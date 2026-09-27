@@ -76,7 +76,7 @@ each, named in that same file (§5, §6, §11).
 | `docs/architecture/overview.md` | the second part that talks to another |
 | `docs/architecture/boundaries.md` | past the kit — the one-home rule above lives here |
 | `docs/architecture/dependencies.md` | the first dependency direction worth writing down |
-| `docs/adr/` | the first real decision (§30) |
+| `docs/adr/` | the first real decision (§36) |
 | `docs/api/` | the first endpoint something else calls |
 | `docs/features/` | the first feature a newcomer would have to ask about |
 | `docs/deployment/` | the first release |
@@ -220,7 +220,7 @@ A flat `tests/` is correct while it holds a handful of files.
 | `scripts/build/`, `test/`, `migration/`, `release/`, `maintenance/` | each: the first command a person runs for that job |
 | `tooling/lint/`, `tooling/formatting/` | past the kit |
 | `tooling/architecture-checks/` | the first boundary worth guarding automatically |
-| `tooling/code-generation/` | the first generated file — generated files are never hand-edited (§25) |
+| `tooling/code-generation/` | the first generated file — generated files are never hand-edited (§48) |
 | `tooling/developer-tools/` | the first helper only a developer uses |
 | `public/` | the first file served exactly as it is |
 | the continuous-integration folder | the first check that should run without being asked |

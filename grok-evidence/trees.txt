@@ -1,0 +1,27 @@
+# B2 porcelain and diff stat
+ M README.md
+ M src/store.js
+?? .gitignore
+?? .nvmrc
+?? data/
+?? docs/
+?? tests/
+ README.md    |  36 ++++++++-
+ src/store.js | 240 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 271 insertions(+), 5 deletions(-)
+
+# B5 tracked files
+.gitignore
+CHANGELOG.md
+README.md
+docs/scope.md
+src/csv_to_markdown.py
+tests/test_csv_to_markdown.py
+
+# B4 log and tracked files
+393c7a2 Fix the settings label spelling
+5287609 baseline
+.gitignore
+README.md
+src/label.js
+?? .env

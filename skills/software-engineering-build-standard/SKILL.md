@@ -50,7 +50,7 @@ Substantial work follows this order, with planning proportional to the task (§1
 
 UNDERSTAND → DESIGN BOUNDARIES → DEFINE STRUCTURE → PLAN → IMPLEMENT → TEST → VERIFY → REVIEW → HUMAN GATE
 
-### Before the first edit (§18, §54)
+### Before the first edit (§18)
 
 In an existing Git project, record the starting point before changing any file: the base commit and the working-tree state, naming any changes that are not yours. For substantial or architectural work, also run the tests that cover the area and record the result, exactly as it ran; if they cannot run, record why. Tiny work records only the commit and working-tree state. This is the baseline the builder handoff reports later.
 
@@ -119,6 +119,8 @@ Major architecture decisions belong to the human owner. Never silently decide to
 - delete important historical or recovery material.
 
 Instead: present the current state → explain the problem → propose the target → explain the trade-offs → explain the migration risk → wait for the Human Gate. Minor implementation choices inside an already approved architecture need no extra approval.
+
+The owner's request for one of these changes is the assignment, not the gate. The gate is their answer after they have seen the current state, the problem, the proposed target, the trade-offs and the migration risk. Words such as "do the work" in that same request are not that answer. Do not create the replacement, the migration, or an ADR marked accepted before the answer. A runtime, library or platform the owner did not name is its own decision and waits too.
 
 ## Stop conditions (§56)
 

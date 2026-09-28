@@ -129,7 +129,7 @@ each, named in that same file (§5, §6, §11).
 | `security/authentication/` | the first sign-in |
 | `security/authorization/`, `permissions/` | the first thing one caller may do and another may not |
 | `validation/` | the first check that lives outside a schema |
-| `config/` | day one of the server, with an example file naming every setting and no real values (§49) |
+| `config/` | the first setting the server has — an example file naming every setting, and no real values (§49) |
 | `logging/` | the first error worth keeping — never a secret, never personal data (§27) |
 
 ## Inside one app — desktop, mobile, command line
@@ -199,7 +199,7 @@ cross apps, so no check has two homes.
 
 | Folder | Due at |
 |---|---|
-| `tests/unit/` | day one |
+| `tests/unit/` | the first split, once a flat `tests/` holds more than a handful of files |
 | `tests/integration/` | the first two parts that must work together |
 | `tests/contract/` | the first interface both sides of this repository own (§39) |
 | `tests/architecture/` | the first boundary worth guarding automatically — the check that dependencies still point inward |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Engineering Build Standard"
+  short_description: "Build software with structure, tests and docs from the first file"
+  default_prompt: "Use $software-engineering-build-standard to plan and build this project properly from the first file."

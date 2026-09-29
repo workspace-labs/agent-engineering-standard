@@ -16,6 +16,9 @@ unfinished (§5, §6, §22).
 - Data · the AI part · tests · settings, commands and tools
 - What this never does
 
+Worked examples per project type live in [trees/](trees/) — start at `trees/README.md` for the
+chooser table: staged snapshots of the *due at* rule in action, never templates to scaffold.
+
 ## Know the project first
 
 Nothing here is decided before the project is understood (§2, §3, §33–§35):

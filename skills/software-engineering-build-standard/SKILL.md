@@ -166,6 +166,7 @@ When work that began from an engineering audit (§28), or any substantial or arc
 | File | Load when the work involves |
 |---|---|
 | [references/layout-map.md](references/layout-map.md) | creating a project or adding a part to one, and deciding where a folder or a file belongs: the full layout, and when each piece becomes due |
+| [references/trees/README.md](references/trees/README.md) | starting a project of any known type: the chooser table and staged example trees (website, webapp, API backend, desktop, mobile, CLI, library, AI service, data pipeline, monorepo) showing what each type earns, stage by stage — examples, never templates |
 | [references/architecture-and-boundaries.md](references/architecture-and-boundaries.md) | where code lives, feature or module boundaries, God-file risk, dependency direction, platform wrappers, change coupling, configuration, naming, comments |
 | [references/data-state-and-runtime.md](references/data-state-and-runtime.md) | persistence or databases, data contracts, units, time, state ownership, migrations, compatibility, error handling, async or concurrency, performance |
 | [references/repository-and-delivery.md](references/repository-and-delivery.md) | tests, tooling, evidence and artifacts, Git and commits, documentation, ADRs, dependencies, generated files, build and release, secrets and private data, dead code |

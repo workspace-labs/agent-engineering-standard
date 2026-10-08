@@ -136,6 +136,9 @@ Run those in isolated fixtures, inspect the actual files and command results, an
 tested behavior from anything the environment could not verify. Package checks passing
 alone do not prove that every agent will select or follow the skill correctly.
 
+See [the cross-platform test evidence](TEST-EVIDENCE.md) for recorded Windows, macOS and
+Linux results, the tested revision, and the additional native Windows installation checks.
+
 ---
 
 ## What it costs

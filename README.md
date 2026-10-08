@@ -30,10 +30,19 @@ The skill is in this repo — [`skills/`](skills).
 
 ## Use it
 
-One line, for every project on your machine:
+With Node.js and npm installed, one line makes it available across your projects.
+
+macOS or Linux:
 
 ```bash
 npx skills add workspace-labs/agent-engineering-standard -g
+```
+
+Windows PowerShell (use the `.cmd` launcher so PowerShell's script execution policy does
+not block npm's `.ps1` wrapper):
+
+```powershell
+npx.cmd skills add workspace-labs/agent-engineering-standard -g
 ```
 
 Or clone it and copy the whole skill folder by hand:
@@ -44,6 +53,8 @@ git clone https://github.com/workspace-labs/agent-engineering-standard.git
 
 Choose the user skill location for your agent, following its current documentation. For
 Codex, the documented user location is `~/.agents/skills/`; Claude uses `~/.claude/skills/`:
+
+**macOS or Linux (Bash)**
 
 ```bash
 skill_root="$HOME/.agents/skills"        # Codex
@@ -65,6 +76,23 @@ else
 fi
 ```
 
+**Windows (PowerShell)**
+
+Run from the directory containing the clone. These commands also refuse an existing
+destination, including a hidden folder or link, rather than merging installations:
+
+```powershell
+$skillRoot = Join-Path $env:USERPROFILE '.agents\skills'   # Codex
+# $skillRoot = Join-Path $env:USERPROFILE '.claude\skills' # Claude: use this instead
+$skillSource = Join-Path $PWD.Path 'agent-engineering-standard\skills\software-engineering-build-standard'
+$skillTarget = Join-Path $skillRoot 'software-engineering-build-standard'
+if (Get-Item -LiteralPath $skillTarget -Force -ErrorAction SilentlyContinue) {
+  throw "Already exists: $skillTarget. Back it up before updating."
+}
+New-Item -ItemType Directory -Path $skillRoot -Force -ErrorAction Stop | Out-Null
+Copy-Item -LiteralPath $skillSource -Destination $skillTarget -Recurse -ErrorAction Stop
+```
+
 The bundled `agents/openai.yaml` supplies optional interface metadata; it is not required
 for skill discovery. See [the official Codex skill documentation](https://learn.chatgpt.com/docs/build-skills)
 for discovery locations and metadata.
@@ -79,11 +107,23 @@ own rules, recorded decisions and the owner's instructions always come first.
 
 ## Test it
 
-From the repository root, run the offline package checks with Python 3.9 or newer:
+From the repository root, run the offline package checks with Python 3.9 or newer.
+
+macOS or Linux:
 
 ```bash
 python3 -B -m unittest discover -s tests -v
 ```
+
+Windows PowerShell:
+
+```powershell
+py -3 -B -m unittest discover -s tests -v
+```
+
+If the Windows Python launcher (`py`) is unavailable, use `python` instead. No Bash or
+WSL is required. [CI](.github/workflows/check-skill.yml) runs the same package checks on
+Windows, macOS and Linux.
 
 The checks cover metadata limits, all bundled links, reference reachability, the tree
 chooser, starter-kit and source-root consistency, and rule citations. They use only the

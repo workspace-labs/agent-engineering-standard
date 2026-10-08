@@ -47,6 +47,11 @@ project-name/
   tests/           the checks
 ```
 
+These are the starting responsibilities for a standalone app. A framework's accepted
+source location wins (§61); when the current approved scope already requires multiple
+deployables, their source lives in `apps/<name>/src/` from day one. Do not add an empty root
+`src/` beside them. A throwaway prototype follows its declared minimal scope (§62).
+
 **Past the kit** means the project holds more than these six and one first file: a second source
 file, a dependency, or anything to install, run, build, test or ship.
 
@@ -68,11 +73,12 @@ each, named in that same file (§5, §6, §11).
 |---|---|
 | the six pieces above | day one |
 | `AGENTS.md` (how to run, test, build and ship it, for the coding agents that work on it) | past the kit |
-| `LICENSE`, `.gitattributes`, `.editorconfig` | past the kit |
+| `LICENSE` | distribution requires an explicit licence; the owner chooses it, and a private local tool need not choose one just to grow past the kit |
+| `.gitattributes`, `.editorconfig` | the project needs recorded line-ending, file-treatment or shared editing conventions |
 | the language or runtime version file (`.nvmrc` or its equivalent) | the first build or dependency |
-| exactly one lockfile | the first dependency — never two, they can disagree about what ships |
-| one linter and one formatter | past the kit |
-| `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates | **only a public repository** |
+| the lockfile(s) required by the package manager(s) | the first managed dependency set — one authoritative resolution per dependency graph; separate runtimes or independently managed apps may need separate lockfiles |
+| a linter and a formatter | the project's checks or shared editing needs justify them; reuse existing tooling, and never install tools solely because a tiny project grew past the kit |
+| `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates | a public repository's contribution or reporting workflow actually needs them |
 | a written design or style reference | the first screen |
 | a credits file for fonts and borrowed code, with each licence | the first font or borrowed code |
 | `docs/roadmap.md` | the second planned piece of work |
@@ -137,21 +143,25 @@ each, named in that same file (§5, §6, §11).
 
 ## Inside one app — desktop, mobile, command line
 
+Paths below are relative to that app's source root: `src/` for one standalone app, or
+`apps/<name>/src/` when multiple deployables are in scope. A platform name does not earn
+another wrapper directory on its own; accepted framework conventions still win (§61).
+
 | Folder | Due at |
 |---|---|
-| `desktop/src/main/`, `preload/`, `renderer/` | the first desktop build — the platform process, the bridge, the interface |
-| `desktop/src/application/`, `domain/`, `infrastructure/` | the same three layers as the server, the day the application has rules or storage of its own |
-| `desktop/src/platform/`, `mobile/src/platform/` | the first thing only that operating system does (§14) |
-| `mobile/src/app/`, `screens/`, `features/`, `services/`, `state/`, `assets/` | each as its frontend twin above |
-| `cli/src/commands/` | the first command |
-| `cli/src/core/`, `application/`, `infrastructure/` | when a command stops being one file |
-| `cli/src/output/` | the first output a person reads, or a script parses |
+| desktop: `main/`, `preload/`, `renderer/` | each when the shell actually has that process, bridge or interface; these are Electron names, not required native-app layers |
+| desktop: `application/`, `domain/`, `infrastructure/` | the same three layers as the server, the day the application has rules or storage of its own |
+| desktop or mobile: `platform/` | the first thing only that operating system does (§14) |
+| mobile: `app/`, `screens/`, `features/`, `services/`, `state/`, `assets/` | each as its frontend twin above |
+| CLI: `commands/` | commands earn separate files when that separation helps; a one-file command stays one file |
+| CLI: `core/`, `application/`, `infrastructure/` | when a command stops being one file |
+| CLI: `output/` | formatting earns its own module when it is shared or substantial; printing one value needs no folder |
 
 ## More than one app
 
 | Folder | Due at |
 |---|---|
-| `apps/<name>/src/`, `apps/<name>/tests/` | the **second** deployable thing. One app keeps a plain `src/` — never an `apps/` folder with a single child |
+| `apps/<name>/src/`, `apps/<name>/tests/` | current approved scope requires multiple deployables, including day one when both are needed. One standalone app keeps a plain `src/`, unless its framework's accepted layout says otherwise |
 | `features/<feature>/` at the root — `domain/ application/ infrastructure/ presentation/ contracts/ tests/` | a feature two apps both run, and only if the one-home rule named this as its home |
 | `packages/contracts/` | the first type an app and a server both import |
 | `packages/domain/` | product rules two apps share |
@@ -177,12 +187,17 @@ by accident cannot be taken back (§27). How a backup is made and how one is res
 `docs/operations/`, and the restore is performed once for real: a backup that has never been
 restored is not a backup.
 
-**Test data lives in `tests/fixtures/`, and nowhere else.**
+**Synthetic test data lives with the test suite that owns it**, for example an app's
+`tests/fixtures/` or the root suite's `tests/fixtures/`. Keep one authoritative home for each
+fixture; production backups are never test fixtures.
 
 ## The AI part
 
 A project that calls a model engineers that part like the rest of it. A project that does not
 never grows this folder.
+
+The `ai/` paths below belong inside the owning app's source root, as shown in
+[the AI service example](trees/ai-service.md). They do not require a second root-level copy.
 
 | Folder | Due at |
 |---|---|
@@ -221,7 +236,7 @@ A flat `tests/` is correct while it holds a handful of files.
 | `config/` with an example settings file | the first setting |
 | `config/<environment>/` | the second environment — only the ones that exist |
 | `scripts/build/`, `test/`, `migration/`, `release/`, `maintenance/` | each: the first command a person runs for that job |
-| `tooling/lint/`, `tooling/formatting/` | past the kit |
+| `tooling/lint/`, `tooling/formatting/` | existing lint or format tooling needs maintained configuration beyond the runtime's normal config file |
 | `tooling/architecture-checks/` | the first boundary worth guarding automatically |
 | `tooling/code-generation/` | the first generated file — generated files are never hand-edited (§48) |
 | `tooling/developer-tools/` | the first helper only a developer uses |

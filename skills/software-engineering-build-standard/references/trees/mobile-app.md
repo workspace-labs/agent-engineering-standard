@@ -12,14 +12,14 @@ myapp/
   CHANGELOG.md
   .gitignore
   docs/scope.md
-  mobile/src/
+  src/
   tests/
 ```
 
 ## Stage 2 — screens and the first feature
 
 ```
-  mobile/src/
+  src/
     app/                  earned by: the first screen — where the app starts
     screens/              earned by: the second screen
     features/<feature>/   earned by: the first feature that owns more than one file
@@ -31,7 +31,7 @@ myapp/
 ## Stage 3 — device capabilities and a backend
 
 ```
-  mobile/src/
+  src/
     services/             earned by: the first server call — ONE API client owning
                           addresses, headers and error handling
     state/                earned by: the first state two features share

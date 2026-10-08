@@ -26,7 +26,8 @@ myapp/
     features/<feature>/   earned by: the first feature that owns more than one file
                           (only the subfolders it really has: components, state, tests…)
   docs/architecture/boundaries.md   earned by: past the kit — the one-home rule lives here
-  one lockfile            earned by: the first dependency — never two
+  the appropriate lockfile(s)   earned by: managed dependencies — one authoritative
+                               resolution per dependency graph, not per entire repository
 ```
 
 The feature's home is chosen once and written down in `boundaries.md` — every later feature

@@ -27,6 +27,8 @@ mypipeline/
                           same input, same output, no clock or network inside (§8)
     sinks/ or loaders/    earned by: the first destination written — partial writes and
                           retries designed, not discovered (§42)
+    quality/              earned by: the first stated data-quality requirement — validate
+                          before a bad batch reaches a sink, not after an incident
     config/               earned by: the first connection string or schedule — an example
                           file, no real values (§49)
   docs/architecture/boundaries.md   earned by: past the kit
@@ -54,8 +56,6 @@ not duplicate or corrupt (§43).
 ## Stage 4 — quality at scale
 
 ```
-  src/quality/            earned by: the first bad batch that reached a sink — checks on
-                          volume, nulls, ranges and drift, owned as code, not as hope
   tests/regression/       earned by: the first defect that came back
   tests/performance/      earned by: the first stated throughput or window requirement (§45)
   docs/adr/               earned by: the ordering and idempotence model (§36) — event time

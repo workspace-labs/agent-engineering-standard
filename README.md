@@ -36,17 +36,65 @@ One line, for every project on your machine:
 npx skills add workspace-labs/agent-engineering-standard -g
 ```
 
-Or copy it by hand:
+Or clone it and copy the whole skill folder by hand:
 
 ```bash
 git clone https://github.com/workspace-labs/agent-engineering-standard.git
-mkdir -p ~/.claude/skills
-cp -R agent-engineering-standard/skills/software-engineering-build-standard ~/.claude/skills/
 ```
 
-Codex reads `~/.codex/skills/` instead; the skill ships the `agents/openai.yaml` it expects.
+Choose the user skill location for your agent, following its current documentation. For
+Codex, the documented user location is `~/.agents/skills/`; Claude uses `~/.claude/skills/`:
 
-Agents load it on their own when they build, extend, restructure or review software. The core is one page — [`SKILL.md`](skills/software-engineering-build-standard/SKILL.md) — and five reference files load only when the work needs them — among them a [layout map](skills/software-engineering-build-standard/references/layout-map.md) that gives a project's full folder structure with the moment each piece becomes due, so nothing is created before the product earns it. A project's own rules, its recorded decisions and the owner's instructions always come first.
+```bash
+skill_root="$HOME/.agents/skills"        # Codex
+# skill_root="$HOME/.claude/skills"      # Claude: use this instead
+```
+
+Then copy into a new destination. This refuses an existing folder or symlink, so an update
+cannot silently mix old and new reference files. Back up an existing installation before
+replacing it through your normal update workflow.
+
+```bash
+skill_source="agent-engineering-standard/skills/software-engineering-build-standard"
+skill_target="$skill_root/software-engineering-build-standard"
+if [ -e "$skill_target" ] || [ -L "$skill_target" ]; then
+  printf '%s\n' "Already exists: $skill_target. Back it up before updating." >&2
+  false
+else
+  mkdir -p "$skill_root" && cp -R "$skill_source" "$skill_target"
+fi
+```
+
+The bundled `agents/openai.yaml` supplies optional interface metadata; it is not required
+for skill discovery. See [the official Codex skill documentation](https://learn.chatgpt.com/docs/build-skills)
+for discovery locations and metadata.
+
+Agents can choose it when they build, extend, restructure or review software, or you can
+invoke it explicitly as `$software-engineering-build-standard`. The entry point is
+[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with five main reference
+guides and [staged examples for ten project types](skills/software-engineering-build-standard/references/trees/README.md).
+The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
+each piece's *due at* trigger, so nothing is created before the product earns it. A project's
+own rules, recorded decisions and the owner's instructions always come first.
+
+## Test it
+
+From the repository root, run the offline package checks with Python 3.9 or newer:
+
+```bash
+python3 -B -m unittest discover -s tests -v
+```
+
+The checks cover metadata limits, all bundled links, reference reachability, the tree
+chooser, starter-kit and source-root consistency, and rule citations. They use only the
+standard library and do not install or execute the skill. The metadata checks cover this
+package's simple YAML string fields; use an Agent Skills YAML validator as well if you
+change that representation.
+
+Instruction quality also needs [realistic agent exercises](tests/behavioral-cases.md).
+Run those in isolated fixtures, inspect the actual files and command results, and distinguish
+tested behavior from anything the environment could not verify. Package checks passing
+alone do not prove that every agent will select or follow the skill correctly.
 
 ---
 

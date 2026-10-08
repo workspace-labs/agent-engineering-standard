@@ -1,15 +1,17 @@
 # Example tree — monorepo (several apps, one repository)
 
-One repository holding multiple deployable apps plus the code they share. This is the
-**endgame** shape — a project grows INTO it; it is never where a project starts. A single app
-keeps plain `src/`, and `apps/` is earned by the **second** deployable thing, never the first.
-Snapshots of growth, not a template (§22).
+One repository holding multiple deployable apps plus any code they actually share. Start
+here when the current approved scope already requires multiple deployables; otherwise a
+project grows into this shape when it earns a second one. A standalone app keeps plain
+`src/`, and future optional apps earn no folders. Snapshots of growth, not a template (§22).
 
 ## When this tree is earned
 
-The day a second deployable exists — a web app plus its API, an app plus its mobile twin, a
-product plus its admin tool. Before that day, use the single-app trees. The move into
-`apps/` is one coherent slice (§20) with zero intended behavior change (§54).
+When the current scope requires a second deployable — a web app plus its API, an app plus
+its mobile twin, a product plus its admin tool. Both may be needed from the first release;
+there is no requirement to build one in the wrong layout and move it later. For an existing
+single app, the move into `apps/` is one coherent slice (§20) with zero intended behavior
+change (§54), through any required Human Gate.
 
 ## Stage 1 — the second deployable arrives
 
@@ -20,8 +22,8 @@ myproduct/
   .gitignore
   docs/scope.md
   apps/
-    web/src/, web/tests/        the first app, moved as-is — one app per folder
-    api/src/, api/tests/        earned by: existing and being deployable
+    web/src/, web/tests/        one app per folder — moved as-is if it already exists
+    api/src/, api/tests/        earned by: the required second deployable in current scope
   docs/architecture/boundaries.md   the one-home rule, now critical: WHERE shared code
                                     lives is decided once and written here
   docs/architecture/overview.md     earned by: two parts that talk to each other
@@ -70,5 +72,7 @@ the machinery beneath them.
 - Never create `apps/` with one child, or `packages/` with nothing two apps import today.
 - Never let app A import app B's internals — sharing goes through a package, decided in
   `boundaries.md`.
+- Never treat different runtimes' lockfiles as competing resolutions of one dependency
+  graph. Follow each package manager's workspace rules and document who owns each graph.
 - Never split one product into several repositories or several apps without the Human Gate —
   repository boundary is an architectural decision (§30).

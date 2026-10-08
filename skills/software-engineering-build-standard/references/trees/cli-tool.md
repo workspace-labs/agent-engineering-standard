@@ -20,8 +20,9 @@ mytool/
 ## Stage 2 — more than one command
 
 ```
-  cli/src/
-    commands/             earned by: the first command — one file per command
+  src/
+    commands/             earned by: commands need separate files — a one-file command
+                          can stay directly under src/
   docs/architecture/boundaries.md   earned by: past the kit
   AGENTS.md               earned by: past the kit — how to run, test, build and ship
 ```
@@ -29,12 +30,12 @@ mytool/
 ## Stage 3 — a command stops being one file
 
 ```
-  cli/src/
+  src/
     core/ or application/ earned by: the first logic shared by two commands — the commands
                           stay thin, the rules live here (§8)
     infrastructure/       earned by: the first filesystem or network call with error handling
-    output/               earned by: the first output a person reads or a script parses —
-                          one owner for formatting, so --json stays possible
+    output/               earned by: formatting is shared or substantial — one owner
+                          for formatting; printing one value needs no folder
   config/ with an example file   earned by: the first setting — no real values (§49)
 ```
 

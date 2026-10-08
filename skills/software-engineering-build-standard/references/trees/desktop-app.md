@@ -21,7 +21,7 @@ myapp/
 ## Stage 2 — the first window
 
 ```
-  desktop/src/
+  src/
     main/                 earned by: the first desktop build — the platform process
     preload/              earned by: the first bridge between the shell and the interface
     renderer/             earned by: the interface itself
@@ -35,7 +35,7 @@ Shared product logic must not depend on the shell (§14): nothing in `renderer/`
 ## Stage 3 — the app gets rules and storage of its own
 
 ```
-  desktop/src/
+  src/
     application/          earned by: the first operation with more than one step
     domain/               earned by: the first product rule — independent of the shell (§8)
     infrastructure/       earned by: the first file written or stored row

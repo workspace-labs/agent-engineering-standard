@@ -5,6 +5,11 @@ with the moment every piece is earned. **They are examples of the *due at* rule,
 templates to scaffold** (§22). A project that stops at stage 1 is finished, not unfinished.
 A framework's or existing repository's own settled structure always wins (§61).
 
+The code blocks show selected additions or changes, not a complete scaffold. The layout
+map's *due at* rule still applies to every stage: a security, operations, test or ADR artifact
+is due when its trigger happens, even if illustrated in a later section. Keep standalone
+source in `src/`; use `apps/<name>/src/` when the current scope requires multiple deployables.
+
 ## Choose by what the product IS, not by what it might become
 
 | If the product is… | Start here |
@@ -22,8 +27,9 @@ A framework's or existing repository's own settled structure always wins (§61).
 
 One product can outgrow its tree: a website that grows a server moves to webapp; a library
 that grows an executable adds a CLI app; a single app that gains a sibling moves to monorepo.
-The move happens on the day the second thing exists, in one coherent slice (§20) — never in
-advance.
+The move happens when the current scope requires the second deployable, in one coherent
+slice (§20) — never for a speculative future. If both are required at the start, begin with
+the monorepo tree.
 
 ## What every mature project eventually earns
 

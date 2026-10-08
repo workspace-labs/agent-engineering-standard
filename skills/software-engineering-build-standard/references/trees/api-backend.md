@@ -30,7 +30,8 @@ myservice/
     logging/              earned by: the first error worth keeping — never a secret,
                           never personal data (§27)
   docs/architecture/boundaries.md   earned by: past the kit
-  the runtime version file, one lockfile   earned by: the first build or dependency
+  the runtime version file   earned by: the first build or dependency
+  the appropriate lockfile(s)   earned by: managed dependencies for this runtime
 ```
 
 ## Stage 3 — the product gets rules and storage

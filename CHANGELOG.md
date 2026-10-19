@@ -12,3 +12,4 @@ version numbers or release dates for earlier commits. See Git history for previo
   notes. Record why the instruction package uses skills/ rather than an empty application src/ directory.
 - Extend package checks with invalid-fragment and filesystem-node controls; record actual automated and
   behavioral verification in TEST-EVIDENCE.md.
+- Record 33 passing checks on each of Windows, macOS and Linux, including native Windows junction fixtures.

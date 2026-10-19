@@ -2,9 +2,28 @@
 
 ## Deep audit and repair — 19 October 2026
 
-**Local result: PASS — 33 automated checks, 11 isolated agent scenarios, and native macOS
-installation/refusal checks.** Current cross-platform CI has not yet been recorded for this
-repair; the older three-platform result below belongs only to its stated revision.
+**Automated result: PASS — 33/33 checks on Windows, macOS and Linux (99 CI test executions),
+plus local checks and native macOS installation/refusal tests.** Eleven isolated behavioral
+scenarios were evaluated, with replay and self-review limits recorded below.
+
+### Current cross-platform CI
+
+Tested repair: [`4ce941ffc78a4fb3589bcfcf42f0012df5f0a382`](https://github.com/workspace-labs/agent-engineering-standard/commit/4ce941ffc78a4fb3589bcfcf42f0012df5f0a382).
+[Run 39182011334](https://github.com/workspace-labs/agent-engineering-standard/actions/runs/39182011334)
+completed successfully on 19 October 2026, 00:42:57–00:43:12 UTC. All three jobs reported
+33 tests and OK, without failures, errors or skips. This evidence entry was added afterward;
+the instruction bundle and test source are unchanged by the evidence update.
+
+| Platform | Environment from job logs | Python | Observed result | Evidence |
+|---|---|---|---|---|
+| Linux | Ubuntu 24.04.5 LTS | 3.12.15 | 33/33; 0.080s | [Linux job](https://github.com/workspace-labs/agent-engineering-standard/actions/runs/39182011334/job/117836572402) |
+| Windows | Windows Server 2025, 10.0.26100 | 3.12.10 | 33/33; 0.267s | [Windows job](https://github.com/workspace-labs/agent-engineering-standard/actions/runs/39182011334/job/117836572663) |
+| macOS | macOS 26.6.2, ARM64 | 3.12.10 | 33/33; 0.053s | [macOS job](https://github.com/workspace-labs/agent-engineering-standard/actions/runs/39182011334/job/117836572692) |
+
+The native Windows junction fixtures executed successfully in the Windows job, including
+linked-entrypoint refusal and external-target preservation. Native FIFO read-order probes were
+also independently checked on the local Mac. The historical manual Windows installation
+procedure below was not repeated; it remains evidence for its October 8 revision only.
 
 The repair started from [`24f35d88cf085b3de7fe3867a4e06fcbbd0383db`](https://github.com/workspace-labs/agent-engineering-standard/commit/24f35d88cf085b3de7fe3867a4e06fcbbd0383db).
 The checked candidate has 19 skill files and eleven staged project-type guides. Its static
@@ -50,8 +69,8 @@ Fixtures cover missing paths and fragments, directory READMEs, encoded paths, Un
 headings, code examples, boundary
 escapes, repository docs beyond README, Windows junction metadata, special nodes and linked
 external children. Native macOS directory links were refused; read/enumeration traps confirmed
-refusal before following unsafe children. The Windows-specific native junction branch awaits
-Windows execution; simulated metadata alone is not native Windows proof.
+refusal before following unsafe children. The Windows-specific native junction branch also
+passed in the current Windows CI job; simulated metadata checks provide separate portable controls.
 
 The available Codex skill validator reported `Skill is valid!`. The read-only skill audit found
 zero structural errors and twelve `deep-reference` review warnings. All twelve refer to the

@@ -16,8 +16,8 @@ project that never calls a model never grows any of this.
                           provider client, keys, retries and errors (§11, §42)
     ai/contracts/         earned by: the first shape a model answer must satisfy — checked
                           like any other external input before it is trusted (§39)
-  docs/security.md        earned by: the API key — a secret, never in source, logs or
-                          fixtures (§27)
+  docs/security.md        earned by: the first stored data, sign-in, network call or secret —
+                          any API key stays out of source, logs and fixtures (§27)
 ```
 
 Product code calls `ai/` through its contract; nothing outside `ai/providers/` knows which
@@ -47,8 +47,8 @@ provider or model serves the call. Swapping providers must not rewrite product c
   docs/adr/               earned by: the provider and model choice (§36) — it shapes cost,
                           privacy and behavior, and an owner-approved change belongs to the
                           Human Gate
-  docs/operations/        earned by: the first incident answer — where prompts, model
-                          versions and eval results are found when production misbehaves
+  docs/operations/        earned by: the first build, sign, ship, release, backup or restore —
+                          record model/prompt versions and eval locations before incidents
 ```
 
 ## What this tree must never do

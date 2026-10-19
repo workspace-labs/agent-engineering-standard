@@ -33,7 +33,8 @@ stays private, and can it change without breaking consumers?
 ## Stage 3 — published and versioned
 
 ```
-  LICENSE                 earned by: the first public release — consumers cannot use it without one
+  LICENSE                 earned by: distribution requires an explicit licence — the owner chooses,
+                          including when consumers receive it privately
   docs/api/               earned by: the first public surface a consumer must look up
   docs/deployment/        earned by: the first release — versioning and publish procedure
   the CI folder           earned by: the first check that should run on every change —

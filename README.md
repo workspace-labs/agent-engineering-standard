@@ -100,7 +100,7 @@ for discovery locations and metadata.
 Agents can choose it when they build, extend, restructure or review software, or you can
 invoke it explicitly as `$software-engineering-build-standard`. The entry point is
 [`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with five main reference
-guides and [staged examples for ten project types](skills/software-engineering-build-standard/references/trees/README.md).
+guides and [staged examples for eleven project types](skills/software-engineering-build-standard/references/trees/README.md).
 The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
 each piece's *due at* trigger, so nothing is created before the product earns it. A project's
 own rules, recorded decisions and the owner's instructions always come first.
@@ -125,11 +125,14 @@ If the Windows Python launcher (`py`) is unavailable, use `python` instead. No B
 WSL is required. [CI](.github/workflows/check-skill.yml) runs the same package checks on
 Windows, macOS and Linux.
 
-The checks cover metadata limits, all bundled links, reference reachability, the tree
-chooser, starter-kit and source-root consistency, and rule citations. They use only the
-standard library and do not install or execute the skill. The metadata checks cover this
-package's simple YAML string fields; use an Agent Skills YAML validator as well if you
-change that representation.
+The checks cover metadata limits, local links and heading fragments across repository
+Markdown, reference reachability, the tree chooser, starter-kit and source-root consistency,
+and rule citations. Adversarial fixtures check missing targets and refusal of links,
+Windows reparse points and special filesystem nodes before content reads or descent.
+They use only the standard library and do not install or execute the skill. The Markdown
+checker supports this package's inline links and heading forms; it is not a general renderer.
+The metadata checks cover simple YAML string fields; use an Agent Skills YAML validator
+as well if you change that representation.
 
 Instruction quality also needs [realistic agent exercises](tests/behavioral-cases.md).
 Run those in isolated fixtures, inspect the actual files and command results, and distinguish
@@ -140,6 +143,15 @@ See [the cross-platform test evidence](TEST-EVIDENCE.md) for recorded Windows, m
 Linux results, the tested revision, and the additional native Windows installation checks.
 
 ---
+
+## Working on this repository
+
+See [AGENTS.md](AGENTS.md), [the package scope](docs/scope.md) and
+[the architecture and source boundaries](docs/architecture/overview.md). The installable source
+stays in the skill folder; no empty application src/ scaffold is required.
+[Verification and publication](docs/operations/verification.md) describes offline and behavioral
+checks. [CHANGELOG.md](CHANGELOG.md) records updates, while
+[findings and limits](docs/risks-and-debt.md) keep audit closure separate from universal assurances.
 
 ## What it costs
 

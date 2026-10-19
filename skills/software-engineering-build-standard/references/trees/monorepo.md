@@ -60,7 +60,7 @@ two apps import it today, not because something *might* be shared someday.
                               the check that dependencies still point inward (§9)
   tests/architecture/       earned by: same moment
   docs/adr/                 earned by: the repository-structure decision itself (§36)
-  docs/operations/          earned by: the first release of more than one app
+  docs/operations/          earned by: the first build, sign, ship, release, backup or restore
   docs/risks-and-debt.md    earned by: the first known problem or deliberate shortcut (§57)
 ```
 

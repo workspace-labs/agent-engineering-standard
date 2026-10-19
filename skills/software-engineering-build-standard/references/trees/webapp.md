@@ -63,7 +63,7 @@ single child.
   tests/contract/         earned by: the first interface both sides of the repo own (§39)
   tests/e2e/              earned by: the first flow a person completes end to end
   docs/api/               earned by: the first endpoint something else calls
-  docs/security.md        earned by: the first sign-in, stored data or secret
+  docs/security.md        earned by: the first stored data, sign-in, network call or secret
 ```
 
 Later stages add `application/use-cases/` (first multi-step operation), `packages/domain/`

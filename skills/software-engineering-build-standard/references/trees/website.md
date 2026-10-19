@@ -42,7 +42,8 @@ Everything on one page stays in one file. No folders for futures.
   scripts/build/          earned by: the first build command a person runs
   docs/deployment/        earned by: the first release
   the CI folder           earned by: the first check that should run without being asked
-  LICENSE, CONTRIBUTING.md, issue templates   earned by: becoming a public repository, only then
+  LICENSE                 earned by: distribution requires an explicit licence — the owner chooses
+  CONTRIBUTING.md, issue templates   earned by: a public contribution or reporting workflow needs them
 ```
 
 A content website never grows `domain/`, `services/` or `state/`. The moment it needs a server

@@ -47,7 +47,7 @@ myservice/
     security/authentication/  earned by: the first sign-in
     security/authorization/   earned by: the first thing one caller may do and another may not
   data/schemas/             earned by: the first table
-  docs/security.md          earned by: the first sign-in, stored data or secret (§27)
+  docs/security.md          earned by: the first stored data, sign-in, network call or secret (§27)
   docs/api/                 earned by: the first endpoint something else calls — for an
                           API-only service this arrives early and stays truthful
 ```
@@ -62,8 +62,8 @@ myservice/
                           twice — never earlier (§22, §45)
   tests/contract/         earned by: the first interface both sides own — for an API, the
                           published contract itself (§39)
-  docs/operations/        earned by: the first deploy — runbooks, backup and restore;
-                          the restore is performed once for real
+  docs/operations/        earned by: the first build, sign, ship, release, backup or restore —
+                          add deploy runbooks and verify restore when those operations arrive
   docs/deployment/        earned by: the first release, including rollback
   docs/adr/               earned by: the persistence-strategy decision (§36) — it is a
                           compatibility commitment (§44), through the Human Gate

@@ -42,15 +42,15 @@ Shared product logic must not depend on the shell (§14): nothing in `renderer/`
     platform/             earned by: the first thing only this operating system does (§14)
   data/backups/           earned by: the first real user data — and .gitignore carries it
                           from the same day; a backup never enters version control (§27)
-  docs/security.md        earned by: the first stored data or secret
+  docs/security.md        earned by: the first stored data, sign-in, network call or secret
 ```
 
 ## Stage 4 — signed and shipped
 
 ```
   scripts/release/        earned by: the first release command a person runs
-  docs/operations/        earned by: the first build, sign and ship — backup and restore
-                          live here, and the restore is performed once for real
+  docs/operations/        earned by: the first build, sign, ship, release, backup or restore —
+                          document each actual operation and verify restore when it arrives
   docs/deployment/        earned by: the first release
   docs/adr/               earned by: the signing-identity decision (§36) — it is a
                           compatibility commitment (§44), so it goes through the Human Gate

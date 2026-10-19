@@ -31,8 +31,8 @@ mytool/
 
 ```
   src/
-    core/ or application/ earned by: the first logic shared by two commands — the commands
-                          stay thin, the rules live here (§8)
+    core/ or application/ earned by: one command needs a separate owner for substantial product
+                          logic, or commands share that logic — the commands stay thin (§8)
     infrastructure/       earned by: the first filesystem or network call with error handling
     output/               earned by: formatting is shared or substantial — one owner
                           for formatting; printing one value needs no folder
@@ -44,7 +44,8 @@ mytool/
 ```
   scripts/release/        earned by: the first release command
   docs/deployment/        earned by: the first release — install and upgrade paths
-  LICENSE, CONTRIBUTING.md   earned by: going public, only then
+  LICENSE                 earned by: distribution requires an explicit licence — the owner chooses
+  CONTRIBUTING.md          earned by: a public contribution workflow needs it
   the CI folder           earned by: the first check that should run without being asked
 ```
 

@@ -46,11 +46,11 @@ not duplicate or corrupt (§43).
   tests/fixtures/         earned by: the first test needing data — synthetic records,
                           NEVER copied production data (§27)
   tests/integration/      earned by: the first two stages that must work together
-  docs/operations/        earned by: the first scheduled run — how to re-run, backfill and
-                          recover, and who is paged when it fails
+  docs/operations/        earned by: the first build, ship, release, backup, restore or operated
+                          run — re-run, backfill and recovery steps; scheduling is not a prerequisite
   data/backups/           earned by: the first real data the pipeline produces — ignored by
                           version control from the same day (§27)
-  docs/security.md        earned by: the first credential or personal record in the flow
+  docs/security.md        earned by: the first stored data, sign-in, network call or secret
 ```
 
 ## Stage 4 — quality at scale

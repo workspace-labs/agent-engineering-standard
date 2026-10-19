@@ -1,4 +1,122 @@
-# Cross-platform test evidence
+# Test evidence
+
+## Deep audit and repair — 19 October 2026
+
+**Local result: PASS — 33 automated checks, 11 isolated agent scenarios, and native macOS
+installation/refusal checks.** Current cross-platform CI has not yet been recorded for this
+repair; the older three-platform result below belongs only to its stated revision.
+
+The repair started from [`24f35d88cf085b3de7fe3867a4e06fcbbd0383db`](https://github.com/workspace-labs/agent-engineering-standard/commit/24f35d88cf085b3de7fe3867a4e06fcbbd0383db).
+The checked candidate has 19 skill files and eleven staged project-type guides. Its static
+auditor bundle digest is `1c7b81ed9c3d3dcb80c22ab10724deb02ec4c86fe7ff33b466a9d70d72455237`.
+This identifies the installable instructions independently of subsequent evidence-only edits.
+
+### Findings repaired
+
+- Aligned website, CLI and library licensing/contribution triggers with the shared layout map.
+- Aligned the webapp, API, desktop, mobile, AI-service and pipeline security-document triggers
+  with the shared stored-data, sign-in, network-call or secret rule.
+- Corrected operations captions that deferred instructions until a signed build, deployment,
+  incident, scheduled run or multiple-app release; operations are documented when first needed.
+- Made mobile end-to-end tests due with the first complete flow, including simulator flows;
+  physical-device checks follow the actual interaction/performance requirement.
+- Allowed substantial logic in a single CLI command to earn a separate owner.
+- Added a staged game guide and chooser route, with engine-layout precedence, authored/generated
+  asset ownership and conditional save, testing and release responsibilities.
+- Added the repository's missing contributor instructions, package catalog, scope, architecture,
+  boundary record, verification procedure and findings/limits documentation. No unused application
+  source tree or dependency manifest was added to this instruction package.
+- Repaired validator gaps for local heading fragments, directory READMEs, links outside the root
+  README, nonportable local URLs, special nodes, symlinks and Windows reparse points. The resource
+  inventory now checks node metadata before descent, and every package test guards reads with it.
+
+### Automated checks and fault controls
+
+The original 10 checks passed before repair. The repaired suite adds 23 adversarial fixture
+checks, for **33/33 passing tests**, with no failures, errors or skips on local Python 3.9.6/macOS.
+The same 33 checks passed against a disposable installed copy using `ENGINEERING_SKILL_ROOT`.
+Run from the repository root:
+
+```text
+python3 -B -m unittest discover -s tests -v
+```
+
+Fail-first runs reproduced eight link/resource failures, then a missed local-file URL, then
+three traversal/read-order failures before their corrections. Independent review then exposed
+a repository link reaching a later unsafe node before lazy inventory completed; a further fail-first
+round reproduced two read-order failures. The repair inventories the repository before link reads
+and checks source/target regular-file metadata, including fragment targets in skipped Git metadata.
+Fixtures cover missing paths and fragments, directory READMEs, encoded paths, Unicode/duplicate
+headings, code examples, boundary
+escapes, repository docs beyond README, Windows junction metadata, special nodes and linked
+external children. Native macOS directory links were refused; read/enumeration traps confirmed
+refusal before following unsafe children. The Windows-specific native junction branch awaits
+Windows execution; simulated metadata alone is not native Windows proof.
+
+The available Codex skill validator reported `Skill is valid!`. The read-only skill audit found
+zero structural errors and twelve `deep-reference` review warnings. All twelve refer to the
+intentional chooser plus guides under `references/trees/`; their discovery links and reachability
+were reviewed. They are retained as layout observations, rather than hidden or reported as a
+warning-free audit. Safety, portability, triggers, Claude and Codex profiles passed static checks.
+
+### Fresh-context behavioral exercises
+
+Each row used a separate agent context, an explicit frozen copy of the candidate skill, the raw
+request and a disposable synthetic project. Executing agents did not receive the evaluator's
+expected outcomes. The evaluator then inspected files, command results and before/after hashes,
+and independently reran generated suites and direct controls where applicable.
+
+The initial eleven contexts used bundle digest
+`c37d3cfba573ccee26a687c7fd413c5c54ef2699d0f5ddae433ec908fc6802ee`.
+After the final operations/security-caption changes in six guides, the CSV and two-deployable
+scenarios were replayed in two new contexts against the final digest above, for thirteen fresh
+contexts in total. Earlier artifacts were retained. The final planning replay initially delayed
+several documentation/tooling triggers; one explicitly requested self-review corrected these,
+including operations at the first build. This is evidence for a reviewed workflow, not reliable
+first-pass compliance.
+
+| Scenario | Observed outcome |
+|---|---|
+| Small existing fix | Trimmed outer whitespace, preserved ordinary/internal spacing output; four tests passed; no architecture scaffold. |
+| Throwaway prototype | Only demo.py created; nine valid/invalid argument controls passed. |
+| New local CLI | One source root, words/slug commands and concise docs; three test methods covering fifteen subprocess calls passed; empty and invalid calls checked independently. |
+| Independent dependency owners | npm web lock and Rust API lock retained; five project files unchanged. |
+| Competing web lockfiles | Redundant Yarn/npm resolution identified without collapsing the independent Rust graph; all six project files unchanged. |
+| Review beyond passing tests | Quantity-two, zero and mixed-row defects reproduced and reported despite the passing original test; all four project files unchanged. |
+| Local migration gate | Concrete SQLite/compatibility/recovery proposal written; original four files unchanged; three baseline checks passed; no migration implementation or database. |
+| Skill-only migration gate | With no local gate instruction, the skill still held implementation for the owner's response to its concrete proposal; three project files unchanged. |
+| Two required deployables | Plan uses apps/web and apps/api immediately, no empty root src or speculative shared package; due triggers corrected on requested self-review; only a plan created. |
+| CSV-to-JSON flow | Original 21 tests passed; final replay passed 10 tests with 25 malformed-input subcases; independent rerun and ten malformed-batch preservation controls passed. |
+| Accepted framework layout | Added only triple and focused tests under existing lib/checks; two tests plus direct positive/zero/negative controls passed; fixtures and local rules unchanged. |
+
+A correctly held migration gate counts as the observed scenario outcome, **not** a completed or
+verified SQLite migration. The quantity bug was deliberately seeded in a review-only fixture;
+reporting it without modifying the fixture was the required review behavior.
+
+### Native macOS installation
+
+The exact documented Bash copy block ran in disposable paths containing spaces and square brackets;
+only skill_root was redirected to the fixture. A clean install copied all 19 final files byte-for-byte,
+and that installed copy passed all 33 package checks.
+Existing directory, file, directory symlink and broken symlink destinations were refused with
+sentinels/targets preserved. No real account was used to obtain this test evidence.
+
+The separately backed-up existing Codex and .agents installations were then updated from the
+validated source; the existing Claude symlink was preserved. All relative-file SHA-256 manifests
+match the source, and the 33-check suite passed against each installed route.
+
+### Limits
+
+These are bounded observations from explicit skill invocation, not tests of automatic selection or
+all models. No production data, real migration, engine/device build, dependency install or release
+was exercised. The Markdown checker intentionally supports the package's inline-link and heading
+forms, not arbitrary Markdown/HTML; the resource guard is a static inventory, not protection against
+concurrent filesystem replacement. Native Windows installation was not rerun locally in this audit.
+Local logs, fixture manifests and recovery snapshots are retained outside the published skill.
+
+---
+
+## Historical record — 8 October 2026
 
 **Result: PASS for the tested package and installation checks.**
 
@@ -18,7 +136,7 @@ Additional installation and metadata checks passed on the Windows workstation.
 This is a dated evidence record for the revision above. Later commits require their own
 CI results. The report was added after the recorded tests.
 
-## Results by operating system
+### Results by operating system
 
 The three CI jobs ran on GitHub-hosted operating-system runners. Versions below are
 copied from their job logs; the workflow selects Python 3.12.
@@ -42,7 +160,7 @@ On the local Windows PC, the equivalent command used the Windows Python launcher
 py -3 -B -m unittest discover -s tests -v
 ```
 
-## What the 10 automated checks covered
+### What the 10 automated checks covered
 
 Each check below passed in all three CI jobs. The implementation is in
 [`tests/test_skill_package.py` at the tested revision](https://github.com/workspace-labs/agent-engineering-standard/blob/645de9ec903812829f198d3f338f4669f2f9fffc/tests/test_skill_package.py).
@@ -60,7 +178,7 @@ Each check below passed in all three CI jobs. The implementation is in
 | 9 | Rule citations | Recognized rule references use the standard's allowed stable IDs. |
 | 10 | Repository README links | Local README links resolve within the repository. |
 
-## Additional native Windows evidence
+### Additional native Windows evidence
 
 The documented PowerShell installation block was executed in isolated temporary
 directories. Only its user-directory destination was redirected into the test fixture.
@@ -99,7 +217,7 @@ Skill is valid!
 PASS: installed-copy checks, skill validator, and native npm launcher.
 ```
 
-## Changes verified and scope
+### Changes verified and scope
 
 The review added native Windows installation and test instructions, including the
 `npx.cmd` launcher and PowerShell copy commands that handle spaces and brackets. It

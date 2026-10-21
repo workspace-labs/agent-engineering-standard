@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — 2026-10-21
+
+- Clarify that required design approval precedes implementation, while reuse of an accepted
+  stack and an earlier approval of the same design do not require duplicate permission.
+- Reject nonportable absolute local Markdown paths and linked resources reached through
+  skipped metadata directories; add regression coverage for the checker.
+- Record this repair's test counts, fail-first controls and behavioral limits in
+  [test-evedince.md](test-evedince.md), preserving earlier test evidence.
+
 ## Unreleased — 2026-10-19
 
 Deep audit and repair work is recorded here. This starts an explicit change history; it does not invent

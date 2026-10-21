@@ -8,6 +8,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest import mock
+from urllib.parse import quote
 
 import test_skill_package as package
 
@@ -104,6 +105,29 @@ class MarkdownLinkRegressions(unittest.TestCase):
                 with self.assertRaisesRegex(AssertionError, "local link"):
                     self.links(document)
 
+    def test_absolute_paths_inside_boundary_are_not_portable_links(self):
+        target = self.write("guide.md", "# Guide\n")
+        for link in (target.as_posix(), quote(target.as_posix(), safe="")):
+            with self.subTest(link=link):
+                document = self.write("README.md", "[guide]({}#guide)\n".format(link))
+                with self.assertRaisesRegex(AssertionError, "Nonportable local link"):
+                    self.links(document)
+
+    def test_relative_parent_links_inside_boundary_remain_valid(self):
+        target = self.write("guide.md", "# Guide\n")
+        document = self.write("docs/README.md", "[guide](../guide.md#guide)\n")
+        self.assertEqual(self.links(document), [target.resolve()])
+
+    def test_explicit_root_alias_remains_supported(self):
+        target = self.write("bundle/guide.md", "# Guide\n")
+        self.write("bundle/README.md", "[guide](guide.md#guide)\n")
+        alias = self.root / "selected-root"
+        directory_link(alias, self.root / "bundle")
+        try:
+            self.assertEqual(list(package.local_links(alias / "README.md", alias)), [target.resolve()])
+        finally:
+            remove_directory_link(alias)
+
     def test_non_markdown_fragment_is_explicitly_unsupported(self):
         self.write("picture.svg", '<svg id="shape"></svg>')
         document = self.write("README.md", "[shape](picture.svg#shape)\n")
@@ -120,7 +144,7 @@ class MarkdownLinkRegressions(unittest.TestCase):
         linked_readme = guides / "README.md"
         directory_link(linked_readme, outside)
         try:
-            with self.assertRaisesRegex(AssertionError, "escapes package"):
+            with self.assertRaisesRegex(AssertionError, "symlink|reparse point"):
                 list(package.local_links(document, boundary))
         finally:
             remove_directory_link(linked_readme)
@@ -214,6 +238,64 @@ class MarkdownLinkRegressions(unittest.TestCase):
         self.assertEqual(result.errors, [])
         self.assertTrue(result.failures)
         self.assertIn("Nonregular local link target", result.failures[0][1])
+
+    def test_native_link_under_skipped_git_is_refused_before_read(self):
+        document = self.write("README.md", "[guide](.git/linked/guide.md#guide)\n")
+        target = self.write("guides/guide.md", "# Guide\n")
+        (self.root / ".git").mkdir()
+        linked_directory = self.root / ".git" / "linked"
+        directory_link(linked_directory, target.parent)
+        native_read = Path.read_text
+        reads = []
+
+        def tracked_read(path, *args, **kwargs):
+            reads.append(path)
+            return native_read(path, *args, **kwargs)
+
+        check = package.SkillPackageTests("test_all_repository_markdown_links_resolve")
+        result = unittest.TestResult()
+        try:
+            with mock.patch.object(package, "REPO", self.root), \
+                    mock.patch.object(Path, "read_text", tracked_read):
+                check.run(result)
+            # The ordinary guide is read later by repository validation, but the
+            # README's linked route must fail before it reads that guide itself.
+            self.assertEqual(reads, [document.resolve(), target.resolve()])
+            self.assertEqual(result.errors, [])
+            self.assertTrue(result.failures)
+            self.assertRegex(result.failures[0][1], "symlink|reparse point")
+            self.assertEqual(target.read_text(encoding="utf-8"), "# Guide\n")
+        finally:
+            remove_directory_link(linked_directory)
+
+    def test_skipped_reparse_file_and_directory_readme_are_refused_before_read(self):
+        for link, filename in ((".git/guide.md#guide", ".git/guide.md"),
+                               (".git/guides/#guide", ".git/guides/README.md")):
+            with self.subTest(link=link):
+                document = self.write("README.md", "[guide]({})\n".format(link))
+                unsafe = self.write(filename, "# Guide\n")
+                native_lstat, native_read = Path.lstat, Path.read_text
+                reads = []
+
+                def fixture_lstat(path, *args, **kwargs):
+                    if path == unsafe:
+                        return SimpleNamespace(st_mode=stat.S_IFREG | 0o600, st_file_attributes=0x400)
+                    return native_lstat(path, *args, **kwargs)
+
+                def tracked_read(path, *args, **kwargs):
+                    reads.append(path)
+                    return native_read(path, *args, **kwargs)
+
+                check = package.SkillPackageTests("test_all_repository_markdown_links_resolve")
+                result = unittest.TestResult()
+                with mock.patch.object(package, "REPO", self.root), \
+                        mock.patch.object(Path, "lstat", fixture_lstat), \
+                        mock.patch.object(Path, "read_text", tracked_read):
+                    check.run(result)
+                self.assertEqual(reads, [document.resolve()])
+                self.assertEqual(result.errors, [])
+                self.assertTrue(result.failures)
+                self.assertIn("reparse point", result.failures[0][1])
 
     def test_missing_file_and_encoded_escape_are_refused(self):
         for link in ("missing.md", "%2e%2e/outside.md"):

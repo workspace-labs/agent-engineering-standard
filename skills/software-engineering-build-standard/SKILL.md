@@ -48,7 +48,9 @@ Do not produce a ceremonial architecture report for a small, obvious task, and d
 
 Substantial work follows this order, with planning proportional to the task (§1):
 
-UNDERSTAND → DESIGN BOUNDARIES → DEFINE STRUCTURE → PLAN → IMPLEMENT → TEST → VERIFY → REVIEW → HUMAN GATE
+UNDERSTAND → DESIGN BOUNDARIES → DEFINE STRUCTURE → PLAN → REQUIRED DECISION GATE → IMPLEMENT → TEST → VERIFY → REVIEW → REQUIRED ACCEPTANCE GATE
+
+Pass any required architecture decision gate before implementation. A later delivery or acceptance gate follows the project's workflow; it does not substitute for approval of the design.
 
 ### Before the first edit (§18)
 
@@ -120,7 +122,7 @@ Major architecture decisions belong to the human owner. Never silently decide to
 
 Instead: present the current state → explain the problem → propose the target → explain the trade-offs → explain the migration risk → wait for the Human Gate. Minor implementation choices inside an already approved architecture need no extra approval.
 
-The owner's request for one of these changes is the assignment, not the gate. The gate is their answer after they have seen the current state, the problem, the proposed target, the trade-offs and the migration risk. Words such as "do the work" in that same request are not that answer. Do not create the replacement, the migration, or an ADR marked accepted before the answer. A runtime, library or platform the owner did not name is its own decision and waits too.
+The owner's request for one of these changes is the assignment, not the gate. The gate is their answer after they have seen the current state, the problem, the proposed target, the trade-offs and the migration risk. Words such as "do the work" in that same request are not that answer. Do not create the replacement, the migration, or an ADR marked accepted before the answer. Introducing or materially changing a runtime, library or platform outside the accepted stack is its own decision and waits too. Reusing the accepted stack, including its standard library, needs no extra gate. An earlier approval of the same concrete design remains valid; ask again only when a material decision changes or the project's workflow requires it.
 
 ## Stop conditions (§56)
 

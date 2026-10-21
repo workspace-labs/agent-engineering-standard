@@ -7,7 +7,7 @@ verify package invariants; realistic agent exercises are documented separately.
 import html
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 import stat
 import unicodedata
@@ -100,18 +100,56 @@ def heading_ids(text):
     return identifiers
 
 
+def checked_local_path(path, boundary):
+    """Check each component below the selected root before following the path.
+
+    The explicitly selected root may be an installation alias. Links and reparse
+    points below its resolved boundary are package resources, so refuse them even
+    in directories omitted from the repository inventory, such as .git.
+    """
+    if not path.is_relative_to(boundary):
+        raise AssertionError("Link escapes package: {}".format(path))
+    current = boundary
+    parts = path.relative_to(boundary).parts
+    for index, part in enumerate(parts):
+        if part == "..":
+            current = current.parent
+            if not current.is_relative_to(boundary):
+                raise AssertionError("Link escapes package: {}".format(path))
+            continue
+        current = current / part
+        try:
+            metadata = current.lstat()
+        except FileNotFoundError:
+            raise AssertionError("Missing link: {}".format(current)) from None
+        if stat.S_ISLNK(metadata.st_mode):
+            raise AssertionError("Local link contains a symlink: {}".format(current))
+        if getattr(metadata, "st_file_attributes", 0) & 0x400:
+            raise AssertionError("Local link contains a Windows reparse point: {}".format(current))
+        if not (stat.S_ISREG(metadata.st_mode) or stat.S_ISDIR(metadata.st_mode)):
+            raise AssertionError("Nonregular local link target: {}".format(current))
+        if index < len(parts) - 1 and not stat.S_ISDIR(metadata.st_mode):
+            raise AssertionError("Non-directory local link component: {}".format(current))
+    return current
+
+
 def local_links(document, boundary):
     """Validate simple inline Markdown links and heading fragments, without network I/O.
 
     For this repository's instruction bundles, a local directory link resolves its
     README.md; it is not enough that a directory exists. URI paths/fragments are
-    decoded once and resolved targets (including directory READMEs) must stay inside
-    boundary. This scoped check is not a general Markdown/HTML link parser.
+    decoded once; local paths must be relative, and every component (including a
+    directory README) must stay inside boundary without linked resources. This
+    scoped check is not a general Markdown/HTML link parser.
     """
-    boundary = boundary.resolve()
-    document = document.resolve()
+    selected_boundary = boundary.absolute()
+    boundary = selected_boundary.resolve()
+    document = document.absolute()
+    if document.is_relative_to(selected_boundary):
+        document = boundary / document.relative_to(selected_boundary)
     if not document.is_relative_to(boundary):
         raise AssertionError("Document escapes package: {}".format(document))
+    document = checked_local_path(document, boundary)
     if not stat.S_ISREG(document.lstat().st_mode):
         raise AssertionError("Nonregular Markdown document: {}".format(document))
     text = "\n".join(markdown_lines(document.read_text(encoding="utf-8")))
@@ -123,11 +161,14 @@ def local_links(document, boundary):
             raise AssertionError("Nonportable local link: {} -> {}".format(document, match.group(1)))
         if url.scheme or url.netloc:
             continue
-        target = (document.parent / unquote(url.path)).resolve() if url.path else document
+        local_path = unquote(url.path)
+        if Path(local_path).is_absolute() or PureWindowsPath(local_path).anchor:
+            raise AssertionError("Nonportable local link: {} -> {}".format(document, url.path))
+        target = checked_local_path(document.parent / local_path, boundary) if local_path else document
         if not target.is_relative_to(boundary):
             raise AssertionError("Link escapes package: {} -> {}".format(document, url.path))
         if target.is_dir():
-            target = (target / "README.md").resolve()
+            target = checked_local_path(target / "README.md", boundary)
             if not target.is_relative_to(boundary):
                 raise AssertionError("Directory README escapes package: {} -> {}".format(document, url.path))
             if not target.is_file():

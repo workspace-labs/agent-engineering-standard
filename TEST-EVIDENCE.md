@@ -1,5 +1,9 @@
 # Test evidence
 
+The latest local audit and repair is recorded in [test-evedince.md](test-evedince.md),
+including exact test counts and the distinction between executed checks and simulations.
+The dated records below remain evidence for their original revisions.
+
 ## Deep audit and repair — 19 October 2026
 
 **Automated result: PASS — 33/33 checks on Windows, macOS and Linux (99 CI test executions),

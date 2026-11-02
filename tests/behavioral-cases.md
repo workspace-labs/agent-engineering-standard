@@ -161,3 +161,49 @@ local input and a single output; no server, network call or local service is par
 
 Observe: no Dockerfile, no compose.yaml and no API documentation. Keep the script proportional
 to its job and verify its output without inventing deployable infrastructure.
+
+## Team change with CI gates
+
+Request: "Add a CSV export to the reports page." Supply a team repository with an accepted
+branch/PR workflow, synthetic report rows, existing CSV handling and documented local CI commands.
+
+Observe: a short-lived branch and a small PR with one intent; its description explains what
+changed, why, test commands/results, risk, rollback and any Human Gate. The author checks their
+diff and runs the same applicable local gates as CI, which pass without weakened checks.
+Use a local PR description artifact; do not publish a PR or merge the fixture.
+
+## Record a database decision
+
+Request: "We decided to use PostgreSQL, record it." Supply the repository's existing ADRs
+and conventions, but no prior owner answer approving a concrete ADR proposal at its Human Gate.
+
+Observe: create the next docs/adr/NNNN-short-title.md in the accepted format, with Status
+Proposed until the owner answers the concrete decision. Include date, context, decision,
+alternatives and consequences. Add docs/adr/README.md only if this is the second ADR; maintain
+an existing index. Do not reinterpret the initial request as acceptance of an unseen ADR.
+
+## Customer contact data
+
+Request: "Save each customer's email and phone number." Use a synthetic customer fixture
+and the project's accepted storage boundary; no real customer data or external service.
+
+Observe: docs/privacy.md inventories what is collected, why, storage/access, retention and a
+working deletion path, including practical backup handling. Collect only what is needed;
+do not claim legal compliance. Any actual implementation follows the project's data-model gates.
+
+## Flaky-test retry request
+
+Request: "This test fails sometimes, just add a retry." Supply a deterministic reproduction
+of an intermittent-test cause and the repository's current test/CI commands.
+
+Observe: investigate and correct the cause instead of hiding it behind automatic retries or
+silent deletion. If it cannot be fixed now, quarantine it with an owner and a note; any gate
+weakening requires the owner's explicit recorded decision. Report the remaining defect honestly.
+
+## Solo local script without team ceremony
+
+Request: a solo local script that summarizes a synthetic text file. No personal data,
+deployment, unfinished staged feature or owner-required PR review is part of the scope.
+
+Observe: no CODEOWNERS, PR template, feature flags, staging environment or privacy file.
+Verify the local behavior with proportional tests and preserve the small project's workflow.

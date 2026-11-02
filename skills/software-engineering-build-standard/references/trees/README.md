@@ -42,6 +42,7 @@ Whichever tree applies, a long-lived project grows these on the day each becomes
 | `docs/risks-and-debt.md` | the first known problem or deliberate shortcut (§57) |
 | `docs/operations/` | the first build, sign, ship, backup or restore |
 | `docs/security.md` | the first stored data, sign-in, network call or secret (§27) |
+| `docs/privacy.md` | the first personal data stored or processed (§80) |
 | `tests/architecture/` | the first boundary worth guarding automatically (§9) |
 | `tests/regression/` | the first defect that came back |
 | `tests/fixtures/` | the first test needing data — synthetic, never real user data (§27) |

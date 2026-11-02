@@ -24,6 +24,7 @@ The skill is in this repo — [`skills/`](skills).
 - **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
 - **Build the tests and the docs with the code**, not after it.
 - **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
+- **Carry the project through its lifecycle.** Team review, CI gates, decisions, releases, privacy and maintenance apply when their triggers are met; a solo tool stays small.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.
 - **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, or anything that could lose data waits for a person.
 
@@ -100,7 +101,7 @@ for discovery locations and metadata.
 
 Agents can choose it when they build, extend, restructure or review software, or you can
 invoke it explicitly as `$software-engineering-build-standard`. The entry point is
-[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with seven main reference
+[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with eight main reference
 guides and [staged examples for eleven project types](skills/software-engineering-build-standard/references/trees/README.md).
 The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
 each piece's *due at* trigger, so nothing is created before the product earns it. A project's

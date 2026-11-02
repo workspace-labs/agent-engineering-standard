@@ -79,18 +79,22 @@ each, named in that same file (§5, §6, §11).
 | the lockfile(s) required by the package manager(s) | the first managed dependency set — one authoritative resolution per dependency graph; separate runtimes or independently managed apps may need separate lockfiles |
 | a linter and a formatter | the project's checks or shared editing needs justify them; reuse existing tooling, and never install tools solely because a tiny project grew past the kit |
 | `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates | a public repository's contribution or reporting workflow actually needs them |
+| a pull-request template | the second person or agent changing the same repository, or the owner asking for review before merge (§76) |
+| `CODEOWNERS` (or the platform's location) | different people or teams own different parts of the repository (§83) |
 | a written design or style reference | the first screen |
 | a credits file for fonts and borrowed code, with each licence | the first font or borrowed code |
 | `docs/roadmap.md` | the second planned piece of work |
 | `docs/architecture/overview.md` | the second part that talks to another |
 | `docs/architecture/boundaries.md` | past the kit — the one-home rule above lives here |
 | `docs/architecture/dependencies.md` | the first dependency direction worth writing down |
-| `docs/adr/` | the first real decision (§36) |
+| `docs/adr/` | the first real decision (§36, §77) |
+| `docs/adr/README.md` (index) | the second ADR (§77) |
 | `docs/api/` | the first endpoint something else calls |
 | `docs/features/` | the first feature a newcomer would have to ask about |
 | `docs/deployment/` | the first release |
 | `docs/operations/` | the first time it is built, signed, shipped or released — and where backup and restore live |
 | `docs/security.md` | the first stored data, sign-in, network call or secret |
+| `docs/privacy.md` | the first personal data stored or processed (§80) |
 | `docs/glossary.md` | the first technical word a reader of the documentation would have to look up |
 | `docs/risks-and-debt.md` | the first known problem or deliberate shortcut |
 
@@ -244,7 +248,7 @@ A flat `tests/` is correct while it holds a handful of files.
 | `tooling/code-generation/` | the first generated file — generated files are never hand-edited (§48) |
 | `tooling/developer-tools/` | the first helper only a developer uses |
 | `public/` | the first file served exactly as it is |
-| the continuous-integration folder | the first check that should run without being asked |
+| the continuous-integration folder | the first check that should run without being asked — runs the same commands as local checks (§75) |
 
 `scripts/` is what a person runs. `tooling/` is what runs by itself.
 

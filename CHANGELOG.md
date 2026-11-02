@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.0 — 2026-11-02
+
+- Add §74–§83 for test levels and flaky tests, CI gates, branches and pull requests,
+  ADR format/lifecycle, releases, environments and feature flags, privacy, dependency
+  health, incidents and code ownership, with explicit due-at triggers and workflow precedence.
+- Route the team/lifecycle guide from SKILL.md, declare standard version 1.1.0 and extend
+  stable rule IDs to §1–§83 without changing existing rule meanings or numbering.
+- Align the layout map and tree chooser with ADR indexes, privacy inventories, code
+  ownership and PR templates; connect CI to the project's documented local commands.
+- Extend heading/citation checks for §74–§83 while retaining §66–§72 and version agreement;
+  add five Request/Observe behavioral contracts for team changes and lifecycle decisions.
+- Document eight main guides and the expanded scope; record baseline, final package
+  checks, fail-first controls and unexecuted behavioral limits while preserving earlier history.
+
 ## 1.0.0 — 2026-11-02
 
 - Extend §69 to project keys in shipped mobile, desktop and CLI apps, with a user-supplied

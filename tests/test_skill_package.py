@@ -306,7 +306,7 @@ class SkillPackageTests(unittest.TestCase):
                 self.assertFalse(required - pieces, "Missing day-one pieces: {}".format(required - pieces))
 
     def test_rule_citations_use_existing_stable_ids(self):
-        known = set(range(1, 74))
+        known = set(range(1, 84))
         for document in self.bundle_files:
             if document.suffix != ".md":
                 continue
@@ -324,7 +324,7 @@ class SkillPackageTests(unittest.TestCase):
             if document.suffix == ".md" and document.is_relative_to(SKILL / "references"):
                 prose = "\n".join(markdown_lines(document.read_text(encoding="utf-8")))
                 headings.extend(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))
-        for rule in range(66, 73):
+        for rule in (*range(66, 73), *range(74, 84)):
             with self.subTest(rule=rule):
                 self.assertEqual(headings.count(rule), 1, "Rule §{} needs exactly one heading".format(rule))
 

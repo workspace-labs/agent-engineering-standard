@@ -5,6 +5,56 @@ Each record remains evidence for its original revision; earlier cross-platform r
 certify the current local release candidate.
 
 
+
+## 1.1.0 local candidate — 2026-11-02
+
+This instruction-package candidate extends the standard with §74–§83; it is not a published
+release. Work began on a clean `main` at `af003c3c631be07125540795beb3a6cfa2ee92fa`.
+`git pull --ff-only origin main` reported Already up to date. Before edits, on local macOS
+with Python 3.15.2, the package baseline was:
+
+```text
+python3 -B -m unittest discover -s tests -v
+Ran 39 tests in 0.047s
+OK
+```
+
+### Package and fail-first checks
+
+After the guide, wiring and documentation changes, the same command passed all **39 tests**
+with zero failures, errors or skips (0.053s). No new test method was added: the existing
+heading/version method now checks §66–§72 and §74–§83, and allowed citations span §1–§83.
+The suite also verifies reference reachability, repository/bundle links, metadata, tree
+consistency and its existing adversarial boundary controls. These are package checks.
+
+For fail-first proof, a disposable copy of the candidate had the §74 heading removed.
+The focused command below failed at the intended assertion, without an error:
+
+```text
+python3 -B -m unittest discover -s tests -p test_skill_package.py -k test_backend_frontend_rules_and_release_version -v
+Ran 1 test in 0.004s
+FAILED (failures=1)
+AssertionError: 0 != 1 : Rule §74 needs exactly one heading
+```
+
+Restoring the fixture returned `Ran 1 test in 0.003s` / `OK`. The test used
+`ENGINEERING_SKILL_ROOT` to select the disposable copy; no source or installed copy was
+mutated for the fault control. Repeated controls do not add unique methods to the count.
+
+### Verification limits
+
+The five new Request/Observe cases were **written, not executed**. No agent-built team PR,
+ADR workflow, customer-data implementation, flaky-test repair or solo-script exercise was
+run. Native Windows/Linux and hosted CI were not run for this candidate. Static package
+results do not prove automatic selection, agent compliance, legal compliance or production
+behavior. Earlier evidence below applies only to its recorded revision.
+
+The owner clarified that the historical 1.0.0 changelog entry stays unchanged, including its
+old gate note; the new 1.1.0 entry contains release changes only. No push, tag, release,
+GitHub topic change or installation was performed; the separate v1.0.0 clone was untouched.
+
+---
+
 ## 1.0.0 local candidate — 2026-11-02
 
 This is a local instruction-package candidate on `release/1.0.0`, not a published release.

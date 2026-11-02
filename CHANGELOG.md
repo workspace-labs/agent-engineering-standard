@@ -1,6 +1,17 @@
 # Changelog
 
-## 1.1.1 — 2026-11-02
+## 1.2.0 — 2026-11-02
+
+- Add §84, Teach while building: explain project structure and important decisions in plain
+  words when needed, keep unsafe requests safe, and keep tiny tasks free of lessons.
+- Add §85, The ten-year handover, with triggered README sections and same-change settings
+  documentation; add §86, Taking over a project, to map actual code without guessing secrets
+  or history or rebuilding an unfamiliar tree.
+- Add a new developer guide and an illustrative first-project conversation, grounded in the
+  existing layout map and webapp tree, and link the guide from README.md.
+- Extend rule-ID and heading checks through §86; add first-project, tiny-typo, takeover and
+  new-settings behavioral contracts and record fail-first package proof separately from
+  unexecuted exercises. Update the layout map's README description without adding starter pieces.
 
 - Rewrite the eleven beginner behavioral requests in a beginner's own words without hints,
   so the agent must recognize the engineering decisions the request requires.

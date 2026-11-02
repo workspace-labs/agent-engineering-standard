@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.1.1
+Standard version: 1.2.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -13,7 +13,7 @@ Professional engineering is not maximum abstraction, excessive folders, unnecess
 
 **Goal (§65):** the software works today, its structure explains itself, another engineer can safely change it tomorrow, and the architecture is no more complicated than the product actually requires.
 
-Rule IDs §1–§83 are stable anchors for this standard; findings, plans and handoffs may cite them.
+Rule IDs §1–§86 are stable anchors for this standard; findings, plans and handoffs may cite them.
 
 ## Precedence (§61)
 
@@ -108,6 +108,7 @@ For architectural work, also establish: what exists now; what problem is being s
 - **Boundaries are explicit (§11–§14, §39–§42, §49).** Persistence, platforms and configuration sit behind intentional boundaries; canonical data contracts, units and time models are defined; every important piece of state has an owner; failures are owned, not scattered as UI messages.
 - **Backend and frontend behaviour (§66–§72).** For server work use [the backend guide](references/backend.md); for screens use [the frontend guide](references/frontend.md). Apply each rule only when its due-at trigger is met.
 - **Team workflow and lifecycle (§74–§83).** Use [the team and lifecycle guide](references/team-and-lifecycle.md) for test levels, CI, review, ADRs, releases, environments, privacy, dependency health, incidents and ownership. Apply each part only when its due-at trigger is met; a solo or tiny project earns no team ceremony.
+- **Teach and hand over (§84–§86).** [Teach while building](references/team-and-lifecycle.md#84-teach-while-building) in plain words when needed, with no lessons on tiny tasks; keep [handover documentation](references/team-and-lifecycle.md#85-the-ten-year-handover) current as its triggers are met, and [map an unfamiliar project](references/team-and-lifecycle.md#86-taking-over-a-project) before changing features when its map or settings list is missing.
 - **Data model before time-based features (§12).** Before movement, telemetry, history, replay, collaboration, event streams, background automation or time-based simulation, verify the data model can carry identity, time, ordering and history.
 - **Repository hygiene (§15–§19, §25–§27, §47, §48).** Tests are architecture, tooling is not testing, source is not evidence, Git tells the truth, documentation is part of engineering. Never commit or expose keys, passwords, secrets, tokens or private user or device data.
 - **Do not over-engineer (§22).** Without a concrete product need, do not add interfaces for every class, repositories, services or managers for appearance, dependency-injection frameworks, global state libraries, empty future feature folders, dozens of tiny files, fashionable design patterns, microservices, event buses, databases or complex build systems. Every abstraction must solve a real problem of responsibility, dependency direction, testing, change isolation, platform isolation, maintainability or extensibility. Prefer the simplest architecture that remains structurally sound.

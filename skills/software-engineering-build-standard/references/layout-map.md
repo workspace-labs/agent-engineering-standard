@@ -39,7 +39,7 @@ A new project starts with six pieces, and only these:
 
 ```
 project-name/
-  README.md        what it is, how to run it
+  README.md        what it is, how to run it — grows a project map and a settings list as the project grows (§85)
   CHANGELOG.md     what changed in each version
   .gitignore       keeps build output, environment files and secrets out of the repository
   docs/scope.md    what it does, what it will NOT do, and how good it must be

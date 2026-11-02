@@ -14,6 +14,8 @@ structure, tests, documentation and owner-controlled major decisions. The produc
 - Team workflow and project lifecycle guidance for test levels, CI gates, review, ADRs,
   releases, environments, privacy, dependencies, incidents and ownership, only when earned.
 - Staged project-tree examples that explain when responsibilities are earned.
+- Plain-language teaching while building (§84), a new developer guide and a first-project walkthrough.
+- Triggered handover documentation (§85) and evidence-based takeover of unfamiliar projects (§86).
 - Optional Codex display metadata, offline integrity checks and realistic isolated agent exercises.
 - Install instructions and dated evidence that separates package checks from agent behavior.
 

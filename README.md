@@ -8,6 +8,8 @@ It is tool-agnostic. Nothing here depends on a particular model, CLI, or framewo
 
 The skill is in this repo — [`skills/`](skills).
 
+**New to building software?** Start with the [new developer guide](docs/new-developer-guide.md).
+
 ---
 
 ## In practice
@@ -25,6 +27,7 @@ The skill is in this repo — [`skills/`](skills).
 - **Build the tests and the docs with the code**, not after it.
 - **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
 - **Carry the project through its lifecycle.** Team review, CI gates, decisions, releases, privacy and maintenance apply when their triggers are met; a solo tool stays small.
+- **Teach while building (§84).** Explain important choices in plain words when the person is new or asks for explanations; keep tiny tasks free of lessons.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.
 - **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, or anything that could lose data waits for a person.
 

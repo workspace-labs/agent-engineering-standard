@@ -4,6 +4,79 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.2.0 local candidate — 2026-11-02
+
+Work began on a clean `release/1.1.1` at `25f3bc676c519f6e813ad33776ca42acd0e8eaa0`,
+then branched locally to `release/1.2.0`. Before any edit, on macOS/Python 3.15.2:
+
+```text
+python3 -B -m unittest discover -s tests -v
+Ran 39 tests in 0.059s
+OK
+```
+
+### Package checks and fail-first proof
+
+The candidate package command passed all **39 tests**, with no failures, errors or skips
+(0.059s), including rule citations, exact heading counts, starter-kit consistency, repository
+and bundle links, reference reachability and standard-version/changelog agreement.
+No test method was added: allowed rule IDs now span §1–§86 and the existing heading test
+also requires exactly one heading for each of §84–§86. Existing §66–§72 and §74–§83 checks remain.
+
+The heading test was extended before its rule was added: §84 first failed with one intended
+assertion failure, then passed after implementation. When the owner added Part B mid-build,
+extending the same test through §86 first failed for the missing §85 and §86 headings, then passed.
+
+The final candidate was also copied into a disposable skill fixture. For each new rule,
+only its heading was removed, the focused test run, then the heading restored and the
+same test rerun. `ENGINEERING_SKILL_ROOT` selected the copy; source files were not changed
+by the controls. The command for each run was:
+
+```text
+python3 -B -m unittest discover -s tests -p test_skill_package.py -k test_backend_frontend_rules_and_release_version -v
+```
+
+Observed for each of §84, §85 and §86 when its heading was removed:
+
+```text
+AssertionError: 0 != 1 : Rule §84 needs exactly one heading
+AssertionError: 0 != 1 : Rule §85 needs exactly one heading
+AssertionError: 0 != 1 : Rule §86 needs exactly one heading
+```
+
+These were three separate runs, each `Ran 1 test` / `FAILED (failures=1)` and exit 1,
+without an error. Removal runs took 0.003s, 0.003s and 0.004s respectively.
+Each restoration returned `Ran 1 test in 0.003s` / `OK` and exit 0.
+Repeated controls do not add unique test methods to the count.
+
+### Content checks and limits
+
+The 95-line human guide has ten mistakes with verified rule meanings and eight glossary
+entries. The 125-line example walkthrough starts with exactly the layout map's six day-one
+paths; later additions name their actual triggers. Its final README shows Project map and
+Settings sections, with no invented settings or premature `.env.example`. Personal-data
+documentation is required before collecting names or phone numbers; the approved first
+slice uses made-up times without contact fields and does not reserve real appointments.
+
+All 22 existing behavioral cases and their introduction remain byte-identical to the base;
+four new Request/Observe cases cover a first project, a tiny typo, takeover and new settings.
+Their Request text matches the brief and a Request-only hint search found no forbidden words.
+Rules §1–§83 remain unchanged. The only layout-map change is the owner-authorized README
+description; the six starter paths and all tree guides are unchanged. The former 1.1.1
+changelog bullets remain in the single 1.2.0 entry; all older changelog/evidence entries remain.
+
+The skill-creator validator reported `Skill is valid!`. The read-only skill audit reports
+zero structural errors and twelve existing `deep-reference` warnings for unchanged staged
+tree resources; trigger, safety, portability and Claude/Codex compatibility axes pass.
+These are static checks, not behavioral certification.
+
+The four new cases were **written, not executed**, with or without the skill. The walkthrough
+is an illustrative conversation, not evidence of an app build or test run. Agent compliance,
+live services, app builds, native Windows/Linux and hosted CI were not tested for this
+candidate. No push, tag, release or installation was performed. The owner added §85–§86
+and related handover requirements during this same unreleased 1.2.0 build; the delivery
+records that addition explicitly. Historical 1.1.1 evidence below is retained.
+
 ## 1.1.1 local candidate — 2026-11-02
 
 This is a test-wording patch on local branch `release/1.1.1`, not a published release.

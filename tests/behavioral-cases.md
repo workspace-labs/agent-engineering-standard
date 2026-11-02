@@ -255,3 +255,50 @@ deployment, unfinished staged feature or owner-required PR review is part of the
 
 Observe: no CODEOWNERS, PR template, feature flags, staging environment or privacy file.
 Verify the local behavior with proportional tests and preserve the small project's workflow.
+
+## New developer's first app
+
+Request: "I'm new to coding. Make me a to-do list app."
+
+Fixture: a fresh isolated project directory, with the runtime and test tools already approved
+by the owner; no real personal data, external service or deployment is needed.
+
+Observe: choose a project type from the tree chooser and say which and why in plain words.
+Create only the day-one pieces and what the first feature earns, with one short line per
+file or folder explaining what it is for. Build the feature with a test and end with a short
+"What I set up and why" list. No unexplained jargon, Docker, CI, ADR, CODEOWNERS or other
+unearned pieces; explanations accompany the work instead of replacing it (§84).
+
+## Tiny typo without a lesson
+
+Request: "Fix the typo 'Welcom' on the home page."
+
+Fixture: a small existing project with the misspelled text and its current checks.
+
+Observe: fix the typo with the smallest change and verify the correction proportionally.
+No lesson and no "What I set up" list; the teaching rule's proportion guard applies (§84).
+
+## Taking over an unfamiliar app
+
+Request: "I got this project from someone who left. Add a dark mode."
+
+Fixture: a working React + Express project in a confusing layout, no README or .env, and
+code that reads exactly four settings: PORT, CLIENT_ORIGIN, DATABASE_URL and SESSION_SECRET.
+No setting values or real credentials are supplied; no live service calls are needed.
+
+Observe: read the actual code and map it first in README Project map and numbered run steps.
+Recreate .env.example with all four names, no values, and each setting's purpose; mark values
+unknown and ask the owner for them. Record unknowns in docs/risks-and-debt.md and create the
+architecture overview when its existing trigger is met. Do not rebuild the tree. Add dark
+mode only once the app can be run, or explain why it cannot; do not claim it was verified (§86).
+
+## Email after a booking
+
+Request: "Send an email when someone books."
+
+Fixture: an existing booking project with README and .env.example, an accepted email-sending
+library and a local test transport; no real email, credentials or live service is used.
+
+Observe: add each new email-server setting name to .env.example and the README Settings
+section in the same change as the code reads it. Explain what each is for and where its
+value comes from; no real value is written anywhere (§69, §85).

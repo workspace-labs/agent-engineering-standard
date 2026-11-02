@@ -16,6 +16,9 @@ CONTRIBUTING, branch policy, ADR format and release process — take precedence 
 - §81 Dependency health over time
 - §82 Incidents
 - §83 Code ownership
+- [§84 Teach while building](#84-teach-while-building)
+- [§85 The ten-year handover](#85-the-ten-year-handover)
+- [§86 Taking over a project](#86-taking-over-a-project)
 
 ## §74 Test levels
 
@@ -136,3 +139,58 @@ prevention. Add a regression test for the cause, following the
 **Due at:** different people or teams own different parts of the repository.
 Use CODEOWNERS or the platform's equivalent to record that ownership.
 CONTRIBUTING keeps its [existing layout-map trigger](layout-map.md#root-files-and-documentation).
+
+## §84 Teach while building
+
+**Due at:** the person says they are new, asks a basic question, or asks for something unsafe
+without seeming to know the risk; or the owner or project asks for explanations.
+
+- On a new project, say in plain words which project type was chosen from the
+  [tree chooser](trees/README.md) and why. Explain what each day-one file or folder is for,
+  one short line each. Create only what the [layout map](layout-map.md#day-one) says is due (§22).
+- When making an important decision about a secret, personal data, storage, structure,
+  a Human Gate or refusing an unsafe request, explain in one or two plain sentences what
+  was done and why. Define any technical word the first time, or avoid it.
+- Safety first: an unsafe request gets the safe build and the explanation, never the unsafe
+  build because the person asked for it (for example, §69). Required decision gates still apply (§30).
+- At the end, give a short **What I set up and why** list in plain words.
+- Keep it proportional: no lessons on tiny tasks; a typo fix gets no explanation. Never
+  lecture or repeat the same explanation in one session. Explanations never replace doing the work.
+
+## §85 The ten-year handover
+
+**Due at:** the first README on day one; grow each part below only when its trigger is met.
+
+- Day one: explain what the project is and how to run it in numbered steps.
+- Past the kit: add a **Project map**, one line each for where the frontend, backend,
+  database/migrations, tests and docs live; include only parts that exist.
+- The first setting: add a **Settings** section pointing to `.env.example`. For each setting,
+  say what it is for and where to get the value, never the value itself (§69).
+- The first deployment: explain how to build and deploy, and where the project runs.
+- The first stored data: explain where the data and its backups live (§43).
+- Point to `CHANGELOG.md` for what changed and `docs/adr/` for why important decisions were
+  made (§19, §36), once decision records are earned; do not create an empty ADR folder.
+- `.env.example` lists every setting the code reads, without real values. A change that
+  makes the code read a new setting adds its name to `.env.example` and the README Settings
+  section in the same change; describe its purpose and where to obtain the value, never the value.
+- Before calling substantial work done, apply the ten-year test: could a stranger holding
+  only the repository, with no chat or original builder, find the frontend and backend that
+  exist, run it, know every setting it needs and see why big decisions were made? If not,
+  fix the documentation first (§59, §65).
+
+## §86 Taking over a project
+
+**Due at:** working on a project the agent did not build and that lacks a map or settings list.
+
+- Map it before changing features. From what the code actually does, write or repair the
+  README **Project map** and numbered how-to-run steps, and `docs/architecture/overview.md`
+  when the [layout map](layout-map.md#root-files-and-documentation) makes it due.
+  Never describe what you have not read.
+- If `.env` is missing, search the code for every setting it reads. Recreate `.env.example`
+  with each name and what it is for, marking every value unknown. Never invent or guess a
+  secret value, or copy one from logs, history or other machines into a file; ask the owner
+  for the real values.
+- If history is missing, start `CHANGELOG.md` from today and put what is unknown or broken
+  in `docs/risks-and-debt.md` (§57). Never invent the past.
+- A wrong project tree is a finding (§28, §29), not a reason to rebuild. Report it, then
+  move to the right structure in small slices through the Human Gate (§20, §30).

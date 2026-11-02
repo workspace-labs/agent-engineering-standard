@@ -110,7 +110,7 @@ each, named in that same file (§5, §6, §11).
 | `state/` | the first state two features share |
 | `hooks/`, `types/` | the first one used twice |
 | `validation/` | the first form, or the first response that must be checked before it is trusted |
-| `config/` | the first setting the browser needs |
+| `config/` | the first setting the browser needs — never a secret: everything the browser gets is public (§69) |
 | `styles/` | the first style not owned by one component |
 | `assets/` | the first image, icon or font |
 
@@ -138,8 +138,11 @@ each, named in that same file (§5, §6, §11).
 | `security/authentication/` | the first sign-in |
 | `security/authorization/`, `permissions/` | the first thing one caller may do and another may not |
 | `validation/` | the first check that lives outside a schema |
-| `config/` | the first setting the server has — an example file naming every setting, and no real values (§49) |
+| `config/` with `.env.example` at the app root | the first setting the server has — `.env.example` names every setting with no real values; configuration is read in one place (§49, §69) |
 | `logging/` | the first error worth keeping — never a secret, never personal data (§27) |
+| `Dockerfile` at the app's build-context root | the first time the server must run somewhere other than the developer's machine, or needs a local service (database, cache, queue) to run at all (§70) |
+| `.dockerignore` beside the Dockerfile | the first Dockerfile (§70) |
+| `compose.yaml` at the local setup root | the first local multi-service setup (§70) |
 
 ## Inside one app — desktop, mobile, command line
 

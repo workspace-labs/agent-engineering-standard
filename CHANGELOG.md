@@ -1,15 +1,34 @@
 # Changelog
 
-## Unreleased — 2026-10-21
+## 1.0.0 — 2026-11-02
+
+- Add backend rules §66–§70 for API contracts and errors, pagination, reliability and
+  operations, security, secret/API-key handling and containers, each with explicit due triggers.
+- Add frontend rules §71–§72 for data ownership and view states, forms, accessibility,
+  security, measured performance and languages, including Arabic and right-to-left layouts.
+- Route both guides from SKILL.md, declare standard version 1.0.0 and fill the stable
+  rule-ID range §1–§73 without renumbering existing rules.
+- Align the layout map and API, webapp and AI-service trees with secret configuration,
+  backend proxies and conditional Dockerfile, ignore-file and Compose responsibilities.
+- Extend allowed rule IDs and add a package test for exactly one heading per new rule and
+  the entrypoint/changelog version match; add five behavioral exercise contracts.
+- Document semantic versions, future tag pinning, seven main reference guides and the
+  expanded scope. Preserve earlier changelog entries under dated Before 1.0.0 headings.
+- Consolidate the October 21 evidence verbatim into TEST-EVIDENCE.md, remove the duplicate
+  evidence file and update its links; record this run's baseline, final count and limits.
+- Prepare the owner-approved 1.0.0 candidate on a local release branch; no push, tag,
+  GitHub Release or installation is part of this change.
+
+## Before 1.0.0 — 2026-10-21
 
 - Clarify that required design approval precedes implementation, while reuse of an accepted
   stack and an earlier approval of the same design do not require duplicate permission.
 - Reject nonportable absolute local Markdown paths and linked resources reached through
   skipped metadata directories; add regression coverage for the checker.
 - Record this repair's test counts, fail-first controls and behavioral limits in
-  [test-evedince.md](test-evedince.md), preserving earlier test evidence.
+  [TEST-EVIDENCE.md](TEST-EVIDENCE.md), preserving earlier test evidence.
 
-## Unreleased — 2026-10-19
+## Before 1.0.0 — 2026-10-19
 
 Deep audit and repair work is recorded here. This starts an explicit change history; it does not invent
 version numbers or release dates for earlier commits. See Git history for previous changes.

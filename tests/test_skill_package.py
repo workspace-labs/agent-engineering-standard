@@ -306,7 +306,7 @@ class SkillPackageTests(unittest.TestCase):
                 self.assertFalse(required - pieces, "Missing day-one pieces: {}".format(required - pieces))
 
     def test_rule_citations_use_existing_stable_ids(self):
-        known = set(range(1, 66)) | {73}
+        known = set(range(1, 74))
         for document in self.bundle_files:
             if document.suffix != ".md":
                 continue
@@ -317,6 +317,25 @@ class SkillPackageTests(unittest.TestCase):
                 cited.update(range(int(start), int(end) + 1))
             with self.subTest(document=document.relative_to(SKILL)):
                 self.assertFalse(cited - known, "Unknown rule IDs: {}".format(cited - known))
+
+    def test_backend_frontend_rules_and_release_version(self):
+        headings = []
+        for document in self.bundle_files:
+            if document.suffix == ".md" and document.is_relative_to(SKILL / "references"):
+                prose = "\n".join(markdown_lines(document.read_text(encoding="utf-8")))
+                headings.extend(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))
+        for rule in range(66, 73):
+            with self.subTest(rule=rule):
+                self.assertEqual(headings.count(rule), 1, "Rule §{} needs exactly one heading".format(rule))
+
+        with self.subTest(release_version=True):
+            entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+            versions = re.findall(r"(?m)^Standard version: (\d+\.\d+\.\d+)$", entrypoint)
+            self.assertEqual(len(versions), 1, "SKILL.md needs one standard version line")
+            changelog = checked_local_path(REPO / "CHANGELOG.md", REPO).read_text(encoding="utf-8")
+            releases = re.findall(r"(?m)^## (\d+\.\d+\.\d+) — \d{4}-\d{2}-\d{2}$", changelog)
+            self.assertTrue(releases, "CHANGELOG.md needs a versioned release heading")
+            self.assertEqual(versions[0], releases[0], "Standard version must match the newest release")
 
     def test_all_repository_markdown_links_resolve(self):
         # Finish the inventory first: an early README can link to a later FIFO

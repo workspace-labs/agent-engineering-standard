@@ -13,15 +13,20 @@ project that never calls a model never grows any of this.
     ai/prompts/           earned by: the first prompt — a prompt is source, versioned and
                           reviewed, not a string buried in a handler
     ai/providers/         earned by: the first model call — ONE boundary owning the
-                          provider client, keys, retries and errors (§11, §42)
+                          provider client, retries and errors; keys come from the one
+                          configuration boundary (§11, §42, §49, §69)
     ai/contracts/         earned by: the first shape a model answer must satisfy — checked
                           like any other external input before it is trusted (§39)
   docs/security.md        earned by: the first stored data, sign-in, network call or secret —
-                          any API key stays out of source, logs and fixtures (§27)
+                          any API key stays out of source, logs and fixtures (§27, §69)
 ```
 
 Product code calls `ai/` through its contract; nothing outside `ai/providers/` knows which
 provider or model serves the call. Swapping providers must not rewrite product code.
+The key is read only in `config/`, from an environment variable or secret manager; `.env.example`
+at the host app's root is due at the first setting the server has and contains names, no real
+values (§69). A secret never reaches the frontend: when there is a browser frontend, the
+backend calls the model provider and the frontend calls that backend proxy (§69).
 
 ## Stage 2 — the feature earns structure
 

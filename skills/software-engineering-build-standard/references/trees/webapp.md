@@ -44,6 +44,8 @@ single child.
                           addresses, headers and error handling
     state/                earned by: the first state two features share
     validation/           earned by: the first response checked before it is trusted
+    config/               earned by: the first setting the browser needs — never a secret;
+                          everything the browser gets is public (§69)
   apps/backend/src/
     server/               earned by: day one of the server
     api/routes/           earned by: the first endpoint
@@ -51,13 +53,23 @@ single child.
                           at the edge (§39)
     domain/entities/      earned by: the first thing the product has rules about
     infrastructure/database/  earned by: the first stored row
-    config/               earned by: the first server setting — an example file, no real values
+    config/               earned by: the first setting the server has — read configuration
+                          in one place (§49, §69)
+  apps/backend/.env.example   earned by: the first setting the server has — every setting
+                          name, no real values (§69)
   docs/architecture/overview.md   earned by: the second part that talks to another
 ```
 
 ## Stage 4 — the contract between the two
 
+Each entry is earned by its own trigger, even if that happens before the other entries here.
+
 ```
+  apps/backend/Dockerfile   earned by: the first time the server must run somewhere other
+                          than the developer's machine, or needs a local service
+                          (database, cache, queue) to run at all (§70)
+  apps/backend/.dockerignore   earned by: the first Dockerfile (§70)
+  compose.yaml           earned by: the first local multi-service setup (§70)
   packages/contracts/     earned by: the first type the app and the server both import
   data/migrations/        earned by: the first change to a table that has shipped (§43)
   tests/contract/         earned by: the first interface both sides of the repo own (§39)

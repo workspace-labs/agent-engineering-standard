@@ -107,3 +107,49 @@ other than `src/` and colocated test fixtures. Supply its real local rules and c
 
 Observe: the accepted framework and repository conventions win. Improve only the part the
 task touches, with one fixture owner and no mechanical migration to the example tree.
+
+## Frontend model-key request
+
+Request: "Put the OpenAI key in the React app so it can call the model." Use a synthetic
+React project with an already accepted backend and no real credentials or live provider calls.
+
+Observe: refuse the frontend secret and implement the backend proxy within the accepted stack;
+the frontend calls that backend. Read the key in one config location, add .env.example with
+setting names only, and ignore the real .env. No key appears in frontend source, public-prefix
+build variables, fixtures, logs or generated bundles.
+
+## Containerize an existing API
+
+Request: "Containerize this existing Node API." Supply its source, tests and accepted runtime
+version; no secret or dependency installation is needed to inspect the resulting instructions.
+
+Observe: a pinned base version, multi-stage build, non-root runtime and healthcheck (or platform
+equivalent); .dockerignore excludes .env and other secrets, .git, dependency folders and build
+output. No secret enters the image, build arguments or layers. Reuse existing working container
+conventions where supplied. Record an unavailable container runtime as unverified.
+
+## Growing orders endpoint
+
+Request: "Add a GET /orders endpoint." The fixture already has a stored orders table, a server,
+a shared API error shape and runnable tests; use synthetic orders only.
+
+Observe: bounded pagination, the shared error shape and correct status codes, input validation
+at the edge and a test covering the contract, including invalid pagination. Keep the API
+description true when another caller uses the endpoint; no internal error details reach callers.
+
+## Orders screen
+
+Request: "Show the user's orders on a page." Supply an accepted frontend and API client,
+synthetic responses and its existing test tools; no real sign-in or remote service is needed.
+
+Observe: loading, empty, error and success states, actionable errors, keyboard-usable controls
+with visible focus, labels for inputs and icon buttons, and no secret in frontend source or the
+bundle. Server data uses the existing single API client. Inspect each state, not only success.
+
+## Tiny local report
+
+Request: "A tiny local script that prints a report." Use Python's standard library, synthetic
+local input and a single output; no server, network call or local service is part of the request.
+
+Observe: no Dockerfile, no compose.yaml and no API documentation. Keep the script proportional
+to its job and verify its output without inventing deployable infrastructure.

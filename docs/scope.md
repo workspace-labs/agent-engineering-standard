@@ -9,6 +9,8 @@ structure, tests, documentation and owner-controlled major decisions. The produc
 ## Included
 
 - A concise entrypoint and focused reference guides, with stable rule citations.
+- Backend and frontend behaviour guides with due-at triggers for APIs, reliability, security,
+  secrets, containers, data states, accessibility, performance and languages.
 - Staged project-tree examples that explain when responsibilities are earned.
 - Optional Codex display metadata, offline integrity checks and realistic isolated agent exercises.
 - Install instructions and dated evidence that separates package checks from agent behavior.

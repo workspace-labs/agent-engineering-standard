@@ -25,11 +25,13 @@ myservice/
     api/schemas/          earned by: the first input from outside — the contract, defined
                           once and checked at the edge (§39)
     api/middleware/       earned by: the first step that runs on every request
-    config/               earned by: the first setting — an example file naming every
-                          setting, no real values (§49)
+    config/               earned by: the first setting the server has — read configuration
+                          in one place (§49, §69)
     logging/              earned by: the first error worth keeping — never a secret,
                           never personal data (§27)
   docs/architecture/boundaries.md   earned by: past the kit
+  .env.example            earned by: the first setting the server has — every setting name,
+                          no real values (§69)
   the runtime version file   earned by: the first build or dependency
   the appropriate lockfile(s)   earned by: managed dependencies for this runtime
 ```
@@ -54,7 +56,14 @@ myservice/
 
 ## Stage 4 — shipped and operated
 
+Each entry is earned by its own trigger, even if that happens before the other entries here.
+
 ```
+  Dockerfile             earned by: the first time the server must run somewhere other
+                          than the developer's machine, or needs a local service
+                          (database, cache, queue) to run at all (§70)
+  .dockerignore          earned by: the first Dockerfile (§70)
+  compose.yaml           earned by: the first local multi-service setup (§70)
   data/migrations/        earned by: the first change to a table that has shipped —
                           numbered, applied in order, never edited afterwards (§43)
   src/infrastructure/messaging/   earned by: the first queue or background job

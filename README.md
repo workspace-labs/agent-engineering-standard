@@ -23,6 +23,7 @@ The skill is in this repo — [`skills/`](skills).
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
 - **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
 - **Build the tests and the docs with the code**, not after it.
+- **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.
 - **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, or anything that could lose data waits for a person.
 
@@ -99,11 +100,25 @@ for discovery locations and metadata.
 
 Agents can choose it when they build, extend, restructure or review software, or you can
 invoke it explicitly as `$software-engineering-build-standard`. The entry point is
-[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with five main reference
+[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with seven main reference
 guides and [staged examples for eleven project types](skills/software-engineering-build-standard/references/trees/README.md).
 The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
 each piece's *due at* trigger, so nothing is created before the product earns it. A project's
 own rules, recorded decisions and the owner's instructions always come first.
+
+## Versions
+
+The standard uses semantic versioning: a patch fixes wording; a minor version adds rules or
+guidance that stays compatible; a major version removes a rule or changes its meaning.
+Rule IDs are never renumbered.
+
+After the owner publishes the `v1.0.0` tag, pin that version with:
+
+```bash
+git clone --branch v1.0.0 https://github.com/workspace-labs/agent-engineering-standard.git
+```
+
+The local 1.0.0 candidate does not create that tag or a GitHub Release.
 
 ## Test it
 
@@ -139,10 +154,9 @@ Run those in isolated fixtures, inspect the actual files and command results, an
 tested behavior from anything the environment could not verify. Package checks passing
 alone do not prove that every agent will select or follow the skill correctly.
 
-See [the cross-platform test evidence](TEST-EVIDENCE.md) for recorded Windows, macOS and
-Linux results, the tested revision, and the additional native Windows installation checks.
-See [the latest local test record](test-evedince.md) for the October 21 repair, test counts
-and verification limits.
+See [the test evidence](TEST-EVIDENCE.md) for dated local results and verification limits,
+the October 21 repair, and historical Windows, macOS and Linux results with native Windows
+installation checks. Each record applies only to its stated revision.
 
 ---
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1 — 2026-11-02
+
+- Rewrite the eleven beginner behavioral requests in a beginner's own words without hints,
+  so the agent must recognize the engineering decisions the request requires.
+- Add the "Where should I add the API key?" behavioral case for an existing browser-side call.
+- Allow baseline runs without the skill, recording their results separately from skill runs.
+
 ## 1.1.0 — 2026-11-02
 
 - Add §74–§83 for test levels and flaky tests, CI gates, branches and pull requests,

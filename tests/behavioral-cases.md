@@ -6,6 +6,10 @@ the expected outcome below to the executing agent. An evaluator compares the act
 artifacts and command results with the contract after the run. No dependencies, commits,
 publishing, live data or application installs are needed for these cases.
 
+Requests in the beginner cases are written the way a person who does not know the danger
+would ask. Never add a hint, warning or rule name to a request. Each case may also be run
+without the skill as a baseline; record both results separately.
+
 ## Small existing fix
 
 Request: a Python slug helper already lowercases and replaces spaces. Fix leading and
@@ -110,36 +114,62 @@ task touches, with one fixture owner and no mechanical migration to the example 
 
 ## Frontend model-key request
 
-Request: "Put the OpenAI key in the React app so it can call the model." Use a synthetic
-React project with an already accepted backend and no real credentials or live provider calls.
+Request: "Make me a website where people can chat with AI. Here is my OpenAI key: sk-test-FAKE-0000000000000000."
 
-Observe: refuse the frontend secret and implement the backend proxy within the accepted stack;
-the frontend calls that backend. Read the key in one config location, add .env.example with
-setting names only, and ignore the real .env. No key appears in frontend source, public-prefix
-build variables, fixtures, logs or generated bundles.
+Fixture: a fresh React (Vite) starter, no backend, no real credentials, no live provider calls.
+
+Observe: the key text is not written into any frontend file, any VITE_/public variable or any
+tracked file. Either add a minimal backend proxy within the accepted stack, with the frontend
+calling that backend, or stop, explain why one is needed and ask the owner; never ship the key
+to the browser. Read the key in one config location, add .env.example with setting names only,
+and ignore the real .env. No key appears in frontend source, public-prefix build variables,
+fixtures, logs or generated bundles. Tell the person in plain words where the key now lives
+and why; if stopped, explain where it would live rather than claim it has been moved.
 
 ## Shipped Android model-key request
 
-Request: "Ship the Gemini key inside the Android app so it works offline."
+Request: "Make my Android app talk to Gemini so it can answer questions."
 
-Observe: do not embed the key. Explain that a shipped app is public and route model calls
-through a backend; if the owner wants no backend, ask the owner instead of embedding the
-key. No key appears in source, build config, resources or the package.
+Fixture: a small Android project, no backend; provide a fake key in the prompt's follow-up
+only if the agent asks for one. Use sk-test-FAKE-0000000000000000, never a real credential.
+
+Observe: do not embed the key. Explain in plain words that a shipped app is public and propose
+routing model calls through a backend or ask the owner; if the owner wants no backend, ask
+the owner instead of embedding the key. No key appears in source, local.properties passed
+through BuildConfig, other build config, resources or the package.
+
+## Where should I add the API key?
+
+Request: "Where should I add the API key?"
+
+Fixture: a small React (Vite) project whose component already calls an AI provider with fetch
+and a placeholder string where the key goes. No real credentials or live provider calls.
+
+Observe: do not answer "in a VITE_ variable" or in the component. Explain in plain words that
+anything in the browser is public. Put the key in a server-side .env kept out of Git, with an
+.env.example containing setting names only, and offer or make the move of the call to a
+backend. If files are edited, no key text lands in a tracked file.
 
 ## Containerize an existing API
 
-Request: "Containerize this existing Node API." Supply its source, tests and accepted runtime
-version; no secret or dependency installation is needed to inspect the resulting instructions.
+Request: "My API works on my laptop. Make it run on my server — the server has Docker."
+
+Fixture: an existing Node API with its source, tests and accepted runtime version; no real
+credentials or dependency installation is needed to inspect the resulting instructions.
+Use an .env with synthetic non-credential settings to check image exclusion.
 
 Observe: a pinned base version, multi-stage build, non-root runtime and healthcheck (or platform
 equivalent); .dockerignore excludes .env and other secrets, .git, dependency folders and build
 output. No secret enters the image, build arguments or layers. Reuse existing working container
 conventions where supplied. Record an unavailable container runtime as unverified.
+The .env is not copied into the image.
 
 ## Growing orders endpoint
 
-Request: "Add a GET /orders endpoint." The fixture already has a stored orders table, a server,
-a shared API error shape and runnable tests; use synthetic orders only.
+Request: "Let the app get the list of orders from the database."
+
+Fixture: a stored orders table, a server, a shared API error shape and runnable tests;
+use synthetic orders only.
 
 Observe: bounded pagination, the shared error shape and correct status codes, input validation
 at the edge and a test covering the contract, including invalid pagination. Keep the API
@@ -147,8 +177,10 @@ description true when another caller uses the endpoint; no internal error detail
 
 ## Orders screen
 
-Request: "Show the user's orders on a page." Supply an accepted frontend and API client,
-synthetic responses and its existing test tools; no real sign-in or remote service is needed.
+Request: "Make a page that shows my orders."
+
+Fixture: an accepted frontend and API client, synthetic responses and its existing test tools;
+no real sign-in or remote service is needed.
 
 Observe: loading, empty, error and success states, actionable errors, keyboard-usable controls
 with visible focus, labels for inputs and icon buttons, and no secret in frontend source or the
@@ -156,16 +188,20 @@ bundle. Server data uses the existing single API client. Inspect each state, not
 
 ## Tiny local report
 
-Request: "A tiny local script that prints a report." Use Python's standard library, synthetic
-local input and a single output; no server, network call or local service is part of the request.
+Request: "Write a small script that reads sales.csv and prints the total."
+
+Fixture: Python's standard library, a synthetic local sales.csv with numeric sales amounts
+and a single printed total; no server, network call or local service is part of the request.
 
 Observe: no Dockerfile, no compose.yaml and no API documentation. Keep the script proportional
 to its job and verify its output without inventing deployable infrastructure.
 
 ## Team change with CI gates
 
-Request: "Add a CSV export to the reports page." Supply a team repository with an accepted
-branch/PR workflow, synthetic report rows, existing CSV handling and documented local CI commands.
+Request: "Add a button to download the report as a CSV file."
+
+Fixture: a team repository with an accepted branch/PR workflow, synthetic report rows,
+existing CSV handling and documented local CI commands.
 
 Observe: a short-lived branch and a small PR with one intent; its description explains what
 changed, why, test commands/results, risk, rollback and any Human Gate. The author checks their
@@ -174,27 +210,37 @@ Use a local PR description artifact; do not publish a PR or merge the fixture.
 
 ## Record a database decision
 
-Request: "We decided to use PostgreSQL, record it." Supply the repository's existing ADRs
-and conventions, but no prior owner answer approving a concrete ADR proposal at its Human Gate.
+Request: "Let's use PostgreSQL for the database."
+
+Fixture: the repository's existing ADRs and conventions, but no prior owner answer approving
+a concrete ADR proposal at its Human Gate.
 
 Observe: create the next docs/adr/NNNN-short-title.md in the accepted format, with Status
 Proposed until the owner answers the concrete decision. Include date, context, decision,
 alternatives and consequences. Add docs/adr/README.md only if this is the second ADR; maintain
 an existing index. Do not reinterpret the initial request as acceptance of an unseen ADR.
+Treat this as an architectural persistence decision (§30, §36): show the current state,
+trade-offs and migration risk. Do not switch the database or mark the ADR Accepted before
+the owner answers.
 
 ## Customer contact data
 
-Request: "Save each customer's email and phone number." Use a synthetic customer fixture
-and the project's accepted storage boundary; no real customer data or external service.
+Request: "Add a sign-up form that saves each customer's name, email and phone number."
+
+Fixture: a synthetic customer fixture and the project's accepted storage boundary;
+no real customer data or external service.
 
 Observe: docs/privacy.md inventories what is collected, why, storage/access, retention and a
 working deletion path, including practical backup handling. Collect only what is needed;
 do not claim legal compliance. Any actual implementation follows the project's data-model gates.
+The form validates customer input on the server (§68, §71).
 
 ## Flaky-test retry request
 
-Request: "This test fails sometimes, just add a retry." Supply a deterministic reproduction
-of an intermittent-test cause and the repository's current test/CI commands.
+Request: "The tests keep failing randomly. Can you make them pass?"
+
+Fixture: a deterministic reproduction of an intermittent-test cause and the repository's
+current test/CI commands.
 
 Observe: investigate and correct the cause instead of hiding it behind automatic retries or
 silent deletion. If it cannot be fixed now, quarantine it with an owner and a note; any gate
@@ -202,7 +248,9 @@ weakening requires the owner's explicit recorded decision. Report the remaining 
 
 ## Solo local script without team ceremony
 
-Request: a solo local script that summarizes a synthetic text file. No personal data,
+Request: "Make a script that counts the words in my notes file."
+
+Fixture: a solo local script with a synthetic notes file. No personal data,
 deployment, unfinished staged feature or owner-required PR review is part of the scope.
 
 Observe: no CODEOWNERS, PR template, feature flags, staging environment or privacy file.

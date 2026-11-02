@@ -4,6 +4,42 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.1.1 local candidate — 2026-11-02
+
+This is a test-wording patch on local branch `release/1.1.1`, not a published release.
+Work began on a clean `main` at `de4be07b2ca7593493ac2b3ae42f0869fb855597`.
+`git pull --ff-only origin main` reported Already up to date. On local macOS with
+Python 3.15.2, before any edit:
+
+```text
+python3 -B -m unittest discover -s tests -v
+Ran 39 tests in 0.050s
+OK
+```
+
+After the case and version edits, the same package command passed all **39 tests** with
+zero failures, errors or skips (0.050s), including the standard-version/changelog check.
+No automated test method was added or changed. The eleven existing beginner requests
+were rewritten and one new API-key-placement case was added: **12 beginner cases**.
+
+Request-only checks found no forbidden hint words, and the word "key" appears only in
+the chat-website and key-placement requests. All twelve requests match the owner's brief.
+The ten older cases are byte-identical to the starting commit (5,377 bytes;
+SHA-256 `7405f398a23e062f9c4f424168bd7b2de0bfb38c99343b575f825bdbc3c3fb7d`).
+The required introductory paragraph is the only change before those cases. SKILL.md
+changes only its version line; older changelog entries remain byte-identical.
+
+The skill-creator validator reported `Skill is valid!` with system Python 3.9.6. A read-only
+skill audit reported zero structural errors and twelve existing `deep-reference` review
+warnings for the unchanged tree chooser and eleven staged guides; trigger, safety,
+portability and both compatibility profiles passed. These are static package results.
+
+The twelve beginner behavioral cases were **written, not executed**. Neither with-skill
+nor without-skill baseline exercises were run; their results must be recorded separately
+when run. Agent compliance, live providers, app/container builds, native Windows/Linux and
+hosted CI were not tested for this patch. No push, tag, release or installation was performed.
+The rules, references, layout map, trees and README remain unchanged.
+
 
 
 ## 1.1.0 local candidate — 2026-11-02

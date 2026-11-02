@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.1 — 2026-11-02
+
+- Route configuration changes explicitly to §85 from the entrypoint and completion
+  checklist after an executed email exercise omitted setting purposes and value sources.
+  Clarify that names and defaults alone do not satisfy the existing handover rule.
+- Reject incorrect filename or directory capitalization in local Markdown links on
+  case-insensitive filesystems, so Windows checks catch links that would break on Linux.
+  Add a fail-first regression with a correctly spelled positive control.
+- Clarify the Windows command fallback when `py` exists but cannot find Python, and
+  record native PowerShell package, installation and behavioral verification.
+
 ## 1.2.0 — 2026-11-02
 
 - Add §84, Teach while building: explain project structure and important decisions in plain

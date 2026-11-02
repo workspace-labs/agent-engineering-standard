@@ -140,8 +140,10 @@ Windows PowerShell:
 py -3 -B -m unittest discover -s tests -v
 ```
 
-If the Windows Python launcher (`py`) is unavailable, use `python` instead. No Bash or
-WSL is required. [CI](.github/workflows/check-skill.yml) runs the same package checks on
+If the Windows Python launcher (`py`) is unavailable or reports "No installed Python
+found!", try `python --version`. If it finds Python 3.9 or newer, run
+`python -B -m unittest discover -s tests -v` instead. No Bash or WSL is required.
+[CI](.github/workflows/check-skill.yml) runs the same package checks on
 Windows, macOS and Linux.
 
 The checks cover metadata limits, local links and heading fragments across repository

@@ -118,6 +118,16 @@ class MarkdownLinkRegressions(unittest.TestCase):
         document = self.write("docs/README.md", "[guide](../guide.md#guide)\n")
         self.assertEqual(self.links(document), [target.resolve()])
 
+    def test_local_link_spelling_is_portable_on_case_insensitive_filesystems(self):
+        target = self.write("Guides/Guide.md", "# Guide\n")
+        for link in ("Guides/guide.md", "guides/Guide.md"):
+            with self.subTest(link=link):
+                document = self.write("README.md", "[guide]({}#guide)\n".format(link))
+                with self.assertRaisesRegex(AssertionError, "Missing link|spelling"):
+                    self.links(document)
+        document = self.write("README.md", "[guide](Guides/Guide.md#guide)\n")
+        self.assertEqual(self.links(document), [target.resolve()])
+
     def test_explicit_root_alias_remains_supported(self):
         target = self.write("bundle/guide.md", "# Guide\n")
         self.write("bundle/README.md", "[guide](guide.md#guide)\n")

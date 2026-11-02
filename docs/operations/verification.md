@@ -8,7 +8,9 @@ From the repository root, with Python 3.9 or newer and no added dependencies:
 python3 -B -m unittest discover -s tests -v
 ```
 
-Windows uses `py -3 -B -m unittest discover -s tests -v`, or `python` when the launcher is unavailable.
+Windows uses `py -3 -B -m unittest discover -s tests -v`. If the launcher is missing or
+cannot find an installed interpreter, check `python --version` and use
+`python -B -m unittest discover -s tests -v` with Python 3.9 or newer instead.
 Use an already available Agent Skills frontmatter validator for metadata changes; the repository's
 simple-field reader is not a general YAML parser.
 

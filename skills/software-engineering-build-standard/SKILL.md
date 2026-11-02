@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.2.0
+Standard version: 1.2.1
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -148,6 +148,8 @@ Never "make it work" by destroying data or bypassing safeguards.
 
 Working code alone is not done. Before declaring substantial work complete, explicitly verify the requested behavior, architectural placement, tests, build/type/lint status where relevant, Git state where relevant, documentation impact, known risks, and whether a Human Gate is required. Then apply the definition of done, the self-check and the handoff in [references/review-and-completion.md](references/review-and-completion.md), in proportion to the task. Report any concerning self-check answer with the smallest appropriate correction. Never claim completion for verification that was not performed — say what remains unverified.
 
+When code starts reading or changes a configuration setting, load [the handover settings requirements (§85)](references/team-and-lifecycle.md#85-the-ten-year-handover). Compare the settings read by the code with `.env.example` and the README Settings section: each needs its name, purpose and where to obtain its value. A list of names and defaults alone does not explain how another person should configure the project.
+
 When you are the builder and the work changed code or other project files, load the `engineering-builder-handoff` skill, if it is installed, before your final message; it sets the handoff's format. Do not load it for review-only or explanation-only work.
 
 ### Closing an audit or a restructuring (§73)
@@ -178,6 +180,6 @@ When work that began from an engineering audit (§28), or any substantial or arc
 | [references/data-state-and-runtime.md](references/data-state-and-runtime.md) | persistence or databases, data contracts, units, time, state ownership, migrations, compatibility, error handling, async or concurrency, performance |
 | [references/backend.md](references/backend.md) | API contracts and errors, reliability and operations, backend security, secrets and API keys, containers — each at its due-at trigger |
 | [references/frontend.md](references/frontend.md) | server data and screen state, remote-data views, forms, accessibility, frontend security, performance and languages — each at its due-at trigger |
-| [references/team-and-lifecycle.md](references/team-and-lifecycle.md) | test levels and CI gates, branches and review, ADR lifecycle, releases, environments and flags, privacy, dependency health, incidents and code ownership — each at its due-at trigger |
+| [references/team-and-lifecycle.md](references/team-and-lifecycle.md) | test levels and CI gates, branches and review, ADR lifecycle, releases, environments and flags, privacy, dependency health, incidents, code ownership, teaching, handover documentation, adding or changing configuration settings, or taking over an unfamiliar project — each at its due-at trigger |
 | [references/repository-and-delivery.md](references/repository-and-delivery.md) | tests, tooling, evidence and artifacts, Git and commits, documentation, ADRs, dependencies, generated files, build and release, secrets and private data, dead code |
 | [references/review-and-completion.md](references/review-and-completion.md) | findings, reviews, zero-behavior-change refactors, technical debt, definition of done, self-check, handoff |

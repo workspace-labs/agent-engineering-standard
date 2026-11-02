@@ -4,6 +4,133 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.2.1 native Windows verification — 2026-11-02
+
+Started from a clean clone of `main` at `afe373cf5cdefe8f4afdeaf71daa625c45ad7c32`
+(standard 1.2.0), on native Windows with **Windows PowerShell 5.1.26100.7309** and
+**Python 3.12.10**. No Bash or WSL was used. Before editing, the working tree was clean
+and `python -B -m unittest discover -s tests -v` passed all **39 tests**, with no skips.
+This record describes a local 1.2.1 candidate, not a published release.
+
+### Confirmed problems and repairs
+
+1. **Incorrectly capitalized links passed on Windows.** With an actual file named
+   `Guides/Guide.md`, the checker accepted both `Guides/guide.md` and `guides/Guide.md`
+   on the native case-insensitive filesystem. These links are not portable to a
+   case-sensitive host. One new regression method covers both errors and a correctly
+   spelled positive control. Before the repair, **40 methods ran with two failing
+   subcases** (`AssertionError not raised`); afterward all **40 passed**, with no skips.
+   Component spelling is now checked against directory entries after the existing
+   link/reparse/type guards. Native junction, boundary and selected-root-alias controls
+   continue to pass. Repeated runs and subcases do not increase the method count.
+2. **The email exercise missed required settings explanations.** The original skill
+   executor produced working mail behavior and listed settings/defaults, but did not
+   explain every setting's purpose. It reported that it had not loaded §85. The
+   entrypoint's reference chooser did not name settings/handover as a reason to read
+   that guide, and the completion checklist only asked generally for documentation.
+   The repair adds explicit routing and a completion check for setting names, purposes
+   and value sources. It clarifies the existing §85 requirement; rule IDs and the rule's
+   meaning are unchanged. The standard version and changelog are now 1.2.1.
+3. **The installed `py` launcher could not locate Python.** `py -3` reported
+   `No installed Python found!` (exit 112), although `python --version` found Python
+   3.12.10 and the tests ran successfully. README, contributor instructions and
+   verification instructions now cover an unusable launcher as well as a missing one.
+   This is an environment problem with a documented command fallback, not a Python fix.
+
+### Executed behavior: original skill and no-skill baseline
+
+Three isolated synthetic fixtures were executed with the original 1.2.0 skill and
+without it. Both executors received the same requests and raw files, without evaluator
+expectations. One executor per configuration handled all three fixtures; these were
+separate projects, **not a fresh agent context per case**. A different grader inspected
+the files, reran tests and probed the contracts independently.
+
+| Exercise | Original skill | Without skill | Observed result |
+|---|---:|---:|---|
+| Tiny home-page typo | 3/3 assertions | 3/3 assertions | Only the heading changed; existing check passed; no lesson or scaffold. |
+| Read-only basket review | 3/3 assertions | 3/3 assertions | Both found ignored quantities despite the passing old test; file paths and bytes stayed unchanged. |
+| Email after booking | 3/4 assertions | 3/4 assertions | Local transport, exactly-once send and invalid-input checks passed; per-setting purposes were missing. |
+
+Each configuration therefore passed **9/10 assertions**. The email projects passed
+seven implementation tests with the skill and six without it; the grader also ran the
+two original tests against each implementation. Passing code tests did not erase the
+documentation failure. The missed check and original outputs remain preserved.
+
+The basket review with the skill also made an overbroad prose claim about every quantity
+other than one: a zero-price row is a counterexample. The grader recorded that limitation;
+the actual reported quantity bug and reproductions were valid.
+
+### Fresh-agent retest after the routing repair
+
+The email request and pristine project were rerun with **one fresh executor per
+configuration**: the saved original 1.2.0 skill and revised 1.2.1. Neither executor
+received the grader's assertions. The same independent grader reran the original tests,
+the new checks and separate send/configuration probes, without modifying project bytes.
+
+- Revised skill: **4/4 assertions passed**, all **8 implementation tests** and both
+  original tests passed. Its settings documentation explains every name, purpose and
+  where to choose the synthetic local value.
+- Original skill, fresh repeat: **4/4 assertions passed**, all **7 implementation tests**
+  and both original tests passed. This run supplied a purpose table and explained safe
+  defaults, process-environment values and shell overrides. The same grading threshold
+  was applied to both runs; explanatory detail may be supplied across the README and
+  example settings file.
+
+Both preserved `book(name, slot)` and its confirmation result, sent exactly once through
+the unchanged local transport, rejected invalid bookings before sending, honored all four
+environment overrides, and propagated transport failures. No real service was contacted.
+The revised documentation was more explicit about per-setting value selection, but this
+fresh comparison shows **no assertion-score improvement**. One earlier original run
+missed the documentation requirement and its fresh repeat satisfied it; neither that
+variation nor one revised success proves reliability. The patch improves routing to an
+existing requirement, not a demonstrated guarantee of compliance. All eight executor
+runs (six initial, two fresh repeats) and their failures remain separately recorded.
+
+### Native PowerShell installation and relocation
+
+The README PowerShell manual-copy procedure was executed in disposable destinations,
+with only its source and destination redirected into the fixture. All **six cases passed**:
+
+- Fresh destination containing spaces: complete relative-file/SHA-256 manifests matched
+  for all **22 files**.
+- Existing directory, hidden directory, existing file, native junction and dangling
+  junction: all five destinations were refused and their prior contents or link targets
+  were preserved.
+
+The same controls passed for the original bundle and were repeated for revised 1.2.1;
+these are six distinct cases, not twelve. The final installed copy also passed the full
+**40-test suite**, using `ENGINEERING_SKILL_ROOT` to select it. The fixture script used
+a process-only PowerShell execution-policy override because this PC blocks `.ps1` files;
+the documented inline copy commands were unchanged. No machine execution policy or real
+user skill installation was changed.
+
+### Commands, artifacts and limits
+
+From the repository root, in PowerShell:
+
+```powershell
+python --version
+python -B -m unittest discover -s tests -v
+git diff --check
+```
+
+Raw fail-first logs, baseline state, manifests, synthetic projects, command records,
+independent grades and review pages are retained in the sibling local
+`agent-engineering-standard-workspace/`, outside the repository and installable skill.
+Historical records below are preserved.
+
+- The optional general YAML frontmatter validator could not run: its existing local
+  Python environment lacks `yaml`/PyYAML. No dependency was installed. The package's
+  simple-field metadata checks passed; frontmatter representation was unchanged.
+- These are native local Windows results. macOS, Linux and hosted CI were not rerun.
+- The email transport only appends synthetic messages in memory. No real emails,
+  services, credentials, deployment, persistence migration or production data were used.
+- Manual skill loading was tested. Automatic skill selection and universal agent
+  compliance are not established. Token counts were unavailable; none are invented.
+- The test run performed no commit, push, tag, GitHub Release or real user installation.
+  The owner subsequently authorized committing and pushing this candidate; that does
+  not publish a version tag or GitHub Release or change a real user installation.
+
 ## 1.2.0 local candidate — 2026-11-02
 
 Work began on a clean `release/1.1.1` at `25f3bc676c519f6e813ad33776ca42acd0e8eaa0`,

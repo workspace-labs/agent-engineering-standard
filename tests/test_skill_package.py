@@ -105,7 +105,9 @@ def checked_local_path(path, boundary):
 
     The explicitly selected root may be an installation alias. Links and reparse
     points below its resolved boundary are package resources, so refuse them even
-    in directories omitted from the repository inventory, such as .git.
+    in directories omitted from the repository inventory, such as .git. Require
+    exact component spelling even on case-insensitive hosts, so links remain
+    valid after publication or copying to a case-sensitive filesystem.
     """
     if not path.is_relative_to(boundary):
         raise AssertionError("Link escapes package: {}".format(path))
@@ -128,6 +130,8 @@ def checked_local_path(path, boundary):
             raise AssertionError("Local link contains a Windows reparse point: {}".format(current))
         if not (stat.S_ISREG(metadata.st_mode) or stat.S_ISDIR(metadata.st_mode)):
             raise AssertionError("Nonregular local link target: {}".format(current))
+        if part not in {child.name for child in current.parent.iterdir()}:
+            raise AssertionError("Nonportable local link spelling: {}".format(current))
         if index < len(parts) - 1 and not stat.S_ISDIR(metadata.st_mode):
             raise AssertionError("Non-directory local link component: {}".format(current))
     return current

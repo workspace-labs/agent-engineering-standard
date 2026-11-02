@@ -14,7 +14,8 @@ Run the offline checks with Python 3.9 or newer, standard library only:
 python3 -B -m unittest discover -s tests -v
 ```
 
-On Windows, use `py -3` or `python`. The CI workflow runs the same checks on Windows, macOS and Linux.
+On Windows, use `py -3` or `python`; use the latter if the launcher cannot find an installed
+interpreter. The CI workflow runs the same checks on Windows, macOS and Linux.
 See [verification and publication](docs/operations/verification.md) for package, installation and behavioral proof.
 
 ## Change rules

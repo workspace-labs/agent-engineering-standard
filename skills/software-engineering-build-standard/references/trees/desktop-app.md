@@ -42,7 +42,10 @@ Shared product logic must not depend on the shell (§14): nothing in `renderer/`
     platform/             earned by: the first thing only this operating system does (§14)
   data/backups/           earned by: the first real user data — and .gitignore carries it
                           from the same day; a backup never enters version control (§27)
-  docs/security.md        earned by: the first stored data, sign-in, network call or secret
+  docs/security.md        earned by: the first stored data, sign-in, network call or secret —
+                          no project secret goes inside the shipped app (§69). Private APIs
+                          are called through the project's backend; a user's own token goes
+                          in the platform's secure storage
 ```
 
 ## Stage 4 — signed and shipped

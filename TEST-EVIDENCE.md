@@ -82,6 +82,19 @@ The 1.0.0 suite was not run on native Windows or Linux or in hosted CI. No insta
 push, tag, GitHub Release or topic change was performed. Claude's independent review and
 the owner's publication decisions follow this local delivery.
 
+### Fix round 1 — 2026-11-02
+
+F1: widen §69 from browser secrets to project keys in all shipped clients, including mobile,
+desktop and published CLI apps; retain the user-supplied runtime-key exception. The three
+tree guides now cite §69. Version remains 1.0.0; frontend.md is unchanged.
+
+On local macOS/Python 3.15.2, `python3 -B -m unittest discover -s tests -v` passed all
+**39 tests**, with no failures, errors or skips, both before this repair (0.046s) and after
+the instruction changes (0.045s). The heading/version test still passes. No test method
+was added or changed. The new Android Request/Observe case was **written, not executed**.
+Agent compliance, Android/desktop/CLI builds, package inspection, live model calls and
+native Windows/Linux/hosted CI were not run. No push, tag, release or installation occurred.
+
 ---
 
 ## Deep audit and repair — 19 October 2026

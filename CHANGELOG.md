@@ -2,6 +2,8 @@
 
 ## 1.0.0 — 2026-11-02
 
+- Extend §69 to project keys in shipped mobile, desktop and CLI apps, with a user-supplied
+  runtime-key exception and matching tree guidance and Android exercise contract.
 - Add backend rules §66–§70 for API contracts and errors, pagination, reliability and
   operations, security, secret/API-key handling and containers, each with explicit due triggers.
 - Add frontend rules §71–§72 for data ownership and view states, forms, accessibility,

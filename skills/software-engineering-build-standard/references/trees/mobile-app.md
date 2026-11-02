@@ -41,7 +41,9 @@ myapp/
     domain/               earned by: the first product rule — independent of screens and
                           of the OS (§8): testable without a device
   docs/security.md        earned by: the first stored data, sign-in, network call or secret — tokens on a
-                          device are private data (§27)
+                          device are private data (§27); no project secret goes inside the
+                          shipped app (§69). Private APIs are called through the project's
+                          backend; a user's own token goes in the platform's secure storage
 ```
 
 ## Stage 4 — store release

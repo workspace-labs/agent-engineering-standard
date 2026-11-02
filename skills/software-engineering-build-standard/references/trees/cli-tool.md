@@ -36,7 +36,9 @@ mytool/
     infrastructure/       earned by: the first filesystem or network call with error handling
     output/               earned by: formatting is shared or substantial — one owner
                           for formatting; printing one value needs no folder
-  config/ with an example file   earned by: the first setting — no real values (§49)
+  config/ with an example file   earned by: the first setting — no real values (§49, §69);
+                          a published binary never contains the project's key; each user
+                          supplies their own key at run time
 ```
 
 ## Stage 4 — published

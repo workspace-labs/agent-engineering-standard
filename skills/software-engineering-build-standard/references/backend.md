@@ -86,10 +86,14 @@ handling applies from the first secret the project uses.
   `.gitignore`; follow the framework's accepted configuration location (§61).
 - Use separate keys for development, test and production when each environment exists,
   with only the permissions that environment's job needs.
-- **A secret never reaches the frontend.** Anything the browser receives is public,
-  including build-time variables with public prefixes such as `NEXT_PUBLIC_`, `VITE_` and
-  `REACT_APP_`. A paid or private API is called by the backend, and the frontend calls the
-  backend: the proxy pattern. This includes AI/model provider keys.
+- **A project's secret never ships to users.** Anything shipped is public — browser code,
+  mobile apps, desktop apps and published CLI binaries — including obfuscated or "hidden"
+  keys and build-time variables with public prefixes such as `NEXT_PUBLIC_`, `VITE_` and
+  `REACT_APP_`. A paid or private API, including an AI/model provider, is called through a
+  server the project controls; the client calls that backend proxy, and the project's key
+  stays on the server. Exception: a tool where **each user supplies their own key at run
+  time** through an environment variable or OS keychain/secure storage is fine. The rule
+  forbids the project's key baked into a build.
 - Never log, print or echo a key, or put one in test fixtures, error messages or screenshots.
 - If a key leaks, **REVOKE AND REPLACE IT FIRST, then clean history**. Deleting a commit
   does not make a leaked key safe.

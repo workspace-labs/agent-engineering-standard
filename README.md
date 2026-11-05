@@ -23,6 +23,7 @@ The skill is in this repo — [`skills/`](skills).
 ## What it asks of an agent
 
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
+- **Account for what the project needs (§87–§90).** Reuse approved project documents and their requirement IDs, then show evidence, inapplicability or unfinished work for the applicable engineering duties. Keep project-docs planning and engineering execution separate.
 - **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
 - **Build the tests and the docs with the code**, not after it.
 - **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
@@ -104,7 +105,7 @@ for discovery locations and metadata.
 
 Agents can choose it when they build, extend, restructure or review software, or you can
 invoke it explicitly as `$software-engineering-build-standard`. The entry point is
-[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with eight main reference
+[`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with supporting reference
 guides and [staged examples for eleven project types](skills/software-engineering-build-standard/references/trees/README.md).
 The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
 each piece's *due at* trigger, so nothing is created before the product earns it. A project's

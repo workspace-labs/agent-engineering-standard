@@ -4,6 +4,114 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.3.0 coordinated local candidate — 2026-11-05
+
+The engineering candidate starts from `3ee51a147ceb77114c46d644a324bf6205d0b806`
+(1.2.1), in an isolated clone. The companion project-docs candidate starts from
+`25beb27c376af95728386be330376987ed077aa2` (0.2.6) and becomes 0.3.0. Original
+source repositories and all six existing user skill copies remain preserved.
+No candidate was committed, pushed, published or installed for real use.
+
+### Executed package checks
+
+On macOS 27.2 arm64, Python 3.15.2 and Node.js 22.14.0:
+
+- Engineering baseline: `python3 -B -m unittest discover -s tests -v`, **40/40** passed.
+  Candidate: the same command passed **41/41**, no skips. The new routing test fails
+  against the exact baseline package because its coverage guide is absent, then passes
+  against this candidate. This is package protection, not proof an agent obeys the prose.
+- The engineering suite also passed **41/41** against a disposable staged package selected
+  by `ENGINEERING_SKILL_ROOT`. This is the same suite repeated, not 41 additional tests.
+- Project-docs baseline `node --test`: **110/110**; candidate: **113/113** passed.
+  The new checks protect bundled reference reachability and boundary integrity.
+- Both `git diff --check` commands passed. The static audit found **0 structural errors**:
+  project-docs has no findings; engineering retains its **12 pre-existing deep-reference
+  review warnings** for the nested tree examples. No new static warning remains.
+- The skill-creator general YAML validator was attempted for both packages but could not
+  start because this Python lacks PyYAML. No dependency was installed. Existing package
+  metadata checks and the static audit passed; the unavailable validator is not a pass.
+
+### Five fresh isolated exercises
+
+One fresh executor context per case received an ordinary raw request, its synthetic
+workspace and manually supplied candidate skill paths, without the private rubric.
+A separate agent authored the fixtures/probes before seeing solutions, then independently
+graded actual artifacts in disposable copies. A separate source reviewer reran all five
+fixture suites. The observed outcomes passed for these scopes:
+
+- **Tiny typo:** only the intended heading changed, no new files or scaffold; **1** existing
+  test passed independently. Browser rendering remains unverified.
+- **Approved notes build:** accepted stack, documents and requirement IDs reused;
+  persistent owned deletion, cross-owner refusal and unchanged denied data verified with
+  unpredictable records and a fresh load. **10** retained tests passed. The prior checked
+  step remains checked; the new step waits for the owner's check.
+- **Restore repair:** supplied and randomized native SQLite snapshots restore usable
+  records; corrupt/missing/wrong-schema failures return nonzero and preserve useful target
+  data. **16** tests passed. Independent old-code controls prove the retained tests detect
+  the original missing deletion and false-success restore behaviors.
+- **Changed approved decision:** current seven-day drafts preserve original decisions,
+  checked history and the old run as history; affected work is not started. Code remains
+  at its original thirty-day checkpoint; its **1** test passed independently. This is a
+  document-only outcome, not an implemented policy change.
+- **Release assessment:** accurately leaves a Mac App Store source slice unready and
+  identifies missing app, identity, signing, sandbox, privacy, artifact and current-rule
+  evidence. Only documentation changed; its **1** source test passed independently.
+
+These are **29 distinct fixture test methods**, separate from the package suites.
+Private probes also checked resulting artifacts; their counts are not added to that total.
+One raw restore grading guard remains red: it incorrectly required the operating document
+to stay byte-identical. Both independent reviewers accepted the expanded documentation
+after verifying the accepted SQLite/schema/CLI contract. The raw false positive is
+retained as EVAL-01; no rubric was silently changed and no candidate defect was hidden.
+
+### Identity, evidence and limits
+
+The review-only packages contain **23 engineering files** and **60 project-docs files**.
+Source/staged content, modes and entry types matched the final staging manifests; both
+review agents independently confirmed current source/staged equality. An earlier manifest
+predates the guide's Contents addition, made before executor launches; it is explicitly
+marked intermediate. Exact hashes at each executor read were not captured.
+
+Raw requests, pristine fixtures, responses, package logs, snapshot notes, manifests,
+independent probes and assessments are retained outside these repositories in the local
+coordinated update workspace's `evidence/` directory. The candidate changes are not installed
+by those tests. All six current installations matched their recovery copies afterward.
+
+Complete executor tool transcripts were unavailable: actual artifacts and independent
+reruns are evidence, while each builder's claimed command history or absence of external
+actions is not independently attested. Exact model-build identifiers were not captured.
+Automatic selection, repeated-agent reliability and causal improvement were not tested;
+there was no prior-skill/no-skill agent comparison. The pristine-code controls test the
+retained regression tests, not skill effectiveness.
+
+Current Apple rules, real signing/submission, legal or assurance conformance, production
+data/recovery, concurrent writers, power loss, other platforms and Arabic live handoff
+were not established. These five small cases do not certify the 91 research duties or
+all examples in §§87–90. Final owner acceptance precedes any real installation.
+
+### Subsequent owner acceptance and installed-copy verification
+
+The owner accepted both candidates on 2026-11-05 and explicitly authorized committing
+and pushing them. The pre-acceptance candidate record above is preserved as history.
+The accepted 23-file engineering and 60-file project-docs packages were then installed
+across six logical user skill paths. Four physical directories were replaced; the two
+existing Claude symlink aliases were preserved. Fresh verified recovery copies and the
+original directories were retained before switching.
+
+All six installed paths matched the accepted content/mode manifests. The engineering
+suite passed **41/41** with `ENGINEERING_SKILL_ROOT` selecting the real Codex installation.
+Hash/mode-identical snapshots of both installed packages passed the static re-audit with
+**0 structural errors**, the same **12 engineering nested-tree review warnings**, and no
+project-docs findings. This adds installed-copy proof, not new behavioral/platform results.
+The existing PyYAML, automatic-selection and other limits above remain. No real rollback
+drill, version tag, GitHub Release or app-store submission was performed for this record.
+
+The first staged whitespace check caught one extra blank line at the new coverage guide's
+end; the earlier unstaged check had not included that untracked file. Exactly one final LF
+was removed in the source, staged and installed copies. Instruction text/meaning and modes
+are unchanged. The original manifests and pre-correction copies are retained separately
+from the final publication manifests; the staged check was rerun after this correction.
+
 ## 1.2.1 native Windows verification — 2026-11-02
 
 Started from a clean clone of `main` at `afe373cf5cdefe8f4afdeaf71daa625c45ad7c32`

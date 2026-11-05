@@ -76,6 +76,8 @@ for review before merge. A solo project keeps §55 commit hygiene; PRs are optio
 
 ## §78 Releasing a project
 
+Apply the selected [distribution and assurance checks (§90)](coverage-and-evidence.md#90-distribution-and-assurance-claims); disclose missing receiver/platform proof.
+
 **Due at:** the first release someone else installs, deploys or depends on.
 
 - Use semantic versioning for things others depend on: libraries, APIs, CLIs and skills.

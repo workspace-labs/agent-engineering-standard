@@ -66,6 +66,8 @@ Do not block every feature on low-value cleanup. Prioritize debt that affects co
 
 ## §31 Definition of done
 
+For substantial work, reconcile the [project coverage record (§87)](coverage-and-evidence.md#87-project-coverage-and-approved-documents) with the actual artifacts and results. Unresolved duties remain visible. Preserve the approved Plan’s human-only checked status.
+
 Working code alone is not done. For substantial work, done means the relevant combination of:
 
 - behavior is correct;

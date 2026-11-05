@@ -55,6 +55,8 @@ controls become due at their own triggers below.
 
 ## §68 Backend security
 
+At a material trust boundary, use the [threat assessment and failure evidence (§88)](coverage-and-evidence.md#88-threat-assessment-and-security-failure-evidence); reuse the approved Security/Plan checks.
+
 **Due at:** the first outside input; authorization, session, password and public-deployment
 controls become due when those capabilities exist.
 

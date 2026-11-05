@@ -13,6 +13,7 @@ structure, tests, documentation and owner-controlled major decisions. The produc
   secrets, containers, data states, accessibility, performance and languages.
 - Team workflow and project lifecycle guidance for test levels, CI gates, review, ADRs,
   releases, environments, privacy, dependencies, incidents and ownership, only when earned.
+- Triggered engineering coverage and evidence, consuming approved planning documents without a second interview, plus proportionate threat, recovery and selected-channel assurance checks.
 - Staged project-tree examples that explain when responsibilities are earned.
 - Plain-language teaching while building (§84), a new developer guide and a first-project walkthrough.
 - Triggered handover documentation (§85) and evidence-based takeover of unfamiliar projects (§86).

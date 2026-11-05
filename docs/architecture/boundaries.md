@@ -14,3 +14,5 @@
 Guidance is authored in one place. Do not duplicate a reference into different roots or move source
 into a generic src/ merely to resemble an application tree. New artifact responsibilities are added
 when real work earns them, following the same proportionality the skill teaches.
+
+The coverage-and-evidence reference owns §87–§90. It consumes approved project planning; it does not generate another PRD/TRD workflow. Behavioral exercises and evidence remain outside the installed package.

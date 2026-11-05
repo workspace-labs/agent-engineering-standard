@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.2.1
+Standard version: 1.3.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -13,7 +13,7 @@ Professional engineering is not maximum abstraction, excessive folders, unnecess
 
 **Goal (§65):** the software works today, its structure explains itself, another engineer can safely change it tomorrow, and the architecture is no more complicated than the product actually requires.
 
-Rule IDs §1–§86 are stable anchors for this standard; findings, plans and handoffs may cite them.
+Rule IDs §1–§90 are stable anchors for this standard; findings, plans and handoffs may cite them.
 
 ## Precedence (§61)
 
@@ -72,6 +72,8 @@ REQUIREMENTS → ARCHITECTURE → REPOSITORY FOUNDATION → DATA/STATE MODEL →
 
 Before substantial feature development, decide: repository boundary, source structure, application composition, domain strategy, feature strategy, persistence boundary, platform boundaries, state ownership, dependency direction, testing strategy, tooling location, documentation location, generated-artifact policy and Git baseline. Decide where responsibilities belong before the project grows, but create only the minimum foundation the product needs — never dozens of speculative feature files, and no architecture a tiny project does not need. [references/layout-map.md](references/layout-map.md) carries the full layout and the moment each piece becomes due: start from the six pieces named there, and create only what the product has already earned.
 
+For new projects, read [project coverage and approved documents (§87)](references/coverage-and-evidence.md#87-project-coverage-and-approved-documents) before feature implementation. Reuse approved planning instead of creating competing requirements.
+
 ### Engineering-quality audit or cleanup (§28)
 
 Do not refactor immediately:
@@ -115,6 +117,8 @@ For architectural work, also establish: what exists now; what problem is being s
 - **Realistic roadmap (§23, §58).** Test the architecture against the next realistic roadmap, not hypothetical infinite scale, and build no infrastructure for speculative features.
 - **Repository over memory (§59).** Conversation context is not a substitute for repository engineering. Important project knowledge lives in source, tests, documentation, ADRs, Git history and explicit project plans, so the project stays understandable to an agent that never saw earlier conversations.
 
+New projects, substantial work and material data/security/release changes use [coverage and engineering evidence (§87–§90)](references/coverage-and-evidence.md). Tiny unrelated corrections keep their narrow workflow.
+
 ## Human Gate (§30, §44)
 
 Major architecture decisions belong to the human owner. Never silently decide to:
@@ -148,6 +152,8 @@ Never "make it work" by destroying data or bypassing safeguards.
 
 Working code alone is not done. Before declaring substantial work complete, explicitly verify the requested behavior, architectural placement, tests, build/type/lint status where relevant, Git state where relevant, documentation impact, known risks, and whether a Human Gate is required. Then apply the definition of done, the self-check and the handoff in [references/review-and-completion.md](references/review-and-completion.md), in proportion to the task. Report any concerning self-check answer with the smallest appropriate correction. Never claim completion for verification that was not performed — say what remains unverified.
 
+Reconcile [project coverage and approved documents (§87)](references/coverage-and-evidence.md#87-project-coverage-and-approved-documents) against actual evidence before claiming substantial work complete. Preserve the project’s human-only approval and checked statuses.
+
 When code starts reading or changes a configuration setting, load [the handover settings requirements (§85)](references/team-and-lifecycle.md#85-the-ten-year-handover). Compare the settings read by the code with `.env.example` and the README Settings section: each needs its name, purpose and where to obtain its value. A list of names and defaults alone does not explain how another person should configure the project.
 
 When you are the builder and the work changed code or other project files, load the `engineering-builder-handoff` skill, if it is installed, before your final message; it sets the handoff's format. Do not load it for review-only or explanation-only work.
@@ -174,6 +180,7 @@ When work that began from an engineering audit (§28), or any substantial or arc
 
 | File | Load when the work involves |
 |---|---|
+| [references/coverage-and-evidence.md](references/coverage-and-evidence.md) | new/substantial project coverage, approved-document handoff, changed trust/data boundaries, recovery, release channels and stronger assurance claims |
 | [references/layout-map.md](references/layout-map.md) | creating a project or adding a part to one, and deciding where a folder or a file belongs: the full layout, and when each piece becomes due |
 | [references/trees/README.md](references/trees/README.md) | starting a project of any known type: the chooser table and staged example trees (website, webapp, API backend, desktop, mobile, game, CLI, library, AI service, data pipeline, monorepo) showing what each type earns, stage by stage — examples, never templates |
 | [references/architecture-and-boundaries.md](references/architecture-and-boundaries.md) | where code lives, feature or module boundaries, God-file risk, dependency direction, platform wrappers, change coupling, configuration, naming, comments |

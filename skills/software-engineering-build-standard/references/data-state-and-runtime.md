@@ -107,6 +107,8 @@ Persistence and migration failures must fail safely. Do not automatically repair
 
 ## §43 Migration safety
 
+Apply the triggered [recovery and compatible-data checks (§89)](coverage-and-evidence.md#89-recovery-and-compatible-data-changes) alongside the rules below.
+
 When changing persisted data:
 
 - inspect existing real data shapes;

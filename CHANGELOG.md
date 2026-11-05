@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 — 2026-11-05
+
+- Add triggered project coverage and evidence rules §87–§90, reusing approved PRD/TRD/Plan decisions and their human checks instead of parallel planning.
+- Require proportionate threat assessment, meaningful failure evidence, engine-aware recovery, and conditional distribution/assurance verification.
+- Distinguish repeatable builds from byte-identical claims and verify actual published artifacts and workflow controls. Tiny changes retain the narrow workflow.
+- Add routing/integrity protection and isolated agent exercise contracts; observed results are recorded separately in TEST-EVIDENCE.md.
+- Record owner acceptance, verified installation across six logical skill paths, and installed-copy checks; remove one extra EOF blank line found during staging without changing instruction meaning.
+
 ## 1.2.1 — 2026-11-02
 
 - Route configuration changes explicitly to §85 from the entrypoint and completion

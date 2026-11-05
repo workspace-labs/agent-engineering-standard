@@ -310,7 +310,7 @@ class SkillPackageTests(unittest.TestCase):
                 self.assertFalse(required - pieces, "Missing day-one pieces: {}".format(required - pieces))
 
     def test_rule_citations_use_existing_stable_ids(self):
-        known = set(range(1, 87))
+        known = set(range(1, 91))
         for document in self.bundle_files:
             if document.suffix != ".md":
                 continue
@@ -328,7 +328,7 @@ class SkillPackageTests(unittest.TestCase):
             if document.suffix == ".md" and document.is_relative_to(SKILL / "references"):
                 prose = "\n".join(markdown_lines(document.read_text(encoding="utf-8")))
                 headings.extend(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))
-        for rule in (*range(66, 73), *range(74, 87)):
+        for rule in (*range(66, 73), *range(74, 91)):
             with self.subTest(rule=rule):
                 self.assertEqual(headings.count(rule), 1, "Rule §{} needs exactly one heading".format(rule))
 
@@ -340,6 +340,19 @@ class SkillPackageTests(unittest.TestCase):
             releases = re.findall(r"(?m)^## (\d+\.\d+\.\d+) — \d{4}-\d{2}-\d{2}$", changelog)
             self.assertTrue(releases, "CHANGELOG.md needs a versioned release heading")
             self.assertEqual(versions[0], releases[0], "Standard version must match the newest release")
+
+    def test_coverage_guidance_is_reachable_at_intake_and_completion(self):
+        entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        guide = SKILL / "references" / "coverage-and-evidence.md"
+        self.assertTrue(guide.is_file(), "The engineering coverage guide must ship in the bundle")
+        new_project = entrypoint.split("### New project", 1)[1].split("### Engineering-quality", 1)[0]
+        completion = entrypoint.split("## Completion", 1)[1].split("### Closing an audit", 1)[0]
+        for section in (new_project, completion):
+            self.assertIn("references/coverage-and-evidence.md#87-project-coverage-and-approved-documents", section)
+        # Package routing protection only; real executor exercises verify behavior.
+        for rule in range(87, 91):
+            headings = re.findall(r"(?m)^## §(\d+)\b", guide.read_text(encoding="utf-8"))
+            self.assertEqual(headings.count(str(rule)), 1)
 
     def test_all_repository_markdown_links_resolve(self):
         # Finish the inventory first: an early README can link to a later FIFO

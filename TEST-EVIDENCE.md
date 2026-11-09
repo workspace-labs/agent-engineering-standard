@@ -29,6 +29,15 @@ four scenarios added to tests/behavioral-cases.md. `python3 -B -m unittest disco
 tests`: **41/41** passed, no skips; `git diff --check` clean. The scenarios were written,
 not executed; no agent exercise was run.
 
+### Fix round 2 — 2026-11-09
+
+Codex round 2 closed F01–F05 and raised F06 (Low): the hero image's "Team & lifecycle"
+tile read "DUE the second person", gating the whole guide on collaboration. The image was
+re-rendered from its HTML source with four due labels corrected (lifecycle, platform
+services, data, backend) and opened to confirm the text, the ten rule sets and the font.
+Image-only change plus this record and the changelog; `python3 -B -m unittest discover
+-s tests`: **41/41**, `git diff --check` clean.
+
 ## 1.3.0 coordinated local candidate — 2026-11-05
 
 The engineering candidate starts from `3ee51a147ceb77114c46d644a324bf6205d0b806`

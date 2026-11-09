@@ -23,6 +23,10 @@
   or notifications; basic search guidance applies at the first search and the separate
   engine only on measurement; sitemap and robots are proportional. Four behavioral
   scenarios added to tests/behavioral-cases.md.
+- Fix round 2 (F06): the hero image's due labels name each guide's real trigger — the
+  lifecycle guide applies rule by rule, to solo projects too, not from a second person;
+  platform services at each service's first use; data at the first stored row, contract or
+  failure; backend at the first endpoint or outside call.
 - Replace the README hero image with the whole-map picture (`media/the-whole-map.png`):
   the entrypoint, the ten guides with their rule ranges and due moments, the eleven trees
   and the three promises. The previous board-specific picture is removed.

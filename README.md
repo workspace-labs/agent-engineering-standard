@@ -14,9 +14,9 @@ The skill is in this repo — [`skills/`](skills).
 
 ## In practice
 
-![How a builder agent works under the standard: the board around it, its eight steps, the folder it leaves behind, and the rules it keeps](media/how-i-build-a-new-project.png)
+![The whole map: one entrypoint that sizes the work, ten guides with their rule ranges and the moment each becomes due, eleven example trees, and the three promises — Human Gate, teach while building, never over-engineer](media/the-whole-map.png)
 
-*The standard at work on the author's own board. One agent plans, one writes the exam and reviews the code, one builds — and a person holds every gate.*
+*The whole standard on one page. A typo loads nothing; a new product loads only what it earns.*
 
 ---
 

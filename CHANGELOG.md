@@ -16,6 +16,9 @@
   certificate ownership.
 - Route the guide from the entrypoint's always-on rules and reference table; extend the
   rule-ID and heading checks through §104.
+- Replace the README hero image with the whole-map picture (`media/the-whole-map.png`):
+  the entrypoint, the ten guides with their rule ranges and due moments, the eleven trees
+  and the three promises. The previous board-specific picture is removed.
 
 ## 1.3.0 — 2026-11-05
 

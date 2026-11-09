@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.4.0 — 2026-11-09
+
+- Add the platform services guide, §91–§104: HTTPS, domains and certificates; sessions and
+  multi-tenancy; background jobs, queues and scheduled tasks; realtime connections; files,
+  uploads and object storage; email and notifications; payments and billing; webhooks and
+  integrations; search; audit log; caching, CDN and running more than one copy;
+  infrastructure as code; public pages and SEO; product analytics and error tracking. Each
+  rule applies only at its due-at trigger, and the stack's existing mechanism comes before
+  a new service.
+- Add the homes these services earn to the layout map (`jobs/`, `realtime/`,
+  `infrastructure/storage/`, `email/`, `payments/`, `search/`, `api/webhooks/`, `audit/`,
+  `locales/`, `apps/worker/`, root `infra/`), to the API backend and monorepo example trees
+  and to the mature-project table; `docs/deployment/` now also records domain, DNS and
+  certificate ownership.
+- Route the guide from the entrypoint's always-on rules and reference table; extend the
+  rule-ID and heading checks through §104.
+
 ## 1.3.0 — 2026-11-05
 
 - Add triggered project coverage and evidence rules §87–§90, reusing approved PRD/TRD/Plan decisions and their human checks instead of parallel planning.

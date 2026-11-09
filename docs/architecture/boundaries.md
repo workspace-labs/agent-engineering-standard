@@ -15,4 +15,6 @@ Guidance is authored in one place. Do not duplicate a reference into different r
 into a generic src/ merely to resemble an application tree. New artifact responsibilities are added
 when real work earns them, following the same proportionality the skill teaches.
 
+The platform-services reference owns §91–§104: the services a product grows around its code, each with a due-at trigger; it names homes the layout map already lists and never mandates a provider or a service.
+
 The coverage-and-evidence reference owns §87–§90. It consumes approved project planning; it does not generate another PRD/TRD workflow. Behavioral exercises and evidence remain outside the installed package.

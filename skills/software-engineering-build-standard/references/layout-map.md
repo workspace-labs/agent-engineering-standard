@@ -91,12 +91,13 @@ each, named in that same file (§5, §6, §11).
 | `docs/adr/README.md` (index) | the second ADR (§77) |
 | `docs/api/` | the first endpoint something else calls |
 | `docs/features/` | the first feature a newcomer would have to ask about |
-| `docs/deployment/` | the first release |
+| `docs/deployment/` | the first release — and where the domain, DNS and certificate ownership are recorded (§91) |
 | `docs/operations/` | the first time it is built, signed, shipped or released — and where backup and restore live |
 | `docs/security.md` | the first stored data, sign-in, network call or secret |
 | `docs/privacy.md` | the first personal data stored or processed (§80) |
 | `docs/glossary.md` | the first technical word a reader of the documentation would have to look up |
 | `docs/risks-and-debt.md` | the first known problem or deliberate shortcut |
+| `infra/` | the first cloud resource someone would have to recreate by hand after it is lost — one folder per environment that exists (§102) |
 
 ## Inside one app — the frontend
 
@@ -116,6 +117,7 @@ each, named in that same file (§5, §6, §11).
 | `validation/` | the first form, or the first response that must be checked before it is trusted |
 | `config/` | the first setting the browser needs — never a secret: everything the browser gets is public (§69) |
 | `styles/` | the first style not owned by one component |
+| `locales/` | the second language, or a right-to-left first language — user-facing text out of components (§72) |
 | `assets/` | the first image, icon or font |
 
 ## Inside one app — the backend
@@ -138,6 +140,14 @@ each, named in that same file (§5, §6, §11).
 | `infrastructure/database/`, `repositories/` | the first stored row |
 | `infrastructure/filesystem/`, `network/`, `external-services/` | the first file written, the first outside call |
 | `infrastructure/messaging/` | the first queue or background job |
+| `jobs/` | the first background or scheduled job — the job and its schedule are source (§93) |
+| `realtime/` | the first screen that must change without a refresh, once polling is measured insufficient (§94) |
+| `infrastructure/storage/` | the first uploaded or generated file the product keeps (§95) |
+| `infrastructure/email/` | the first message the product sends to a person (§96) |
+| `infrastructure/payments/` | the first money the product takes (§97) |
+| `api/webhooks/` | the first message another system sends to the product (§98) |
+| `infrastructure/search/` | the first search the database's own features can no longer serve, by measurement (§99) |
+| `audit/` | the first action someone will later ask "who did this?" about (§100) |
 | `infrastructure/cache/` | the first thing measurably worth not computing twice — never earlier (§22) |
 | `security/authentication/` | the first sign-in |
 | `security/authorization/`, `permissions/` | the first thing one caller may do and another may not |
@@ -174,6 +184,7 @@ another wrapper directory on its own; accepted framework conventions still win (
 | `packages/domain/` | product rules two apps share |
 | `packages/ui/` | the first component two apps share |
 | `packages/validation/`, `configuration/`, `logging/`, `utilities/` | each: the second app that needs that exact thing |
+| `apps/worker/` | the first background work that cannot run inside the server's own process or must scale on its own (§93) |
 | `platform/` — `persistence/ filesystem/ networking/ authentication/ authorization/ logging/ telemetry/ security/ integrations/ runtime/` | each folder: when **two** apps share that one concern. Before that it lives in the app's own `infrastructure/`, and having it in one app only is not a finding |
 
 `packages/` against `platform/`: `packages/` is product code several apps import; `platform/` is

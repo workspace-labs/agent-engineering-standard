@@ -67,6 +67,13 @@ Each entry is earned by its own trigger, even if that happens before the other e
   data/migrations/        earned by: the first change to a table that has shipped —
                           numbered, applied in order, never edited afterwards (§43)
   src/infrastructure/messaging/   earned by: the first queue or background job
+  src/jobs/               earned by: the first background or scheduled job — safe to run twice,
+                          seen when it fails (§93)
+  src/api/webhooks/       earned by: the first message another system sends — verified before
+                          it is read, processed once (§98)
+  src/infrastructure/storage/   earned by: the first file the product keeps (§95)
+  infra/                  earned by: the first cloud resource someone would have to recreate
+                          by hand (§102)
   src/infrastructure/cache/       earned by: the first thing MEASURABLY worth not computing
                           twice — never earlier (§22, §45)
   tests/contract/         earned by: the first interface both sides own — for an API, the

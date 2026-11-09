@@ -48,6 +48,7 @@ Whichever tree applies, a long-lived project grows these on the day each becomes
 | `tests/fixtures/` | the first test needing data — synthetic, never real user data (§27) |
 | `data/migrations/` | the first change to a data shape that has shipped (§43) |
 | the CI folder | the first check that should run without being asked |
+| `infra/` | the first cloud resource someone would have to recreate by hand (§102) |
 | `scripts/`, `tooling/` | the first command a person runs; the first check that runs by itself |
 
 None of these is created as an empty placeholder. Each arrives the day it is true, and the

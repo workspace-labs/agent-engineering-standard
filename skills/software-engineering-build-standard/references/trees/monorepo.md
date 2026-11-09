@@ -55,6 +55,10 @@ two apps import it today, not because something *might* be shared someday.
     logging/                  lives in each app's own infrastructure/ (§11)
     authentication/
     telemetry/
+  apps/worker/              earned by: the first background work that cannot run inside the
+                            server's own process (§93)
+  infra/                    earned by: the first cloud resource someone would have to
+                            recreate by hand — per environment that exists (§102)
   scripts/build/, release/    earned by: the first command a person runs per job
   tooling/architecture-checks/  earned by: the first boundary worth guarding automatically —
                               the check that dependencies still point inward (§9)

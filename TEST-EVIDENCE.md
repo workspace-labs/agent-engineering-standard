@@ -4,6 +4,22 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.4.0 local candidate — 2026-11-09
+
+Branch `release/1.4.0` from `fd8ab67` (1.3.0), in `~/Desktop/Projects/agent-engineering-standard`.
+Not pushed, not tagged, not installed: the six user skill copies stay at 1.3.0.
+
+### Executed package checks
+
+On macOS 27.2 arm64, Python 3:
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed, no skips. `git diff --check` clean.
+- Fail-first, three ways, each restored afterwards: a stray `§105` citation fails
+  `test_rule_citations_use_existing_stable_ids`; removing the `## §99 Search` heading fails
+  the heading count; removing `references/platform-services.md` fails the link checks from
+  SKILL.md, so the old 1.3.0 package does not pass the new suite.
+- This is package protection only. No agent exercise was run against §91–§104.
+
 ## 1.3.0 coordinated local candidate — 2026-11-05
 
 The engineering candidate starts from `3ee51a147ceb77114c46d644a324bf6205d0b806`

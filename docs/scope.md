@@ -16,6 +16,9 @@ structure, tests, documentation and owner-controlled major decisions. The produc
 - Triggered engineering coverage and evidence, consuming approved planning documents without a second interview, plus proportionate threat, recovery and selected-channel assurance checks.
 - Staged project-tree examples that explain when responsibilities are earned.
 - Plain-language teaching while building (§84), a new developer guide and a first-project walkthrough.
+- Platform service guidance (§91–§104) for HTTPS and domains, sessions and tenancy, background jobs,
+  realtime, files, email, payments, webhooks, search, audit logs, caching and scaling,
+  infrastructure as code, public pages and measurement, each at its due-at trigger.
 - Triggered handover documentation (§85) and evidence-based takeover of unfamiliar projects (§86).
 - Optional Codex display metadata, offline integrity checks and realistic isolated agent exercises.
 - Install instructions and dated evidence that separates package checks from agent behavior.

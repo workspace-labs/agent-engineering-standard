@@ -27,6 +27,7 @@ The skill is in this repo — [`skills/`](skills).
 - **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
 - **Build the tests and the docs with the code**, not after it.
 - **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
+- **Engineer the services around the product (§91–§104).** HTTPS and domains, sessions and tenants, background jobs, realtime, uploads, email, payments, webhooks, search, audit logs, caching and scaling, infrastructure as code, public pages, analytics and error tracking — each when the product earns it, and the stack's existing mechanism before a new service.
 - **Carry the project through its lifecycle.** Team review, CI gates, decisions, releases, privacy and maintenance apply when their triggers are met; a solo tool stays small.
 - **Teach while building (§84).** Explain important choices in plain words when the person is new or asks for explanations; keep tiny tasks free of lessons.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.

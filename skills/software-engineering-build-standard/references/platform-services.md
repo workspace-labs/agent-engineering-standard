@@ -113,7 +113,8 @@ keeps.
 
 **Due at:** the first message the product sends to a person.
 
-- One sender boundary (`infrastructure/email/` or `notifications/`) owns the provider,
+- One sender boundary (`infrastructure/email/`, or `infrastructure/notifications/` when it
+  also sends push or SMS — one home, not both) owns the provider,
   templates and sending; features ask it to send, they do not call the provider.
 - Templates are source, reviewed like code, and carry no secrets or more personal data
   than the message needs (§27). A link in a message is a one-time or expiring token, never
@@ -147,10 +148,16 @@ keeps.
 **Due at:** the first message another system sends to the product, or the first one the
 product sends to another system.
 
-- Incoming webhooks are untrusted input (§39, §68): verify the sender's signature and
-  timestamp before reading the body, and accept only the events the product handles.
-- Acknowledge quickly, then do the work: record the event with its id and process it as a
-  job (§93). The same event id is processed once; senders retry and deliver out of order.
+- Incoming webhooks are untrusted input (§39, §68). Read the raw body up to a size limit,
+  then verify it the way the chosen provider documents — usually a signature over those
+  exact raw bytes, plus the provider's own replay protection such as a signed timestamp
+  where it offers one — **before** parsing, trusting or acting on it. A delivery that
+  fails verification is rejected and never reaches product code; accept only the events
+  the product handles.
+- Accept durably, then respond, then do the work: after verification, record the event
+  with its id (or enqueue it) and only then return success; if that write fails, return
+  a failure so the sender retries. Processing happens afterwards as a job (§93). The same
+  event id is processed once, across restarts; senders retry and deliver out of order.
 - Outgoing webhooks are signed so receivers can verify them, retried with backoff and
   limits, and their payloads documented in `docs/api/` like any contract (§66).
 - Each outside system sits behind one boundary (`infrastructure/external-services/`,
@@ -159,8 +166,9 @@ product sends to another system.
 
 ## §99 Search
 
-**Due at:** the first screen where a person types to find things, and the database's own
-search is measured to be insufficient for the data size and the need (§45).
+**Due at:** the first screen where a person types to find things. A separate search
+engine, and its home, are earned only when the database's own search is measured to be
+insufficient for the data size and the need (§45).
 
 - Start with the database the product already has: an index, a full-text feature, or a
   simple filter is often enough for years. A separate search engine is earned by
@@ -223,8 +231,10 @@ behind sign-in earn none of this.
 
 - Each public page has one canonical address, a title and a description, a sensible
   heading structure (§72), and an honest 404 for addresses that do not exist.
-- `sitemap` and `robots` files are generated from the real routes, not maintained by
-  hand, so they never drift from the pages that exist.
+- A `robots` policy and a `sitemap` are added when they serve a need: a small, well-linked
+  site may have neither or keep a short hand-maintained file. Once the site has many or
+  changing pages, the sitemap is generated from the real routes so it never drifts from
+  the pages that exist; a `robots` file is a policy, written and reviewed on purpose.
 - Pages render their essential content without client-side scripting when the framework
   allows it, and measured page speed (§72) is checked on the public address, not only
   locally.

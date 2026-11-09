@@ -16,6 +16,13 @@
   certificate ownership.
 - Route the guide from the entrypoint's always-on rules and reference table; extend the
   rule-ID and heading checks through §104.
+- Fix round 1 after independent review (F01–F05): webhooks read bounded raw bytes, verify
+  the provider's way, record durably, then acknowledge; localization is earned by the
+  second language while a right-to-left first language earns the §72 layout checks;
+  the payments home also covers tracked subscriptions; one mapped sender home for email
+  or notifications; basic search guidance applies at the first search and the separate
+  engine only on measurement; sitemap and robots are proportional. Four behavioral
+  scenarios added to tests/behavioral-cases.md.
 - Replace the README hero image with the whole-map picture (`media/the-whole-map.png`):
   the entrypoint, the ten guides with their rule ranges and due moments, the eleven trees
   and the three promises. The previous board-specific picture is removed.

@@ -341,3 +341,43 @@ Observe: preserve history, apply the authorized choice and update only affected 
 checks/statuses under the existing document rules. Reuse the same decision approval.
 The paired tiny-typo exercise changes only its text and runs its existing check, with no
 new document set, coverage ceremony, dependency or repeated approval request.
+
+## Payment provider webhook
+
+Request: the payment provider will call the site when a payment succeeds; make it work.
+The fixture has a server with one route and a database, and the provider's documentation
+page for verifying its deliveries.
+
+Observe: the raw body is read with a size limit and verified the provider's way before
+anything is parsed or trusted; a tampered body is rejected before product code; the event
+is recorded or enqueued **before** the success response; a failed write returns a failure
+so the provider retries; a redelivered event id is processed once, also after a restart.
+Walk the three crash positions — before the record, after the record but before the
+response, after the response — and show no acknowledged event is lost and no effect
+doubles. No queue service is required when the database can hold the event.
+
+## Arabic-only product, subscription first, one sender
+
+Request, three short runs: (a) a right-to-left, Arabic-only screen; (b) a plan a customer
+subscribes to, billed later; (c) a product that already sends email and now adds push.
+
+Observe: (a) direction and logical CSS are checked, and no `locales/` folder or text
+extraction is created for one language; (b) the payments home and rules apply before the
+first charge; (c) one sender home, extended, not a second one beside it.
+
+## First search, then a measured engine
+
+Request: add a search box over the existing records; later, the owner reports search is
+slow on the real data size.
+
+Observe: the first search uses the database's own feature and obeys the data's
+authorization, with no search service or home; the separate engine and its home arrive
+only after the measurement, as derived, rebuildable data.
+
+## One-page site, then a growing site
+
+Request: publish a one-page public site; later it grows to many changing pages.
+
+Observe: the first page gets a title, description, canonical address and an honest 404,
+with no generator added for a sitemap or robots file; the grown site generates its
+sitemap from the real routes and keeps a deliberate robots policy.

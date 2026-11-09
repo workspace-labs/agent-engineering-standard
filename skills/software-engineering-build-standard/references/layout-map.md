@@ -117,7 +117,7 @@ each, named in that same file (§5, §6, §11).
 | `validation/` | the first form, or the first response that must be checked before it is trusted |
 | `config/` | the first setting the browser needs — never a secret: everything the browser gets is public (§69) |
 | `styles/` | the first style not owned by one component |
-| `locales/` | the second language, or a right-to-left first language — user-facing text out of components (§72) |
+| `locales/` | the second language — user-facing text out of components (§72); a right-to-left first language earns the direction and layout checks in §72, not this folder |
 | `assets/` | the first image, icon or font |
 
 ## Inside one app — the backend
@@ -143,8 +143,8 @@ each, named in that same file (§5, §6, §11).
 | `jobs/` | the first background or scheduled job — the job and its schedule are source (§93) |
 | `realtime/` | the first screen that must change without a refresh, once polling is measured insufficient (§94) |
 | `infrastructure/storage/` | the first uploaded or generated file the product keeps (§95) |
-| `infrastructure/email/` | the first message the product sends to a person (§96) |
-| `infrastructure/payments/` | the first money the product takes (§97) |
+| `infrastructure/email/`, or `infrastructure/notifications/` when it also sends push or SMS | the first message the product sends to a person — one home, not both (§96) |
+| `infrastructure/payments/` | the first money the product takes, or the first subscription it tracks (§97) |
 | `api/webhooks/` | the first message another system sends to the product (§98) |
 | `infrastructure/search/` | the first search the database's own features can no longer serve, by measurement (§99) |
 | `audit/` | the first action someone will later ask "who did this?" about (§100) |

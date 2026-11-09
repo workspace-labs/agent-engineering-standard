@@ -20,6 +20,15 @@ On macOS 27.2 arm64, Python 3:
   SKILL.md, so the old 1.3.0 package does not pass the new suite.
 - This is package protection only. No agent exercise was run against §91–§104.
 
+### Fix round 1 — 2026-11-09
+
+Independent Codex review of 45d44cb returned F01–F05 (review file kept outside the
+repository). Corrections applied to platform-services.md §96, §98, §99, §103, the layout
+map's `locales/`, `payments/` and `email/notifications/` rows and the API backend tree;
+four scenarios added to tests/behavioral-cases.md. `python3 -B -m unittest discover -s
+tests`: **41/41** passed, no skips; `git diff --check` clean. The scenarios were written,
+not executed; no agent exercise was run.
+
 ## 1.3.0 coordinated local candidate — 2026-11-05
 
 The engineering candidate starts from `3ee51a147ceb77114c46d644a324bf6205d0b806`

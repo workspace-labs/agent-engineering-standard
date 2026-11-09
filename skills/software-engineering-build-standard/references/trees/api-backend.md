@@ -69,8 +69,8 @@ Each entry is earned by its own trigger, even if that happens before the other e
   src/infrastructure/messaging/   earned by: the first queue or background job
   src/jobs/               earned by: the first background or scheduled job — safe to run twice,
                           seen when it fails (§93)
-  src/api/webhooks/       earned by: the first message another system sends — verified before
-                          it is read, processed once (§98)
+  src/api/webhooks/       earned by: the first message another system sends — raw body read,
+                          verified, recorded, then acknowledged; processed once (§98)
   src/infrastructure/storage/   earned by: the first file the product keeps (§95)
   infra/                  earned by: the first cloud resource someone would have to recreate
                           by hand (§102)

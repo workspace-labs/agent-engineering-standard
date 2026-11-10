@@ -67,6 +67,12 @@ under [the personal-data rule](../skills/software-engineering-build-standard/ref
 It will say what we collect and why, who can read it, how long it stays and how to delete it.
 Our practice page has no contact fields or real customer records, so that file is not due yet."
 
+**Agent:** "I'll write the selection rules in `docs/scope.md` as plain sentences: only an available time can be selected, and an empty selection cannot continue."
+
+**Agent:** "Two people choosing the same time is another case to consider, but it cannot happen on this practice page because nothing is saved or shared. There is nothing to build or test for that case yet."
+
+**Agent:** "When we plan the shared booking service, I'll raise that case with you and ask what we promise a customer."
+
 **Agent:** "I'll first check the selection rule with made-up times: an available time works,
 an unavailable time is rejected, and an empty selection cannot continue. The first check
 fails before the rule exists; then I write the rule and run the checks again."

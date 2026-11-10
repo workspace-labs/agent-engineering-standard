@@ -23,14 +23,14 @@ The skill is in this repo — [`skills/`](skills).
 ## What it asks of an agent
 
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
-- **Account for what the project needs (§87–§90).** Reuse approved project documents and their requirement IDs, then show evidence, inapplicability or unfinished work for the applicable engineering duties. Keep project-docs planning and engineering execution separate.
-- **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
+- **Check what the project needs (§87–§90).** Reuse the project documents you have already approved and their requirement labels, so checks point back to what you asked for. Show what was proved, what does not apply and why, and what is still unfinished. The project-docs skill plans what to build; this skill builds it and checks the work.
+- **Give every job one home.** Keep unrelated jobs out of one giant file. Rules about how the product works stay separate from screens and the code that saves data.
 - **Think of the cases nobody mentioned (§105).** Two people booking the same slot, a refund after a cancellation, an empty basket: the agent writes each product rule down, walks its edge cases, asks you about the ones that matter and tests them.
-- **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at the limit the server says "busy, try again" and never crashes or loses accepted work.
+- **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at a limit the server says "too big" for an oversized upload, or "busy, try again" when requests arrive too fast or the server is full. It never crashes or loses accepted work.
 - **Build the tests and the docs with the code**, not after it.
-- **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
-- **Engineer the services around the product (§91–§104).** HTTPS and domains, sessions and tenants, background jobs, realtime, uploads, email, payments, webhooks, search, audit logs, caching and scaling, infrastructure as code, public pages, analytics and error tracking — each when the product earns it, and the stack's existing mechanism before a new service.
-- **Carry the project through its lifecycle.** Team review, CI gates, decisions, releases, privacy and maintenance apply when their triggers are met; a solo tool stays small.
+- **Build the server and screens carefully.** Rules for how programs talk to each other, keeping the server running, protecting secrets such as service keys and packaging it in containers each say when they are needed. Screens handle loading, empty results, errors, success, accessibility, security and languages when needed.
+- **Build the services the product needs (§91–§104).** Secure web addresses, remembering signed-in users, separating customer accounts, work done in the background, live updates, uploads, email, payments, updates sent by other services, search, records of important actions, reusing results and handling more traffic, server setup kept as code, public pages, usage measurement and error tracking — each only when needed, using what the project's tools already provide before adding a new service.
+- **Look after the project as it grows.** Review by teammates, automated checks before changes are accepted, recorded decisions, releases, privacy and maintenance each apply when needed; a tool built by one person stays small.
 - **Teach while building (§84).** Explain important choices in plain words when the person is new or asks for explanations; keep tiny tasks free of lessons.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.
 - **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, or anything that could lose data waits for a person.
@@ -120,17 +120,17 @@ The standard uses semantic versioning: a patch fixes wording; a minor version ad
 guidance that stays compatible; a major version removes a rule or changes its meaning.
 Rule IDs are never renumbered.
 
-After the owner publishes the `v1.0.0` tag, pin that version with:
+To pin a version, use the newest published tag listed on the repository's
+[GitHub Releases page](https://github.com/workspace-labs/agent-engineering-standard/releases).
+Replace the example tag `v1.5.0` below with that tag (`vX.Y.Z`):
 
 ```bash
-git clone --branch v1.0.0 https://github.com/workspace-labs/agent-engineering-standard.git
+git clone --branch v1.5.0 https://github.com/workspace-labs/agent-engineering-standard.git
 ```
-
-The local 1.0.0 candidate does not create that tag or a GitHub Release.
 
 ## Test it
 
-From the repository root, run the offline package checks with Python 3.9 or newer.
+From the repository root, Python 3.9 or newer runs offline checks of the skill's metadata, links, structure and rule citations using only the standard library.
 
 macOS or Linux:
 
@@ -144,29 +144,7 @@ Windows PowerShell:
 py -3 -B -m unittest discover -s tests -v
 ```
 
-If the Windows Python launcher (`py`) is unavailable or reports "No installed Python
-found!", try `python --version`. If it finds Python 3.9 or newer, run
-`python -B -m unittest discover -s tests -v` instead. No Bash or WSL is required.
-[CI](.github/workflows/check-skill.yml) runs the same package checks on
-Windows, macOS and Linux.
-
-The checks cover metadata limits, local links and heading fragments across repository
-Markdown, reference reachability, the tree chooser, starter-kit and source-root consistency,
-and rule citations. Adversarial fixtures check missing targets and refusal of links,
-Windows reparse points and special filesystem nodes before content reads or descent.
-They use only the standard library and do not install or execute the skill. The Markdown
-checker supports this package's inline links and heading forms; it is not a general renderer.
-The metadata checks cover simple YAML string fields; use an Agent Skills YAML validator
-as well if you change that representation.
-
-Instruction quality also needs [realistic agent exercises](tests/behavioral-cases.md).
-Run those in isolated fixtures, inspect the actual files and command results, and distinguish
-tested behavior from anything the environment could not verify. Package checks passing
-alone do not prove that every agent will select or follow the skill correctly.
-
-See [the test evidence](TEST-EVIDENCE.md) for dated local results and verification limits,
-the October 21 repair, and historical Windows, macOS and Linux results with native Windows
-installation checks. Each record applies only to its stated revision.
+See [verification details](docs/operations/verification.md) and [CI](.github/workflows/check-skill.yml).
 
 ---
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.5.1 — 2026-11-10
+
+- Make README version pinning follow the newest published GitHub Release, with v1.5.0
+  as an example, instead of the outdated local v1.0.0 candidate instructions.
+- Shorten README package-check instructions and merge the details into the existing
+  verification guide, preserving the checks, caveats and historical evidence links.
+- Explain project coverage and the other technical overview bullets in plain words,
+  keeping their meaning, rule IDs and bullet count.
+- Teach §105 edge cases and §106 overload in two more beginner mistakes, with glossary
+  entries and distinct too-big, too-fast and server-full responses.
+- Show the walkthrough agent writing selection rules and deferring shared-booking
+  cases until that service is planned, without expanding the practice-page scope.
+- Mark the standard 1.5.1 and record local verification; wording and docs only, with
+  no rule changes. Keep the existing 1.5.0 hero image for this patch.
+- Fix round 1 after independent review (C1–C3): remove local tool paths from public
+  evidence, have the walkthrough agent raise the same-time case without being asked,
+  and distinguish oversized uploads from temporary overload in the README.
+
 ## 1.5.0 — 2026-11-10
 
 - Add §105 Business rules and edge cases to the architecture guide: write each product

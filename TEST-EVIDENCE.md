@@ -4,6 +4,59 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.5.1 local candidate — 2026-11-10
+
+Branch `release/1.5.1` from `eab68e2` (published 1.5.0), with a clean working-tree
+baseline. Local docs-only candidate; not pushed, tagged, released or installed.
+
+### Executed package and documentation checks
+
+On Darwin 27.2.0 arm64 (macOS), Python 3.15.2, from the repository root:
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed, no skips, at the
+  baseline and after the documentation changes. This includes the repository-wide
+  Markdown links and heading-fragment check. No tests were added or changed.
+- `git diff --check`: clean, exit 0.
+- A release-specific check script, kept outside the repository: **15/15** moved-fact
+  groups present; overview remains **12** bullets with unchanged rule IDs (only bullets
+  2, 3, 7, 8 and 9 changed). Checks also preserve mistakes 1–10, the rest of the
+  walkthrough, README sections outside the three authorized edits, historical records,
+  and the installable source except its version line; changed paths stay in the seven-file
+  allowlist. The release-specific script is local evidence outside the repository.
+- The same script caught **3/3** in-memory negative probes: a nonexistent README link
+  target fails `test_all_repository_markdown_links_resolve`; a stale 1.5.0 standard
+  version fails `test_backend_frontend_rules_and_release_version`; dropping "No Bash
+  or WSL is required." fails the moved-fact trace check. The last check is a prose
+  preservation assertion, not a guarantee supplied by the package tests. Neither
+  tracked files nor the installed skill were mutated for these probes.
+- The audit-agent-skills static audit, run over the `skills/` folder:
+  **1** skill scanned, **0** structural errors, **11** heuristic review warnings, all
+  about the existing nested `references/trees/` files. Those files are unchanged;
+  the static audit does not certify agent behavior.
+
+No agent exercise or installation check was run. Windows and Linux commands and CI
+were not executed for this candidate. The unchanged hero image still says 1.5.0,
+as accepted for this docs-only patch. Earlier evidence, including the guide's former
+ten-mistake description, remains historical.
+
+### Fix round 1 — 2026-11-10
+
+Claude's independent review of 2c85071 returned C1–C3. Remove local tool paths from
+the public record while keeping every count, let the walkthrough agent raise the
+same-time case, and distinguish oversized uploads from temporary overload in the
+README. Version stays 1.5.1; no rule text or tests changed.
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed, no skips.
+- `git diff --check`: clean, exit 0.
+- `git grep -n -e '/[U]sers/' -e '/private/[t]mp' HEAD`: no matches, exit 1.
+- `git diff --name-only 2c85071..HEAD`: only README.md,
+  docs/first-project-walkthrough.md, CHANGELOG.md and TEST-EVIDENCE.md.
+- `git diff eab68e2..HEAD -- docs/first-project-walkthrough.md`: added lines only;
+  the three inserted dialogue lines belong to the agent, without an opening "First".
+  README overview remains **12** bullets with the §106 citation retained.
+
+No agent exercise, publication or installation was run. Delivered for re-review.
+
 ## 1.5.0 local candidate — 2026-11-10
 
 Branch `release/1.5.0` from `a27317b` (1.4.0), in `~/Desktop/Projects/agent-engineering-standard`.

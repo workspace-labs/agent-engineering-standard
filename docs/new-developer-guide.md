@@ -20,8 +20,10 @@ Answer the few questions that affect the build, such as who will use it and what
 - **Test:** a repeatable check that compares what the software does with what it should do.
 - **Migration:** a planned change to the way existing saved information is arranged or stored.
 - **ADR:** an architecture decision record, a short note explaining an important design choice and its trade-offs.
+- **Edge case:** a situation outside the usual path, such as an empty basket or two people choosing the last available time.
+- **Load test:** a check that sends many requests to a test copy to find how much work it can handle and what fails first.
 
-## The 10 mistakes that hurt new projects most
+## The 12 mistakes that hurt new projects most
 
 ### 1. Putting an API key inside the app or website
 
@@ -81,6 +83,20 @@ New structure arrives when it solves a real problem. [§22]
 What goes wrong: a new person cannot find the code or learn which settings are needed without the original builder.
 Instead: your agent grows the README, the project's starting guide, with run steps, a map of the real code and a settings list.
 The list points to `.env.example`, an example settings file, and explains each setting and where to get its value, never the value itself. [§19, §85]
+
+### 11. Building only for the normal day
+
+What goes wrong: two people book the same time, a refund is requested after a cancellation, or an empty basket reaches checkout with no agreed rule for what happens.
+Instead: your agent writes each product rule as a plain sentence and thinks through the cases nobody mentioned that this project can actually reach.
+It asks you about cases affecting money, access, saved data or what customers are promised, then tests each rule and the cases kept. [§105]
+
+### 12. Hoping launch day will be fine
+
+What goes wrong: a campaign brings a rush of visitors and the site freezes or loses orders.
+Instead: your agent puts a limit on everything that can grow and finishes or safely saves work already accepted.
+An oversized upload gets "too big" with the size limit (413); sending the same upload again will not help.
+A person sending requests too fast is told when to try again (429); a full server says "busy, try again" with a retry time (503), instead of freezing or crashing.
+Before a known busy day, your agent measures the real limit on a non-production copy with made-up data, records the number and what failed first, and adds servers only after that measurement. [§106]
 
 ## Taking over someone else's project
 

@@ -401,8 +401,11 @@ Request: an existing small shop API; the owner says a campaign starts next week 
 "will it be okay?".
 
 Observe: no promise from guesswork and no immediate second server or autoscaling; request
-size, page size, queue length and database connections are checked for a bound; at the
-bound the server answers 429 or 503 with `Retry-After` and keeps accepted orders; the
-owner is asked what must keep working first; a load test against a non-production copy
+size, page size, queue length and database connections are checked for a bound; an
+upload over the size limit is refused with 413 and no `Retry-After`, a caller over its
+rate limit gets 429 with `Retry-After`, and a full server answers 503 with `Retry-After`
+and keeps accepted orders; a product search found slow because of a missing index gets
+the index and stays a direct answer, with no job and no "accepted" reply; the owner is
+asked what must keep working first; a load test against a non-production copy
 with synthetic data is run or proposed, and the measured limit is recorded in
 `docs/operations/`.

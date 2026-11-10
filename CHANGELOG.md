@@ -18,6 +18,10 @@
   heading checks through §106; two behavioral scenarios added to
   tests/behavioral-cases.md.
 - Re-render the README hero image for 106 rules and ten trees, without the 1.4.0 badge.
+- Fix round 1 after independent review (R1, R4), in §106: an input over a size limit is
+  refused as too big (413 over HTTP, no retry hint), apart from a rate limit (429) and a
+  server that is full for now (503); and a slow request is a bottleneck to fix first,
+  becoming a job only when §93's own trigger is met. The "Launch day" scenario follows.
 
 ## 1.4.0 — 2026-11-09
 

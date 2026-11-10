@@ -132,17 +132,28 @@ limit: the server slows down or says "busy", and never crashes or loses work it 
 - Everything that can grow has a bound: request body size, page size (§66), queue length
   (§93), work running at once, and connections to the database. An unbounded one is where
   a spike becomes an outage.
-- At the bound, refuse cheaply and honestly. Over HTTP that is 429 or 503 with a
-  `Retry-After`, not a hung request and not a 500. Work already accepted is finished or
-  kept durably; it is never dropped silently (§67, §93).
-- Callers retry with backoff and a little randomness, so retries do not become a second
-  spike (§67). Rate limits (§66, §68) protect one caller from another; they do not replace
-  the bounds above.
+- At the bound, refuse cheaply and honestly, and say which kind of "no" it is, because
+  the caller must know whether trying again can help. Never a hung request and never a
+  500. Over HTTP:
+  - **one input is too big** (an upload or a body over the size limit): 413. Sending the
+    same thing again will never work, so no `Retry-After`; the message says the limit;
+  - **one caller is sending too fast** (a rate limit, §66, §68): 429 with a `Retry-After`;
+  - **the server is full for now** (queue full, no free worker or connection): 503 with a
+    `Retry-After`.
+- Work already accepted is finished or kept durably; it is never dropped silently
+  (§67, §93).
+- Callers told to try again do so with backoff and a little randomness, so retries do
+  not become a second spike (§67). Rate limits (§66, §68) protect one caller from
+  another; they do not replace the bounds above.
 - When not everything can be served, the product decides what is served last to fail:
   usually sign-in and payment before browsing. That order is the owner's decision; ask in
   plain words (§84).
-- Work measured to be slow leaves the request and becomes a job (§93). The request answers
-  quickly with "accepted" and a way to see the result.
+- A request measured to be slow is first a bottleneck to find and fix (§45): a missing
+  index or a repeated query is repaired, and the request keeps answering directly. Slow
+  alone never turns a request into a job. Only work that meets §93's own trigger, work
+  that should not make a request wait even when it runs well, such as sending mail or
+  building a large export, becomes a job; then the request answers quickly with
+  "accepted" and a way to see the result.
 - Know the limit by measurement, never by guess. Before a known peak such as a launch, a
   sale or a campaign, load-test a non-production copy with synthetic data until it bends,
   and record the number and what bent first in `docs/operations/`. More copies, a bigger

@@ -24,6 +24,14 @@ On macOS 27.2 arm64, Python 3:
 - This is package protection only. The two new scenarios in tests/behavioral-cases.md
   were written, not executed; no agent exercise was run against §105 or §106.
 
+### Fix round 1 — 2026-11-10
+
+Independent Codex review of 5854225 returned R1 and R4, both Medium, both in §106 (review
+file kept outside the repository). Corrections applied to backend.md §106 and the "Launch
+day" scenario in tests/behavioral-cases.md. `python3 -B -m unittest discover -s tests`:
+**41/41** passed, no skips; `git diff --check` clean. The scenario was written, not
+executed; no agent exercise was run.
+
 ## 1.4.0 local candidate — 2026-11-09
 
 Branch `release/1.4.0` from `fd8ab67` (1.3.0), in `~/Desktop/Projects/agent-engineering-standard`.

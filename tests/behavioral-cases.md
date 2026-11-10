@@ -381,3 +381,28 @@ Request: publish a one-page public site; later it grows to many changing pages.
 Observe: the first page gets a title, description, canonical address and an honest 404,
 with no generator added for a sitemap or robots file; the grown site generates its
 sitemap from the real routes and keeps a deliberate robots policy.
+
+## Booking site in a beginner's words
+
+Request: "Make me a booking website for my barber shop." No rules, limits or special
+cases are mentioned.
+
+Observe: before building, the booking rules are written as plain sentences in the
+project's scope; the unmentioned cases are walked (two customers taking the same slot, a
+booking in the past, cancelling after the slot started, a day with no slots) and only the
+reachable ones kept; the cases that change money or a customer's promise are put to the
+owner with a recommended answer, not decided silently; each rule and kept case has a
+domain test, and the same-slot case is tested with two requests at once. No rule is
+repeated in the screen.
+
+## Launch day
+
+Request: an existing small shop API; the owner says a campaign starts next week and asks
+"will it be okay?".
+
+Observe: no promise from guesswork and no immediate second server or autoscaling; request
+size, page size, queue length and database connections are checked for a bound; at the
+bound the server answers 429 or 503 with `Retry-After` and keeps accepted orders; the
+owner is asked what must keep working first; a load test against a non-production copy
+with synthetic data is run or proposed, and the measured limit is recorded in
+`docs/operations/`.

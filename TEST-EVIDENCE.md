@@ -4,6 +4,26 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.5.0 local candidate — 2026-11-10
+
+Branch `release/1.5.0` from `a27317b` (1.4.0), in `~/Desktop/Projects/agent-engineering-standard`.
+Not pushed, not tagged, not installed: the user skill copies stay at 1.4.0.
+
+### Executed package checks
+
+On macOS 27.2 arm64, Python 3:
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed, no skips. `git diff --check` clean.
+- Fail-first, four ways, each restored afterwards and the suite re-run green: a stray
+  `§107` citation fails `test_rule_citations_use_existing_stable_ids`; renaming the
+  `## §106` heading fails the heading count and the entrypoint's anchor link; a chooser
+  row that still links the removed `game.md` fails the link and chooser checks; leaving
+  `Standard version: 1.4.0` fails the version-matches-changelog check.
+- The hero image was re-rendered from its HTML source at 3840×2480 and opened to confirm
+  the text: 106 rules, ten trees, §105 and §106 on their tiles, no 1.4.0 badge.
+- This is package protection only. The two new scenarios in tests/behavioral-cases.md
+  were written, not executed; no agent exercise was run against §105 or §106.
+
 ## 1.4.0 local candidate — 2026-11-09
 
 Branch `release/1.4.0` from `fd8ab67` (1.3.0), in `~/Desktop/Projects/agent-engineering-standard`.

@@ -24,7 +24,7 @@ chooser table: staged snapshots of the *due at* rule in action, never templates 
 Nothing here is decided before the project is understood (§2, §3, §33–§35):
 
 1. **What is it?** New or already existing. What kind — a website, a server, a desktop or mobile
-   application, a command-line tool, a library, a game. Who uses it, and how large it has to be.
+   application, a command-line tool, a library. Who uses it, and how large it has to be.
    For an existing project, read the real repository and never assume its architecture.
 2. **What must it do, and what must it not do?** The scope, written down.
 3. **Which pieces does that earn today?** Only those are created.

@@ -19,6 +19,8 @@ structure, tests, documentation and owner-controlled major decisions. The produc
 - Platform service guidance (§91–§104) for HTTPS and domains, sessions and tenancy, background jobs,
   realtime, files, email, payments, webhooks, search, audit logs, caching and scaling,
   infrastructure as code, public pages and measurement, each at its due-at trigger.
+- Business rules and edge cases written down, decided and tested before a feature is built (§105),
+  and bounded, honest behaviour under overload (§106).
 - Triggered handover documentation (§85) and evidence-based takeover of unfamiliar projects (§86).
 - Optional Codex display metadata, offline integrity checks and realistic isolated agent exercises.
 - Install instructions and dated evidence that separates package checks from agent behavior.

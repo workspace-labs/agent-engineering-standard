@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.4.0
+Standard version: 1.5.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -13,7 +13,7 @@ Professional engineering is not maximum abstraction, excessive folders, unnecess
 
 **Goal (§65):** the software works today, its structure explains itself, another engineer can safely change it tomorrow, and the architecture is no more complicated than the product actually requires.
 
-Rule IDs §1–§104 are stable anchors for this standard; findings, plans and handoffs may cite them.
+Rule IDs §1–§106 are stable anchors for this standard; findings, plans and handoffs may cite them.
 
 ## Precedence (§61)
 
@@ -108,7 +108,8 @@ For architectural work, also establish: what exists now; what problem is being s
 - **No God files (§7).** Central files such as App, main, index, server, controller or manager must not become the default home of new behavior. Judge by responsibilities and change coupling, not size alone, and never split a cohesive file just to meet a line count.
 - **Domain logic has a home (§8, §9, §10).** Product rules stay independent of UI, storage, platform wrappers and global clock access where practical; dependencies point toward stable product logic; each substantial feature has an obvious home; shared rules are not duplicated.
 - **Boundaries are explicit (§11–§14, §39–§42, §49).** Persistence, platforms and configuration sit behind intentional boundaries; canonical data contracts, units and time models are defined; every important piece of state has an owner; failures are owned, not scattered as UI messages.
-- **Backend and frontend behaviour (§66–§72).** For server work use [the backend guide](references/backend.md); for screens use [the frontend guide](references/frontend.md). Apply each rule only when its due-at trigger is met.
+- **Backend and frontend behaviour (§66–§72, §106).** For server work use [the backend guide](references/backend.md), including what the server does [when too many requests arrive](references/backend.md#106-overload-and-traffic-spikes); for screens use [the frontend guide](references/frontend.md). Apply each rule only when its due-at trigger is met.
+- **Business rules and edge cases (§105).** Before building a feature that carries a product rule, [write the rule down and walk the cases nobody mentioned](references/architecture-and-boundaries.md#105-business-rules-and-edge-cases): nothing, the limit, twice, out of order, the wrong person, halfway. The owner decides the ones that change money, access or data.
 - **Team workflow and lifecycle (§74–§83).** Use [the team and lifecycle guide](references/team-and-lifecycle.md) for test levels, CI, review, ADRs, releases, environments, privacy, dependency health, incidents and ownership. Apply each part only when its due-at trigger is met; a solo or tiny project earns no team ceremony.
 - **Platform services (§91–§104).** When the product earns a public address, sessions or tenants, background jobs, realtime, uploads, mail, payments, webhooks, search, an audit log, caching or a second running copy, infrastructure code, public pages or measurement, use [the platform services guide](references/platform-services.md). Each applies only at its due-at trigger; the stack's existing mechanism comes before a new service.
 - **Teach and hand over (§84–§86).** [Teach while building](references/team-and-lifecycle.md#84-teach-while-building) in plain words when needed, with no lessons on tiny tasks; keep [handover documentation](references/team-and-lifecycle.md#85-the-ten-year-handover) current as its triggers are met, and [map an unfamiliar project](references/team-and-lifecycle.md#86-taking-over-a-project) before changing features when its map or settings list is missing.
@@ -183,10 +184,10 @@ When work that began from an engineering audit (§28), or any substantial or arc
 |---|---|
 | [references/coverage-and-evidence.md](references/coverage-and-evidence.md) | new/substantial project coverage, approved-document handoff, changed trust/data boundaries, recovery, release channels and stronger assurance claims |
 | [references/layout-map.md](references/layout-map.md) | creating a project or adding a part to one, and deciding where a folder or a file belongs: the full layout, and when each piece becomes due |
-| [references/trees/README.md](references/trees/README.md) | starting a project of any known type: the chooser table and staged example trees (website, webapp, API backend, desktop, mobile, game, CLI, library, AI service, data pipeline, monorepo) showing what each type earns, stage by stage — examples, never templates |
-| [references/architecture-and-boundaries.md](references/architecture-and-boundaries.md) | where code lives, feature or module boundaries, God-file risk, dependency direction, platform wrappers, change coupling, configuration, naming, comments |
+| [references/trees/README.md](references/trees/README.md) | starting a project of any known type: the chooser table and staged example trees (website, webapp, API backend, desktop, mobile, CLI, library, AI service, data pipeline, monorepo) showing what each type earns, stage by stage — examples, never templates |
+| [references/architecture-and-boundaries.md](references/architecture-and-boundaries.md) | where code lives, feature or module boundaries, God-file risk, dependency direction, platform wrappers, change coupling, configuration, naming, comments, business rules and edge cases |
 | [references/data-state-and-runtime.md](references/data-state-and-runtime.md) | persistence or databases, data contracts, units, time, state ownership, migrations, compatibility, error handling, async or concurrency, performance |
-| [references/backend.md](references/backend.md) | API contracts and errors, reliability and operations, backend security, secrets and API keys, containers — each at its due-at trigger |
+| [references/backend.md](references/backend.md) | API contracts and errors, reliability and operations, backend security, secrets and API keys, containers, overload and traffic spikes — each at its due-at trigger |
 | [references/frontend.md](references/frontend.md) | server data and screen state, remote-data views, forms, accessibility, frontend security, performance and languages — each at its due-at trigger |
 | [references/platform-services.md](references/platform-services.md) | HTTPS and domains, sessions and tenants, background jobs and schedules, realtime, uploads and files, email, payments, webhooks, search, audit logs, caching and scaling, infrastructure as code, public pages and SEO, analytics and error tracking — each at its due-at trigger |
 | [references/team-and-lifecycle.md](references/team-and-lifecycle.md) | test levels and CI gates, branches and review, ADR lifecycle, releases, environments and flags, privacy, dependency health, incidents, code ownership, teaching, handover documentation, adding or changing configuration settings, or taking over an unfamiliar project — each at its due-at trigger |

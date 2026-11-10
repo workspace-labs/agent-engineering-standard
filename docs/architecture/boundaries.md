@@ -17,4 +17,6 @@ when real work earns them, following the same proportionality the skill teaches.
 
 The platform-services reference owns §91–§104: the services a product grows around its code, each with a due-at trigger; it names homes the layout map already lists and never mandates a provider or a service.
 
+The architecture reference also owns §105 (business rules and edge cases), beside §8 where the rules live; the backend reference also owns §106 (overload and traffic spikes), beside §67 reliability. New rules join the guide whose subject they extend and take the next free ID; IDs are never renumbered.
+
 The coverage-and-evidence reference owns §87–§90. It consumes approved project planning; it does not generate another PRD/TRD workflow. Behavioral exercises and evidence remain outside the installed package.

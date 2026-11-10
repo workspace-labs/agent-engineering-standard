@@ -14,7 +14,7 @@ The skill is in this repo — [`skills/`](skills).
 
 ## In practice
 
-![The whole map: one entrypoint that sizes the work, ten guides with their rule ranges and the moment each becomes due, eleven example trees, and the three promises — Human Gate, teach while building, never over-engineer](media/the-whole-map.png)
+![The whole map: one entrypoint that sizes the work, ten guides with their rule ranges and the moment each becomes due, ten example trees, and the three promises — Human Gate, teach while building, never over-engineer](media/the-whole-map.png)
 
 *The whole standard on one page. A typo loads nothing; a new product loads only what it earns.*
 
@@ -25,6 +25,8 @@ The skill is in this repo — [`skills/`](skills).
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
 - **Account for what the project needs (§87–§90).** Reuse approved project documents and their requirement IDs, then show evidence, inapplicability or unfinished work for the applicable engineering duties. Keep project-docs planning and engineering execution separate.
 - **Give every job one home.** No god files. Product rules stay out of the screens and the storage.
+- **Think of the cases nobody mentioned (§105).** Two people booking the same slot, a refund after a cancellation, an empty basket: the agent writes each product rule down, walks its edge cases, asks you about the ones that matter and tests them.
+- **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at the limit the server says "busy, try again" and never crashes or loses accepted work.
 - **Build the tests and the docs with the code**, not after it.
 - **Engineer backend and frontend behaviour.** APIs, reliability, secrets and containers have explicit triggers; screens handle data states, accessibility, security and languages when needed.
 - **Engineer the services around the product (§91–§104).** HTTPS and domains, sessions and tenants, background jobs, realtime, uploads, email, payments, webhooks, search, audit logs, caching and scaling, infrastructure as code, public pages, analytics and error tracking — each when the product earns it, and the stack's existing mechanism before a new service.
@@ -107,7 +109,7 @@ for discovery locations and metadata.
 Agents can choose it when they build, extend, restructure or review software, or you can
 invoke it explicitly as `$software-engineering-build-standard`. The entry point is
 [`SKILL.md`](skills/software-engineering-build-standard/SKILL.md), with supporting reference
-guides and [staged examples for eleven project types](skills/software-engineering-build-standard/references/trees/README.md).
+guides and [staged examples for ten project types](skills/software-engineering-build-standard/references/trees/README.md).
 The [layout map](skills/software-engineering-build-standard/references/layout-map.md) gives
 each piece's *due at* trigger, so nothing is created before the product earns it. A project's
 own rules, recorded decisions and the owner's instructions always come first.

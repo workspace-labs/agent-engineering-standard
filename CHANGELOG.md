@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.5.0 — 2026-11-10
+
+- Add §105 Business rules and edge cases to the architecture guide: write each product
+  rule in a plain sentence, walk the cases a request never mentions (nothing, the limit,
+  twice, out of order, the wrong person, halfway), ask the owner about the ones that
+  change money, access, kept data or a promise, and give each rule and kept case a test.
+- Add §106 Overload and traffic spikes to the backend guide: bound everything that can
+  grow, refuse cheaply and honestly at the bound, never drop accepted work, retry with
+  backoff, let the owner decide what fails last, and measure the limit before a known
+  peak; scaling follows the measurement.
+- **Removed:** the game example tree (`references/trees/game.md`) and its chooser row.
+  The standard serves products such as websites, apps, servers and services; a game
+  still follows the layout map's due-at rule and its engine's own layout (§61). No rule
+  is removed or changed, so this stays a minor version.
+- Route both rules from the entrypoint and the reference table; extend the rule-ID and
+  heading checks through §106; two behavioral scenarios added to
+  tests/behavioral-cases.md.
+- Re-render the README hero image for 106 rules and ten trees, without the 1.4.0 badge.
+
 ## 1.4.0 — 2026-11-09
 
 - Add the platform services guide, §91–§104: HTTPS, domains and certificates; sessions and

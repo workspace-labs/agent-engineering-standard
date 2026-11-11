@@ -4,6 +4,69 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.6.0 local candidate — 2026-11-11
+
+Baseline: `main` at `e5b370946e88f568a1547f9adb88946ef76d40b8`, clean working tree.
+The owner requested conditional Keycloak and LDAP guidance, explaining when each fits.
+The change extends §92; existing rule IDs and their headings remain unchanged.
+Backups, complete audit output and planning exercise artifacts are retained outside
+the repository. At preparation the candidate was uncommitted, unpublished and not
+installed; the later owner-authorized installation is recorded below.
+
+### Executed checks
+
+- `python3 -B -m unittest discover -s tests -v`: **41/41** passed, no skips, before
+  the first edit and after the update. No automated test code was added or changed.
+  The existing suite checks metadata, version/changelog agreement, rule citations,
+  package boundaries, resource reachability and repository Markdown links/fragments.
+- `git diff --check`: clean, exit 0.
+- The installed audit-agent-skills scanner checked both the baseline and candidate
+  packages: one skill each, no structural errors, and the same **11** `deep-reference`
+  review warnings for existing `references/trees/` files. No new warning was introduced;
+  these static results do not certify agent behaviour.
+- A separate read-only agent reviewed the source diff and spot-checked the official
+  Keycloak OIDC, adapter and LDAP documentation; it reported no actionable blocker.
+  This is instruction review, not live identity-system verification.
+- The skill-creator `quick_validate.py` check could not start because its Python
+  environment lacks PyYAML (`ModuleNotFoundError: No module named 'yaml'`). It did
+  **not** pass; no dependency was installed. The package suite and static audit above
+  executed independently of that unavailable validator.
+
+### Observed planning exercises and limits
+
+Two fresh independent agent contexts explicitly loaded the candidate skill and received
+only a short project inventory and a planning request, without expected outcomes:
+
+- A single-shop app whose accepted framework already provides authentication: the
+  response reused that mechanism, introduced neither Keycloak nor LDAP, and planned
+  session, permission and failure checks. It made no implementation or test claim.
+- Two staff apps with an existing LDAP directory and no accepted SSO provider: the
+  response explained the directory/provider distinction, proposed Keycloak as a candidate,
+  checked for an existing provider first, and identified approval, identity mapping,
+  read-only federation, TLS, access-removal delay, outage, migration and test decisions.
+  It made no deployment or federation claim.
+
+These were planning-only adaptations, not implementation runs of the four new exercise
+contracts in [behavioral-cases.md](tests/behavioral-cases.md). The accepted-other-provider
+and cached-token repair contracts were authored but not executed. No actual Keycloak
+server, directory, user account, token validation, TLS failure, revocation, migration or
+recovery was exercised. No automatic skill-selection claim is made. Windows/Linux,
+publication and installed-copy updates were not part of those planning exercises.
+
+### Owner-authorized installation — 2026-11-11
+
+After the owner approved committing/pushing and installation, the two physical skill
+folders used by Claude and Codex were backed up and replaced as whole packages. The
+Claude discovery path remains its existing link to the shared agents skill folder;
+the legacy Codex skill folder also received the same package. No link was replaced.
+
+Complete relative-file SHA-256 manifests matched the reviewed candidate: **23/23** files
+in each physical installation, also reachable through the Claude link, with version
+**1.6.0**. The previous **1.5.1** copies and original directories are retained outside
+the discovery roots. Installed-package snapshots were audited separately: each scanned
+one skill with no structural errors and exactly the same 11 existing `deep-reference`
+warnings as the baseline. No dependencies or running identity services were installed.
+
 ## 1.5.1 local candidate — 2026-11-10
 
 Branch `release/1.5.1` from `eab68e2` (published 1.5.0), with a clean working-tree

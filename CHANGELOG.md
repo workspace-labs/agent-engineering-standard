@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.6.0 — 2026-11-11
+
+- Extend §92 with conditional Keycloak and LDAP guidance: explain when an identity provider
+  or directory integration is earned, reuse the accepted provider, and keep ordinary sign-in small.
+- Define OIDC and LDAP boundaries, secure client/token and directory configuration, approved
+  write modes, account linking, access-removal delays and safe provider-outage behaviour.
+- Require proportionate synthetic integration checks and settings/operator handover; distinguish
+  mocked checks from verified federation. Route the addition from the entrypoint and README.
+- Add behavioral exercise contracts for simple sign-in, existing LDAP with SSO, accepted
+  providers and access removal; record executed verification separately in TEST-EVIDENCE.md.
+- Prepare a local minor-version candidate; publication and installed-copy updates are separate steps.
+
 ## 1.5.1 — 2026-11-10
 
 - Make README version pinning follow the newest published GitHub Release, with v1.5.0

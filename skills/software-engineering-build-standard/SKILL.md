@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.6.0
+Standard version: 1.6.1
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -65,6 +65,8 @@ Never assume its architecture, and do not start changing files until you underst
 INSPECT → AUDIT IF NECESSARY → PLAN → HUMAN GATE IF ARCHITECTURAL → IMPLEMENT IN COHERENT SLICES → TEST → VERIFY → REVIEW
 
 Determine the current architecture before proposing a target. Do not rebuild a functioning project because its structure is imperfect, and never reorganize blindly. Before a major feature, check whether the existing architecture can support it safely; if it cannot, do the minimum necessary foundation work first.
+
+In a project shared with other people, such as a workplace or team repository, follow its existing documentation habits (§19). Do not create a document file the repository does not already have — a README, CHANGELOG, `docs/` page or ADR — without asking the owner first, and name every document you added in the handoff.
 
 ### New project (§3, §34, §63)
 

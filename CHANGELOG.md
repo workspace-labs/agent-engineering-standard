@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.1 — 2026-11-14
+
+- In a shared workplace or team repository, follow its existing documentation habits:
+  ask the owner before adding a document file the repository does not already have
+  (README, CHANGELOG, `docs/` page or ADR) and name every added document in the handoff.
+  Clarifies §19 and the existing-project workflow; no rule IDs added or removed.
+
 ## 1.6.0 — 2026-11-11
 
 - Extend §92 with conditional Keycloak and LDAP guidance: explain when an identity provider

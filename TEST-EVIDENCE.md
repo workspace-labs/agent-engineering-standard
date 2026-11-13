@@ -4,6 +4,17 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.6.1 local candidate — 2026-11-14
+
+Baseline: `main` at `6453d0e`, clean working tree. The owner asked that agents stop adding
+unexpected documents to shared workplace repositories. The change adds one sentence to the
+existing-project workflow and one to §19; no rule IDs were added or removed.
+
+### Executed checks
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed after the update.
+- `git diff --check`: clean.
+
 ## 1.6.0 local candidate — 2026-11-11
 
 Baseline: `main` at `e5b370946e88f568a1547f9adb88946ef76d40b8`, clean working tree.

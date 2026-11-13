@@ -63,6 +63,8 @@ A mature repository explains enough of itself that another engineer does not nee
 
 Do not create large documentation sets for projects too small to need them.
 
+In a shared workplace or team repository, documentation follows the repository's existing habits: ask the owner before adding a document file the repository does not already have, and name every added document in the handoff.
+
 ## §25 Dead code and dependency hygiene
 
 Do not let abandoned prototypes, template components, unused dependencies or obsolete scripts accumulate indefinitely — and do not delete them casually either. First establish:

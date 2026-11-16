@@ -4,6 +4,18 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.6.2 local candidate — 2026-11-16
+
+Baseline: `main` at `08d9f79`, clean working tree. The owner asked that a change which adds a
+paid service name its cost before it is built. The change adds one question to the §47 list of
+questions asked before adding a dependency; no rule IDs were added or removed. No test was
+added: the package checks verify structure and links, not the wording of a rule, as for 1.6.1.
+
+### Executed checks
+
+- `python3 -B -m unittest discover -s tests`: **41/41** passed before and after the update.
+- `git diff --check`: clean.
+
 ## 1.6.1 local candidate — 2026-11-14
 
 Baseline: `main` at `6453d0e`, clean working tree. The owner asked that agents stop adding

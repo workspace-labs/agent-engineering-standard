@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.2 — 2026-11-16
+
+- Before adding a dependency that starts a recurring bill (a paid service, a hosted database,
+  a model charged by use), say so first, with the amount and who pays, or that the amount is
+  not known. Never state a price from memory; starting a recurring bill is the owner's decision.
+  One question added to §47; no rule IDs added or removed.
+
 ## 1.6.1 — 2026-11-14
 
 - In a shared workplace or team repository, follow its existing documentation habits:

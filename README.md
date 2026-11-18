@@ -44,20 +44,20 @@ With Node.js and npm installed, one line makes it available across your projects
 macOS or Linux:
 
 ```bash
-npx skills add workspace-labs/agent-engineering-standard -g
+npx skills add workspace-labs/software-engineering-build-standard -g
 ```
 
 Windows PowerShell (use the `.cmd` launcher so PowerShell's script execution policy does
 not block npm's `.ps1` wrapper):
 
 ```powershell
-npx.cmd skills add workspace-labs/agent-engineering-standard -g
+npx.cmd skills add workspace-labs/software-engineering-build-standard -g
 ```
 
 Or clone it and copy the whole skill folder by hand:
 
 ```bash
-git clone https://github.com/workspace-labs/agent-engineering-standard.git
+git clone https://github.com/workspace-labs/software-engineering-build-standard.git
 ```
 
 Choose the user skill location for your agent, following its current documentation. For
@@ -75,7 +75,7 @@ cannot silently mix old and new reference files. Back up an existing installatio
 replacing it through your normal update workflow.
 
 ```bash
-skill_source="agent-engineering-standard/skills/software-engineering-build-standard"
+skill_source="software-engineering-build-standard/skills/software-engineering-build-standard"
 skill_target="$skill_root/software-engineering-build-standard"
 if [ -e "$skill_target" ] || [ -L "$skill_target" ]; then
   printf '%s\n' "Already exists: $skill_target. Back it up before updating." >&2
@@ -93,7 +93,7 @@ destination, including a hidden folder or link, rather than merging installation
 ```powershell
 $skillRoot = Join-Path $env:USERPROFILE '.agents\skills'   # Codex
 # $skillRoot = Join-Path $env:USERPROFILE '.claude\skills' # Claude: use this instead
-$skillSource = Join-Path $PWD.Path 'agent-engineering-standard\skills\software-engineering-build-standard'
+$skillSource = Join-Path $PWD.Path 'software-engineering-build-standard\skills\software-engineering-build-standard'
 $skillTarget = Join-Path $skillRoot 'software-engineering-build-standard'
 if (Get-Item -LiteralPath $skillTarget -Force -ErrorAction SilentlyContinue) {
   throw "Already exists: $skillTarget. Back it up before updating."
@@ -121,11 +121,11 @@ guidance that stays compatible; a major version removes a rule or changes its me
 Rule IDs are never renumbered.
 
 To pin a version, use the newest published tag listed on the repository's
-[GitHub Releases page](https://github.com/workspace-labs/agent-engineering-standard/releases).
+[GitHub Releases page](https://github.com/workspace-labs/software-engineering-build-standard/releases).
 Replace the example tag `v1.5.0` below with that tag (`vX.Y.Z`):
 
 ```bash
-git clone --branch v1.5.0 https://github.com/workspace-labs/agent-engineering-standard.git
+git clone --branch v1.5.0 https://github.com/workspace-labs/software-engineering-build-standard.git
 ```
 
 ## Test it

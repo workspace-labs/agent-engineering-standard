@@ -1,4 +1,4 @@
-# Working on agent-engineering-standard
+# Working on software-engineering-build-standard
 
 Read [the scope](docs/scope.md) and [the boundaries](docs/architecture/boundaries.md) before changing the package.
 

@@ -486,6 +486,25 @@ class SkillContractRegressions(unittest.TestCase):
         self.assertTrue(result.failures, "A citation must resolve to an actual rule definition")
         self.assertRegex(result.failures[0][1], r"Missing rule definitions.*47")
 
+    def test_rule_definition_markers_are_refused_on_headings(self):
+        entrypoint = self.bundle / "SKILL.md"
+        marker = "<!-- defines §30 -->"
+        original = entrypoint.read_text(encoding="utf-8")
+        self.assertEqual(original.count(marker), 1)
+        for heading in ("## Human Gate (§30, §44) " + marker,
+                        "Human Gate (§30, §44) " + marker + "\n---"):
+            with self.subTest(heading=heading):
+                changed, count = re.subn(
+                    r"(?m)^## Human Gate \(§30, §44\)[ \t]*$",
+                    lambda match: heading,
+                    original.replace(marker, ""),
+                )
+                self.assertEqual(count, 1)
+                entrypoint.write_text(changed, encoding="utf-8")
+                result = self.check_fixture("test_rule_citations_use_existing_stable_ids")
+                self.assertEqual(len(result.failures), 1)
+                self.assertIn("Keep rule definition markers off headings", result.failures[0][1])
+
 
 if __name__ == "__main__":
     unittest.main()

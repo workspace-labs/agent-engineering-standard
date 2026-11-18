@@ -15,7 +15,9 @@ Professional engineering is not maximum abstraction, excessive folders, unnecess
 
 Rule IDs §1–§106 are stable anchors for this standard; findings, plans and handoffs may cite them.
 
-## Precedence (§61) <!-- defines §61 -->
+## Precedence (§61)
+
+<!-- defines §61 -->
 
 This standard is general. It does not replace, and it yields to:
 
@@ -28,7 +30,9 @@ When a project has a more specific accepted rule — a mandated folder layout, f
 
 Narrower technique skills and guides (testing, incremental delivery, interface design, migrations, debugging) complement this standard rather than compete with it: this standard decides placement, boundaries, proportion and gates; they supply technique.
 
-## Size the work before acting (§33–§35, §62–§63) <!-- defines §33, §34, §35, §62, §63 -->
+## Size the work before acting (§33–§35, §62–§63)
+
+<!-- defines §33, §34, §35, §62, §63 -->
 
 | Work | Examples | Required depth |
 |---|---|---|
@@ -46,7 +50,9 @@ Complexity follows product needs. A declared throwaway prototype or spike is a s
 
 Do not produce a ceremonial architecture report for a small, obvious task, and do not use planning to avoid implementation once the required decisions are resolved.
 
-## Workflows <!-- defines §1 -->
+## Workflows
+
+<!-- defines §1 -->
 
 Substantial work follows this order, with planning proportional to the task (§1):
 
@@ -60,7 +66,9 @@ Before running an unfamiliar test, build or install command, inspect the scripts
 
 In an existing Git project, record the starting point before changing any file: the base commit and the working-tree state, naming any changes that are not yours. For substantial or architectural work, also run the tests that cover the area and record the result, exactly as it ran; if they cannot run, record why. Tiny work records only the commit and working-tree state. This is the baseline the builder handoff reports later.
 
-### Existing project (§2, §34, §58, §63) <!-- defines §2 -->
+### Existing project (§2, §34, §58, §63)
+
+<!-- defines §2 -->
 
 Never assume its architecture, and do not start changing files until you understand enough of the real project: repository root, Git state, source layout, entry points, application composition, major features, domain rules, state ownership, persistence, platform-specific code, tests, tooling, documentation, dependencies, build and release path, and its own instructions and ADRs.
 
@@ -70,7 +78,9 @@ Determine the current architecture before proposing a target. Do not rebuild a f
 
 In a project shared with other people, such as a workplace or team repository, follow its existing documentation habits (§19). Do not create a document file the repository does not already have — a README, CHANGELOG, `docs/` page or ADR — without asking the owner first, and name every document you added in the handoff.
 
-### New project (§3, §34, §63) <!-- defines §3 -->
+### New project (§3, §34, §63)
+
+<!-- defines §3 -->
 
 REQUIREMENTS → ARCHITECTURE → REPOSITORY FOUNDATION → DATA/STATE MODEL → TEST STRATEGY → IMPLEMENTATION
 
@@ -78,7 +88,9 @@ Before substantial feature development, decide: repository boundary, source stru
 
 For new projects, read [project coverage and approved documents (§87)](references/coverage-and-evidence.md#87-project-coverage-and-approved-documents) before feature implementation. Reuse approved planning instead of creating competing requirements.
 
-### Engineering-quality audit or cleanup (§28) <!-- defines §28 -->
+### Engineering-quality audit or cleanup (§28)
+
+<!-- defines §28 -->
 
 Do not refactor immediately:
 
@@ -86,15 +98,21 @@ AUDIT → CURRENT ARCHITECTURE → FINDINGS → TARGET ARCHITECTURE → HUMAN GA
 
 Distinguish actual correctness risk, structural debt, maintainability debt, cleanup and optional improvement. Report findings in the §29 format and never inflate severity to justify restructuring.
 
-### Refactoring or restructuring (§20, §21, §54) <!-- defines §20, §21 -->
+### Refactoring or restructuring (§20, §21, §54)
+
+<!-- defines §20, §21 -->
 
 Prefer small coherent slices to a big-bang rewrite unless there is a compelling reason. Each slice has one objective, explicit scope, expected behavior change, risk, tests, a rollback point and acceptance criteria. Purely structural work carries ZERO intended behavior change (§54). After each significant slice: IMPLEMENT → VERIFY → REVIEW → HUMAN GATE, and never continue into the next slice automatically when the workflow requires approval. Move modules that are coherent, well tested, appropriately isolated and stable with minimal logic changes; architectural cleanup must never become a hidden product rewrite.
 
-### Defect found in review (§53) <!-- defines §53 -->
+### Defect found in review (§53)
+
+<!-- defines §53 -->
 
 Do not immediately rewrite the surrounding architecture. First isolate the exact defect, its root cause, the affected contract, a reproduction, the required correction and the regression tests; then fix the smallest coherent scope that closes the defect. Record architecture work discovered during the fix separately unless it is necessary for correctness.
 
-## Design questions before substantial building (§4, §34) <!-- defines §4 -->
+## Design questions before substantial building (§4, §34)
+
+<!-- defines §4 -->
 
 Derive the answers from the product, never from an arbitrary folder template:
 
@@ -125,7 +143,9 @@ For architectural work, also establish: what exists now; what problem is being s
 
 New projects, substantial work and material data/security/release changes use [coverage and engineering evidence (§87–§90)](references/coverage-and-evidence.md). Tiny unrelated corrections keep their narrow workflow.
 
-## Human Gate (§30, §44) <!-- defines §30 -->
+## Human Gate (§30, §44)
+
+<!-- defines §30 -->
 
 Major architecture decisions and new recurring costs belong to the human owner. Never silently decide to:
 
@@ -133,16 +153,18 @@ Major architecture decisions and new recurring costs belong to the human owner. 
 - change the persistence strategy, data-model semantics or platform strategy;
 - restructure the repository at scale;
 - break the compatibility of released software (persisted data, public APIs, package or application identity, signing identity, file formats, configuration, user workflows);
-- delete important historical or recovery material
+- delete important historical or recovery material;
 - start a recurring charge or add recurring spend through a service already in use.
 
 Instead: present the current state → explain the problem → propose the target → explain the trade-offs → explain the migration risk → wait for the Human Gate. Minor implementation choices inside an already approved architecture need no extra approval.
 
-For architectural changes, the owner's answer follows a description of the current state, the problem, the proposed target, the trade-offs and the migration risk. Wait for that answer before creating the replacement, the migration, or an ADR marked accepted. Introducing or materially changing a runtime, library or platform outside the accepted stack is its own decision and waits too. Reusing the accepted stack within the approved design and spend needs no extra gate. Ask again when a material decision changes or the project's workflow requires it.
+For each change listed above, including new recurring spend, the owner's initial request starts the assessment. Even if that request says "do the work", get the owner's approval after they review the concrete decision. Present the current state, the problem, the proposed target, the trade-offs and any migration risk. Wait for the owner's answer before implementing the change, including creating a replacement, writing a migration or marking an ADR accepted. Introducing or materially changing a runtime, library or platform outside the accepted stack is its own decision and waits too. Reusing the accepted stack, including its standard library, within the approved design and spend needs no extra gate. An earlier approval of the same concrete design remains valid. Ask again only when a material decision changes or the project's workflow requires it.
 
-For new recurring spend, state the service, expected cost and usage assumptions (or what remains unknown), and who pays. Use a current price or an approved quote. Wait for the owner's approval before implementing, provisioning or enabling the paid workload. Reuse approval only when it covers that workload and its spend. An initial request starts the assessment. Approval follows the owner's review of the concrete decision.
+For new recurring spend, state the service, expected cost and usage assumptions (or what remains unknown), and who pays. Use a current price or an approved quote. Never state a price from memory. Wait for the owner's approval before implementing, provisioning or enabling the paid workload. Reuse approval only when it covers that workload and its spend.
 
-## Stop conditions (§56) <!-- defines §56 -->
+## Stop conditions (§56)
+
+<!-- defines §56 -->
 
 Stop and report instead of improvising when:
 
@@ -157,7 +179,9 @@ Stop and report instead of improvising when:
 
 Never "make it work" by destroying data or bypassing safeguards.
 
-## Completion (§31, §32, §60, §64) <!-- defines §64 -->
+## Completion (§31, §32, §60, §64)
+
+<!-- defines §64 -->
 
 Working code alone is not done. Before declaring substantial work complete, explicitly verify the requested behavior, architectural placement, tests, build/type/lint status where relevant, Git state where relevant, documentation impact, known risks, and whether a Human Gate is required. Then apply the definition of done, the self-check and the handoff in [references/review-and-completion.md](references/review-and-completion.md), in proportion to the task. Report any concerning self-check answer with the smallest appropriate correction. Never claim completion for verification that was not performed — say what remains unverified.
 
@@ -167,7 +191,9 @@ When code starts reading or changes a configuration setting, load [the handover 
 
 When you are the builder and the work changed code or other project files, load the `engineering-builder-handoff` skill, if it is installed, before your final message; it sets the handoff's format. Do not load it for review-only or explanation-only work.
 
-### Closing an audit or a restructuring (§73) <!-- defines §73 -->
+### Closing an audit or a restructuring (§73)
+
+<!-- defines §73 -->
 
 When work that began from an engineering audit (§28), or any substantial or architectural restructuring (§33–§35) — whatever it is called, however it began and however many slices it has — finishes or is stopped, including by the owner partway, reconcile it against the ORIGINAL audit, or the problems the restructuring set out to fix, not only the approved slices, and record the result where the project keeps its plan or debt register (§59):
 

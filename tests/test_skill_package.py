@@ -75,6 +75,17 @@ def markdown_lines(text):
             yield line
 
 
+def markdown_headings(text):
+    previous = ""
+    for line in markdown_lines(text):
+        atx = re.match(r"^ {0,3}#{1,6}[ \t]+(.+?)\s*#*\s*$", line)
+        setext = previous and re.fullmatch(r" {0,3}(?:=+|-+)\s*", line)
+        heading = atx[1] if atx else previous.strip() if setext else None
+        previous = line if not atx and not setext else ""
+        if heading is not None:
+            yield heading
+
+
 def heading_ids(text):
     """GitHub-style IDs for this package's ATX and single-line Setext headings.
 
@@ -83,14 +94,7 @@ def heading_ids(text):
     extensions are not supported. Local fragments must name a recognized heading.
     """
     identifiers = set()
-    previous = ""
-    for line in markdown_lines(text):
-        atx = re.match(r"^ {0,3}#{1,6}[ \t]+(.+?)\s*#*\s*$", line)
-        setext = previous and re.fullmatch(r" {0,3}(?:=+|-+)\s*", line)
-        heading = atx[1] if atx else previous.strip() if setext else None
-        previous = line if not atx and not setext else ""
-        if heading is None:
-            continue
+    for heading in markdown_headings(text):
         heading = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", heading)
         heading = re.sub(r"<[^>]*>", "", heading)
         heading = re.sub(r"(?<!\w)_{1,3}(.+?)_{1,3}(?!\w)", r"\1", heading)
@@ -330,10 +334,13 @@ class SkillPackageTests(unittest.TestCase):
         documents = {path: path.read_text(encoding="utf-8")
                      for path in self.bundle_files if path.suffix == ".md"}
         definitions = Counter()
+        marker = re.compile(r"<!-- defines ((?:§\d+, )*§\d+) -->")
         for path, text in documents.items():
             prose = "\n".join(markdown_lines(text))
             if path == SKILL / "SKILL.md":
-                for anchor in re.findall(r"<!-- defines ((?:§\d+, )*§\d+) -->", prose):
+                for heading in markdown_headings(text):
+                    self.assertNotRegex(heading, marker, "Keep rule definition markers off headings")
+                for anchor in marker.findall(prose):
                     definitions.update(int(value) for value in re.findall(r"§(\d+)", anchor))
             elif path.is_relative_to(SKILL / "references"):
                 definitions.update(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))

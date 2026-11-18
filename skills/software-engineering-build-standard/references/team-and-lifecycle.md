@@ -191,9 +191,10 @@ without seeming to know the risk; or the owner or project asks for explanations.
   when the [layout map](layout-map.md#root-files-and-documentation) makes it due.
   Never describe what you have not read.
 - If settings are undocumented, search the code for what it reads and apply §85 to those
-  sources. Mark unknown values and name the secure place where the owner can provide any
-  required secret. Keep secrets out of handoff notes, example files and logs. Follow §19
-  before adding new documentation to a shared repository.
+  sources. Mark unknown values. Never invent or guess a secret value or copy one from
+  logs, history or other machines into a file. Ask the owner to supply the real values
+  through the project's secure configuration mechanism. Keep secrets out of handoff notes,
+  example files and logs. Follow §19 before adding new documentation to a shared repository.
 - If history is missing, start `CHANGELOG.md` from today and put what is unknown or broken
   in `docs/risks-and-debt.md` (§57). Never invent the past.
 - A wrong project tree is a finding (§28, §29), not a reason to rebuild. Report it, then

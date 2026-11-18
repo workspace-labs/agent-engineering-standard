@@ -251,7 +251,7 @@ A flat `tests/` is correct while it holds a handful of files.
 
 | Folder | Due at |
 |---|---|
-| configuration example in the project's format | the first setting that needs an example (§85). Use `.env.example` for environment variables |
+| `config/` | the first setting. Keep applicable examples in the project's format (§85). Use `.env.example` for environment variables |
 | `config/<environment>/` | the second environment — only the ones that exist |
 | `scripts/build/`, `test/`, `migration/`, `release/`, `maintenance/` | each: the first command a person runs for that job |
 | `tooling/lint/`, `tooling/formatting/` | existing lint or format tooling needs maintained configuration beyond the runtime's normal config file |

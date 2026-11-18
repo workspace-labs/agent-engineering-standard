@@ -4,6 +4,26 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.7.0 fix round 1 — 2026-11-18
+
+Baseline `cfef3c6` passed **44/44** package tests. This round restores Human Gate and
+secret-handling meanings identified in review, moves rule definition markers off
+headings, restores two list separators and restores the `config/` folder trigger.
+
+- The new marker regression failed on both ATX and Setext headings before changing the
+  validator. Both cases failed because the marked heading was accepted. The corrected
+  validator rejects both for marker placement. The full command
+  `python3 -B -m unittest discover -s tests -v` passed **45/45** on arm64 macOS with
+  Python 3.15.2, including all 106 rule definitions and the bundled link checks.
+- A read-only comparison of GitHub-rendered HTML for `e526f85` and `cfef3c6` found
+  17 heading IDs in each revision. Exactly 13 IDs gained a trailing dash, including
+  `human-gate-30-44`. Comparing the corrected `SKILL.md` to `e526f85` found all 17
+  heading lines byte-identical in the same order. The local heading IDs also match
+  the baseline and the Human Gate fragment resolves.
+- `git diff --check` passed. The anchor check used published HTML for the two prior
+  revisions and local source for the correction. This round has local package
+  verification. Prior agent exercises and CI apply to their recorded revisions.
+
 ## 1.7.0 local candidate — 2026-11-18
 
 Baseline is `main` at `e526f8523e2cc774a461561fe774a1b24137c647` with a clean worktree.

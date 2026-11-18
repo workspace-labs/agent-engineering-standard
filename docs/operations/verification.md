@@ -17,9 +17,11 @@ package checks on Windows, macOS and Linux.
 The checks cover metadata types and limits, local links and heading fragments across repository
 Markdown, reference reachability, the tree chooser, starter-kit and source-root consistency,
 and rule citations. Each stable rule has one definition. Reference guides use `## §NN …`
-headings. In the entry point, keep a `<!-- defines §NN -->` marker on the rule's definition
-line. Adversarial fixtures cover non-string metadata, a removed rule that is still cited,
-missing links, Windows reparse points and special filesystem nodes.
+headings. In the entry point, put a `<!-- defines §NN -->` marker on its own line below
+a heading or alongside a prose definition. Keep markers off heading lines to preserve
+GitHub anchors. Adversarial fixtures cover misplaced rule markers, non-string metadata,
+a removed rule that is still cited, missing links, Windows reparse points and special
+filesystem nodes.
 They use only the standard library and do not install or execute the skill. The Markdown
 checker supports this package's inline links and heading forms; it is not a general renderer.
 The metadata checks cover simple YAML string fields; the simple-field reader is not a

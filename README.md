@@ -27,13 +27,13 @@ The skill is in this repo — [`skills/`](skills).
 - **Give every job one home.** Keep unrelated jobs out of one giant file. Rules about how the product works stay separate from screens and the code that saves data.
 - **Think of the cases nobody mentioned (§105).** Two people booking the same slot, a refund after a cancellation, an empty basket: the agent writes each product rule down, walks its edge cases, asks you about the ones that matter and tests them.
 - **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at a limit the server says "too big" for an oversized upload, or "busy, try again" when requests arrive too fast or the server is full. It never crashes or loses accepted work.
-- **Build the tests and the docs with the code**, not after it.
+- **Build the tests and the docs with the code.** Check where unfamiliar test and build commands point before running them.
 - **Build the server and screens carefully.** Rules for how programs talk to each other, keeping the server running, protecting secrets such as service keys and packaging it in containers each say when they are needed. Screens handle loading, empty results, errors, success, accessibility, security and languages when needed.
 - **Build the services the product needs (§91–§104).** Secure web addresses, remembering signed-in users, separating customer accounts, shared sign-in and existing staff directories ([Keycloak and LDAP, when needed](skills/software-engineering-build-standard/references/platform-services.md#keycloak-and-ldap--when-each-fits)), work done in the background, live updates, uploads, email, payments, updates sent by other services, search, records of important actions, reusing results and handling more traffic, server setup kept as code, public pages, usage measurement and error tracking — each only when needed, using what the project's tools already provide before adding a new service.
 - **Look after the project as it grows.** Review by teammates, automated checks before changes are accepted, recorded decisions, releases, privacy and maintenance each apply when needed; a tool built by one person stays small.
 - **Teach while building (§84).** Explain important choices in plain words when the person is new or asks for explanations; keep tiny tasks free of lessons.
 - **Don't over-engineer.** No layer, interface, framework or folder without a real problem it solves.
-- **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, or anything that could lose data waits for a person.
+- **Leave the big calls to the owner.** Replacing the architecture, changing how data is stored, risking data loss, or starting a recurring charge waits for the owner.
 
 ---
 

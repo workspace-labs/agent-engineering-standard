@@ -109,8 +109,9 @@ A local page for trying the booking interaction; it does not reserve real appoin
 - Instructions and design notes: docs/
 
 ## Settings
-No settings are read in this first slice. Add .env.example and describe each setting here
-when the code first reads one. Never write a real private value into these instructions.
+No settings are read in this first slice. When the code first reads a setting, document it here
+with an example in the format the code uses. Use `.env.example` for environment variables.
+Keep private values out of these instructions.
 
 See CHANGELOG.md for changes; docs/design.md and docs/architecture/boundaries.md explain
 the current screen and code organization. Add docs/adr/ decision records when a major choice earns them.

@@ -2,6 +2,8 @@
 
 import os
 from pathlib import Path
+import re
+import shutil
 import stat
 import subprocess
 import tempfile
@@ -427,6 +429,62 @@ class ResourceBoundaryRegressions(unittest.TestCase):
                 self.assertEqual(sentinel.read_text(encoding="utf-8"), "synthetic external sentinel\n")
             finally:
                 remove_directory_link(link)
+
+
+class SkillContractRegressions(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="engineering-skill-contract-")
+        self.addCleanup(temporary.cleanup)
+        self.bundle = Path(temporary.name) / package.SKILL.name
+        shutil.copytree(package.SKILL, self.bundle)
+
+    def check_fixture(self, method):
+        result = unittest.TestResult()
+        with mock.patch.object(package, "SKILL", self.bundle):
+            package.SkillPackageTests(method).run(result)
+        self.assertEqual(result.errors, [])
+        return result
+
+    def test_description_must_be_a_yaml_string(self):
+        entrypoint = self.bundle / "SKILL.md"
+        original = entrypoint.read_text(encoding="utf-8")
+        method = "test_frontmatter_identity_and_description"
+        for value in ("[example]", "{use: example}", "false", "null", "42",
+                      "2026-11-18", "Uses: examples", "|"):
+            with self.subTest(value=value):
+                entrypoint.write_text(
+                    re.sub(r"(?m)^description: .+$", "description: " + value, original),
+                    encoding="utf-8",
+                )
+                result = self.check_fixture(method)
+                self.assertEqual(len(result.failures), 1, "Expected metadata validation to reject this value")
+                self.assertIn("YAML string scalar", result.failures[0][1])
+
+    def test_supported_string_descriptions_still_pass(self):
+        entrypoint = self.bundle / "SKILL.md"
+        original = entrypoint.read_text(encoding="utf-8")
+        for value in ("Uses examples for builds.", '"Covers lists: [example]."',
+                      "'Covers an agent''s build workflow.'", '"false"'):
+            with self.subTest(value=value):
+                entrypoint.write_text(
+                    re.sub(r"(?m)^description: .+$", "description: " + value, original),
+                    encoding="utf-8",
+                )
+                result = self.check_fixture("test_frontmatter_identity_and_description")
+                self.assertTrue(result.wasSuccessful(), result.failures)
+
+    def test_citation_to_deleted_rule_fails(self):
+        guide = self.bundle / "references" / "repository-and-delivery.md"
+        before = guide.read_text(encoding="utf-8")
+        after, matches = re.subn(r"(?ms)^## §47 External dependencies\n.*?(?=^## §48 )", "", before)
+        self.assertEqual(matches, 1)
+        # The contents and entrypoint both still cite §47.
+        self.assertIn("§47", after)
+        guide.write_text(after, encoding="utf-8")
+
+        result = self.check_fixture("test_rule_citations_use_existing_stable_ids")
+        self.assertTrue(result.failures, "A citation must resolve to an actual rule definition")
+        self.assertRegex(result.failures[0][1], r"Missing rule definitions.*47")
 
 
 if __name__ == "__main__":

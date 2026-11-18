@@ -42,6 +42,9 @@ Evidence may be stored separately and indexed by repository documentation. Small
 
 Version control represents the real product source, and Git state is intentional.
 
+Before verifying behavior, apply the [command safety check (§18)](../SKILL.md#before-the-first-edit-18)
+to unfamiliar scripts, wrappers and hooks.
+
 Before risky restructuring:
 
 - establish a trustworthy baseline;
@@ -119,9 +122,9 @@ Before adding a dependency, ask:
 - Is it maintained?
 - What architectural coupling does it introduce?
 - What is its bundle or runtime cost?
-- Does it start a recurring bill (a paid service, a hosted database, a model charged by use)? Say so
-  before adding it, with the amount and who pays, or that the amount is not known; never state a price
-  from memory. Starting a recurring bill is the owner's decision (§30).
+- Does it start a recurring bill (a paid service, a hosted database, a model charged by use)?
+  Apply the [spending approval in §30](../SKILL.md#human-gate-30-44). This also covers new
+  recurring spend that uses an existing dependency or provider.
 - Does it affect security or licensing?
 - How difficult is removal later?
 

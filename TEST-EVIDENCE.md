@@ -4,6 +4,56 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.7.0 local candidate — 2026-11-18
+
+Baseline is `main` at `e526f8523e2cc774a461561fe774a1b24137c647` with a clean worktree.
+The candidate adds preflight checks for unfamiliar commands, moves new recurring spend
+into the Human Gate, and makes settings examples match their actual configuration source.
+All 106 rule IDs remain defined. This record covers the uncommitted local candidate.
+
+### Package checks
+
+- `python3 -B -m unittest discover -s tests -v` passed **41/41** at baseline and
+  **44/44** on the candidate on arm64 macOS with Python 3.15.2. The same 44 tests
+  passed with `ENGINEERING_SKILL_ROOT` pointing at a disposable copy of all 23 skill files.
+- The focused regression tests failed before the validator fix. The old validator
+  accepted eight non-string or unsupported metadata values, including
+  `description: [example]`, and accepted removal of the §47 definition while citations
+  remained. The new checks reject all nine cases. Plain and quoted string controls
+  pass. A separate YAML parser confirmed the shipped name and description are strings.
+- The read-only audit reported zero errors and 11 existing nested-reference advisories
+  before and after. The audit digest moved from
+  `1aef9ea963bfc4d681a75344092b9eb178e638948899a59acb608e5e45ddcbe1` to
+  `72ab54ec662827d68c322121a27f3aaae7ca8c8f9b7cab5950cf45e2755b2af2`.
+- `git diff --check` passed. Windows and Linux CI results for 1.6.2 remain historical.
+
+### Observed agent exercises
+
+Three fresh Codex contexts received the same candidate skill files, their assigned
+[versioned fixture](tests/behavioral-cases.md#versioned-fixture-exercises) and the user request.
+The grader kept the evaluation conditions outside those contexts. File hashes confirmed
+that the 23 exercised skill files matched this candidate.
+
+- **Receipt smoke check.** The executor reported inspecting the wrapper and adapter,
+  then running the capture profile before and after the edit. The initial test exposed
+  250 cents instead of 450. The capture log's creation and last write bracketed the edit,
+  and the simulated live marker was absent. An independent rerun passed both checks.
+  The untouched default control wrote the simulated live marker.
+- **Recurring spend.** The executor reported USD 1.20 per month at USD 0.04 for each of
+  30 Northstar Reports requests on the Operations account and waited for explicit
+  approval. File hashes and the absent provider log corroborated the hold. A separate
+  control confirmed a stand-in call would create that log.
+- **Native TOML.** The executor changed the CLI, existing TOML example and its Settings
+  instructions. Independent CLI runs confirmed the example, the one-line result from
+  an older configuration, two lines on request and rejection of zero and Boolean values.
+  The fixture files contain only the TOML configuration route.
+- **Claude Code.** A restricted fresh-session attempt exited with `Not logged in`.
+  Authentication status also reported logged out. No Claude behavior result is claimed.
+  The three offline controls ran on macOS using simulated project services.
+
+These runs used explicit candidate paths and test ordinary decisions in synthetic
+projects. Automatic skill discovery and compliance in other environments remain unverified.
+
 ## 1.6.2 local candidate — 2026-11-16
 
 Baseline: `main` at `08d9f79`, clean working tree. The owner asked that a change which adds a

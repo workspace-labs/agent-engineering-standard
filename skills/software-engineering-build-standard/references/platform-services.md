@@ -278,7 +278,8 @@ lost — a database, a bucket, a DNS record, a server.
 - The tool's state file and its variables hold secrets and identifiers: keep state in the
   tool's remote backend, never in version control, and pass secrets at apply time (§69).
 - Review the plan before applying it, and apply from one place (a person or CI, not both
-  at once). Destroying infrastructure is a Human Gate action (§30), never automated.
+  at once). Take planned destruction or new recurring spend through the Human Gate (§30).
+  Keep infrastructure destruction out of automatic runs.
 
 ## §103 Public pages and SEO
 

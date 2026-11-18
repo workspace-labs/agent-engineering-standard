@@ -79,14 +79,15 @@ controls become due when those capabilities exist.
 
 ## §69 Secrets and API keys
 
-**Due at:** the first setting the server has earns `config/` and `.env.example`; secret
-handling applies from the first secret the project uses.
+**Due at:** the first server setting earns a configuration boundary. Environment-backed
+settings earn `.env.example`. Secret handling applies from the first secret the project uses.
 
 - A key lives in an environment variable or a secret manager, and is read in **one place**
   behind the configuration boundary (`config/`, §49). Other code uses that boundary; never
   copy keys or duplicate their lookup across files.
-- `.env.example` lists every setting name with **no real values**. Keep the real `.env` in
-  `.gitignore`; follow the framework's accepted configuration location (§61).
+- `.env.example` lists the environment variable names with safe placeholders. Keep a local
+  `.env` out of Git when the project uses one. Document other settings using their actual
+  configuration source (§61, §85).
 - Use separate keys for development, test and production when each environment exists,
   with only the permissions that environment's job needs.
 - **A project's secret never ships to users.** Anything shipped is public — browser code,

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 — 2026-11-18
+
+- Check unfamiliar verification commands before running them and isolate possible side effects (§18).
+- Require owner approval for new recurring spend, including paid workloads that reuse an existing provider (§30, §47).
+- Match settings documentation and examples to the configuration sources the project uses (§69, §85, §86).
+- Reject non-string metadata and resolve citations to the definitions of all 106 stable rules.
+- Add disposable agent exercises for command isolation, recurring spend and native settings documentation.
+
 ## 1.6.2 — 2026-11-16
 
 - Before adding a dependency that starts a recurring bill (a paid service, a hosted database,

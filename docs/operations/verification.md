@@ -14,10 +14,12 @@ is unavailable or reports "No installed Python found!", check `python --version`
 No Bash or WSL is required. [CI](../../.github/workflows/check-skill.yml) runs the same
 package checks on Windows, macOS and Linux.
 
-The checks cover metadata limits, local links and heading fragments across repository
+The checks cover metadata types and limits, local links and heading fragments across repository
 Markdown, reference reachability, the tree chooser, starter-kit and source-root consistency,
-and rule citations. Adversarial fixtures check missing targets and refusal of links,
-Windows reparse points and special filesystem nodes before content reads or descent.
+and rule citations. Each stable rule has one definition. Reference guides use `## §NN …`
+headings. In the entry point, keep a `<!-- defines §NN -->` marker on the rule's definition
+line. Adversarial fixtures cover non-string metadata, a removed rule that is still cited,
+missing links, Windows reparse points and special filesystem nodes.
 They use only the standard library and do not install or execute the skill. The Markdown
 checker supports this package's inline links and heading forms; it is not a general renderer.
 The metadata checks cover simple YAML string fields; the simple-field reader is not a
@@ -37,6 +39,12 @@ results, refusal behavior and approval boundaries afterward. Record model/enviro
 and failed observations, distinguishing tested behavior from anything the environment could
 not verify. Never turn static checks into a claim of universal agent compliance: package
 checks passing alone do not prove that every agent will select or follow the skill correctly.
+
+Start with the [versioned exercises](../../tests/behavioral-cases.md#versioned-fixture-exercises).
+Use a new disposable copy and fresh agent context for each case and each client. Record the
+skill's revision or manifest, agent and environment, commands and actual outputs. Keep the
+grading guide and real credentials outside the fixture. Observe the files and logs after
+the run. Fixture controls run locally and use simulated services.
 
 ## Install/update proof
 

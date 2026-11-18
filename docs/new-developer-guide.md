@@ -82,7 +82,8 @@ New structure arrives when it solves a real problem. [§22]
 
 What goes wrong: a new person cannot find the code or learn which settings are needed without the original builder.
 Instead: your agent grows the README, the project's starting guide, with run steps, a map of the real code and a settings list.
-The list points to `.env.example`, an example settings file, and explains each setting and where to get its value, never the value itself. [§19, §85]
+The list explains what each setting does and where to get its value. Environment variables use
+`.env.example` and file-based settings use an example in the project's own format. [§19, §85]
 
 ### 11. Building only for the normal day
 

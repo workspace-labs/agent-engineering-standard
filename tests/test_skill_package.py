@@ -4,6 +4,7 @@ Set ENGINEERING_SKILL_ROOT to validate another copy of the bundle. These checks
 verify package invariants; realistic agent exercises are documented separately.
 """
 
+from collections import Counter
 import html
 import json
 import os
@@ -21,6 +22,13 @@ SKILL = Path(os.environ.get(
     str(REPO / "skills" / "software-engineering-build-standard"),
 )).resolve()
 LINK = re.compile(r"\[[^\]\n]*\]\(([^)\n]+)\)")
+IMPLICIT_YAML_TYPE = re.compile(r"""
+    (?:~|null|true|false|y|n|yes|no|on|off)              # nulls and booleans
+    | [-+]?(?:\.inf|\.nan|0x[\da-f_]+|0o[0-7_]+|0b[01_]+)
+    | [-+]?(?:\d[\d_]*(?:\.[\d_]*)?|\.[\d_]+)(?:e[-+]?\d+)?
+    | [-+]?\d[\d_]*(?::[0-5]?\d)+(?:\.[\d_]*)?         # YAML 1.1 base-60 numbers
+    | \d{4}-\d{1,2}-\d{1,2}(?:[t \t]\d.*)?           # dates and timestamps
+""", re.ASCII | re.IGNORECASE | re.VERBOSE)
 
 
 def regular_files(root, skip_names=frozenset()):
@@ -191,18 +199,27 @@ def local_links(document, boundary):
 
 
 def simple_string(value):
-    """Read the simple quoted/bare string fields used by this package.
+    """Read the single-line string scalars used by this package.
 
-    This is deliberately not a general YAML validator. Use an Agent Skills
-    frontmatter validator as well when changing the YAML representation.
+    Accept JSON-style double quotes, YAML single quotes, and plain text.
+    Quote values that a YAML reader could treat as another type.
     """
     value = value.strip()
+    error = "Expected a YAML string scalar. Quote ambiguous values."
     if value.startswith('"'):
-        return json.loads(value)
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError as exc:
+            raise AssertionError(error) from exc
     if value.startswith("'"):
-        if not value.endswith("'"):
-            raise AssertionError("Unclosed YAML string")
+        if not re.fullmatch(r"'(?:[^']|'')*'", value):
+            raise AssertionError(error)
         return value[1:-1].replace("''", "'")
+    value = re.split(r"\s+#", value, maxsplit=1)[0]
+    if (not value or value[0] in "[]{}#,!&*|>@\x60%"
+            or re.search(r"^[-?:](?:\s|$)|:(?:\s|$)", value)
+            or IMPLICIT_YAML_TYPE.fullmatch(value)):
+        raise AssertionError(error)
     return value
 
 
@@ -310,36 +327,44 @@ class SkillPackageTests(unittest.TestCase):
                 self.assertFalse(required - pieces, "Missing day-one pieces: {}".format(required - pieces))
 
     def test_rule_citations_use_existing_stable_ids(self):
-        known = set(range(1, 107))
-        for document in self.bundle_files:
-            if document.suffix != ".md":
-                continue
-            text = document.read_text(encoding="utf-8")
+        documents = {path: path.read_text(encoding="utf-8")
+                     for path in self.bundle_files if path.suffix == ".md"}
+        definitions = Counter()
+        for path, text in documents.items():
+            prose = "\n".join(markdown_lines(text))
+            if path == SKILL / "SKILL.md":
+                for anchor in re.findall(r"<!-- defines ((?:§\d+, )*§\d+) -->", prose):
+                    definitions.update(int(value) for value in re.findall(r"§(\d+)", anchor))
+            elif path.is_relative_to(SKILL / "references"):
+                definitions.update(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))
+
+        published = set(range(1, 107))
+        declared = set(definitions)
+        missing = sorted(published - declared)
+        self.assertFalse(missing, "Missing rule definitions: {}".format(missing))
+        duplicates = sorted(rule for rule, count in definitions.items() if count > 1)
+        self.assertFalse(duplicates, "Duplicate rule definitions: {}".format(duplicates))
+        unknown = sorted(declared - published)
+        self.assertFalse(unknown, "Unknown rule definitions: {}".format(unknown))
+
+        for document, text in documents.items():
             cited = set(int(value) for value in re.findall(r"§(\d+)", text))
             for start, end in re.findall(r"§(\d+)[–-]§?(\d+)", text):
                 self.assertLessEqual(int(start), int(end))
+                self.assertIn(int(end), declared, "Range cites an undefined rule: §{}".format(end))
                 cited.update(range(int(start), int(end) + 1))
             with self.subTest(document=document.relative_to(SKILL)):
-                self.assertFalse(cited - known, "Unknown rule IDs: {}".format(cited - known))
+                unresolved = sorted(cited - declared)
+                self.assertFalse(unresolved, "Citations without rule definitions: {}".format(unresolved))
 
-    def test_backend_frontend_rules_and_release_version(self):
-        headings = []
-        for document in self.bundle_files:
-            if document.suffix == ".md" and document.is_relative_to(SKILL / "references"):
-                prose = "\n".join(markdown_lines(document.read_text(encoding="utf-8")))
-                headings.extend(int(value) for value in re.findall(r"(?m)^## §(\d+)\b", prose))
-        for rule in (*range(66, 73), *range(74, 107)):
-            with self.subTest(rule=rule):
-                self.assertEqual(headings.count(rule), 1, "Rule §{} needs exactly one heading".format(rule))
-
-        with self.subTest(release_version=True):
-            entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-            versions = re.findall(r"(?m)^Standard version: (\d+\.\d+\.\d+)$", entrypoint)
-            self.assertEqual(len(versions), 1, "SKILL.md needs one standard version line")
-            changelog = checked_local_path(REPO / "CHANGELOG.md", REPO).read_text(encoding="utf-8")
-            releases = re.findall(r"(?m)^## (\d+\.\d+\.\d+) — \d{4}-\d{2}-\d{2}$", changelog)
-            self.assertTrue(releases, "CHANGELOG.md needs a versioned release heading")
-            self.assertEqual(versions[0], releases[0], "Standard version must match the newest release")
+    def test_release_version_matches_changelog(self):
+        entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        versions = re.findall(r"(?m)^Standard version: (\d+\.\d+\.\d+)$", entrypoint)
+        self.assertEqual(len(versions), 1, "SKILL.md needs one standard version line")
+        changelog = checked_local_path(REPO / "CHANGELOG.md", REPO).read_text(encoding="utf-8")
+        releases = re.findall(r"(?m)^## (\d+\.\d+\.\d+) — \d{4}-\d{2}-\d{2}$", changelog)
+        self.assertTrue(releases, "CHANGELOG.md needs a versioned release heading")
+        self.assertEqual(versions[0], releases[0], "Standard version must match the newest release")
 
     def test_coverage_guidance_is_reachable_at_intake_and_completion(self):
         entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")

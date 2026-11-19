@@ -4,6 +4,23 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.8.0 local candidate — 2026-11-19
+
+Baseline `main` at `637cdfe` had a clean working tree. The §67 update records
+how to verify firewall rules and administrator access on the deployed server and
+who handles operating-system security updates. All 106 rule definitions remain.
+
+- `python3 -B -m unittest discover -s tests -v` passed **45/45** before and after
+  the update on arm64 macOS with Python 3.15.2, including rule citations and version
+  agreement with the changelog.
+- The same suite passed **45/45** for each installed route using
+  `ENGINEERING_SKILL_ROOT`. All 23 package files matched the source by relative path,
+  SHA-256 and file mode. The backend guide SHA-256 is
+  `e1cc1a758fbed8868696d5f6c95c7bd94070d2f33bff6d42566b376215113f6e`.
+- The read-only skill audit reported zero errors and 11 existing nested-reference
+  advisories before and after. These results cover package integrity and installed
+  files. Live-server and agent behavior checks were outside this run.
+
 ## 1.7.0 fix round 1 — 2026-11-18
 
 Baseline `cfef3c6` passed **44/44** package tests. This round restores Human Gate and

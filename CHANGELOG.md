@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0 — 2026-11-19
+
+- Extend §67 to verify firewall rules, administrator access and operating-system security
+  updates on self-managed servers before making the deployment available to users.
+
 ## 1.7.0 — 2026-11-18
 
 - Check unfamiliar verification commands before running them and isolate possible side effects (§18).

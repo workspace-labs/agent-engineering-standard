@@ -54,6 +54,28 @@ controls become due at their own triggers below.
 - **Metrics and alerts are due at the first deployment someone depends on.** Record enough
   operational evidence to detect failures without exposing private data.
 
+### Self-managed server checks
+
+**Due at** the first deployment anywhere beyond the developer machine on a server the
+project team maintains, including a rented virtual machine. Complete the checks before
+making the deployment available to its users. Where a hosting provider manages part of
+the server, record who owns each control and verify the settings the project controls.
+
+- **Firewall rules.** Read the rules in effect on the running server and in the hosting
+  provider console, where applicable. Allow only the ports and source networks the
+  service requires, and restrict access to administration and internal services. From an
+  authorized test client outside the allowed network, confirm that a connection to a
+  running restricted service is blocked.
+- **Administrative access.** Compare administrator accounts, roles and any authorized
+  keys on the running server and in the provider console with the approved list, where
+  applicable. Verify individual accounts, strong authentication and only the privileges
+  they need. Record how access is removed.
+- **Operating-system security updates.** Check that the host runs a supported release
+  and that required security patches are applied. Name who applies updates and how
+  urgent fixes and restarts are handled.
+- Record the environment, results and any checks awaiting evidence in the existing
+  Plan or operations runbook (§82, §87).
+
 ## §68 Backend security
 
 At a material trust boundary, use the [threat assessment and failure evidence (§88)](coverage-and-evidence.md#88-threat-assessment-and-security-failure-evidence); reuse the approved Security/Plan checks.

@@ -6,6 +6,8 @@
   review of the file's responsibilities, and a file over 1,000 lines stays whole only with a
   written reason (generated code, a pure data table or proven cohesion). Functions and hooks
   are reviewed past about 40 to 50 lines. There is no minimum file size.
+- The review starts at 400 to 500 lines, and a longer file that has not had it still gets
+  it. A cohesive file of 1,001 lines or more stays whole, with that finding written down.
 - The existing §7 rule is unchanged: responsibility decides, and a cohesive file is never
   split to meet a line count. The numbers only start a review. No rule IDs added or removed.
 

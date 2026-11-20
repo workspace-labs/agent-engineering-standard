@@ -16,6 +16,11 @@ its existing rule, which is unchanged. All 106 rule definitions remain.
 - On a disposable copy, the new method failed for each of three changes: the 1,000-line
   row removed, the sentence against splitting a cohesive file removed, and "400 lines"
   written into another guide. The repository copy was not changed by these attempts.
+- Review round 2 clarified the 501 to 1,000 band and the written reason for a cohesive
+  file over 1,000 lines. The suite passed **46/46** after it. On disposable copies the new
+  method failed for each of four more changes: the warning-signs step removed, the written
+  reason made optional, the longer-file sentence removed, and the 1,000-line boundary made
+  inclusive.
 - These results cover package integrity. Agent behavior with the alarms and the installed
   copies were outside this run.
 

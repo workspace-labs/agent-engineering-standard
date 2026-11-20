@@ -392,6 +392,22 @@ class SkillPackageTests(unittest.TestCase):
                           "no number decides anything alone"):
             with self.subTest(threshold=threshold):
                 self.assertIn(threshold, alarms)
+        rows = {row.split(" | ")[0].lstrip("| "): row for row in alarms.splitlines() if row.startswith("| ")}
+        # 450 and 650 lines: both steps of the review, and a longer unreviewed file is not exempt.
+        review = rows["400 to 500 lines"]
+        for action in ("List the file's responsibilities with line ranges",
+                       "then check the warning signs above",
+                       "a longer file that has not had it (first met at 650 lines, say) gets the same review"):
+            self.assertIn(action, review)
+        # 1,001 lines: reviewed, then whole only with a reason; no wording waives the reason.
+        reason = rows["Over 1,000 lines"]
+        for action in ("After the same review", "stays whole only with a written reason",
+                       "Otherwise split it by responsibility"):
+            self.assertIn(action, reason)
+        self.assertIn("Over 1,000 lines, write that finding down; it is the written reason.", alarms)
+        self.assertIn("a file of exactly 1,000 lines needs no written reason, one of 1,001 does", alarms)
+        self.assertNotRegex(alarms, r"(?i)\b(optional|may skip|can skip|not required)\b")
+        self.assertEqual(rows["About 300 lines"], "| About 300 lines | Soft target | Nothing. |")
         # One home for the numbers: the other guides and trees cite §7 and do not restate them.
         for document in sorted(SKILL.rglob("*.md")):
             if document.name not in ("SKILL.md", "architecture-and-boundaries.md"):

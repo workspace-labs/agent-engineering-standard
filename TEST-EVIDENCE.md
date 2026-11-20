@@ -21,6 +21,11 @@ its existing rule, which is unchanged. All 106 rule definitions remain.
   method failed for each of four more changes: the warning-signs step removed, the written
   reason made optional, the longer-file sentence removed, and the 1,000-line boundary made
   inclusive.
+- Review round 3 added a fingerprint of the whole §7 section and of its summary line in
+  the entrypoint, so a reversal that keeps the checked phrases still fails. **46/46** after
+  it. On disposable copies the method failed for each of five changes: a one-job file told
+  to split; a split rule added after the original sentence; an extra table row; the summary
+  line reversed; one warning sign removed.
 - These results cover package integrity. Agent behavior with the alarms and the installed
   copies were outside this run.
 

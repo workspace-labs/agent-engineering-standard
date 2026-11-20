@@ -5,6 +5,7 @@ verify package invariants; realistic agent exercises are documented separately.
 """
 
 from collections import Counter
+import hashlib
 import html
 import json
 import os
@@ -417,6 +418,16 @@ class SkillPackageTests(unittest.TestCase):
         summary = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("never split a cohesive file just to meet a line count.", summary)
         self.assertIn("only start that review", summary)
+        # A reversal that keeps every phrase above still changes these bytes. After a deliberate,
+        # reviewed change to §7 or its summary line, replace the fingerprint.
+        self.assertIn("A review that finds one responsibility ends there: the file stays whole.", alarms)
+        self.assertEqual(hashlib.sha256(section.encode("utf-8")).hexdigest(),
+                         "94c3a17e94773198d7db125c47b6b5b6b59097a200cc165cc15fa99cb3183a54",
+                         "§7 wording changed: review it, then update this fingerprint")
+        bullet = next(line for line in summary.splitlines() if line.startswith("- **No God files (§7).**"))
+        self.assertEqual(hashlib.sha256(bullet.encode("utf-8")).hexdigest(),
+                         "05b868ba828d074f52ccc0f6a3a773765f32e3e5ba66802a01dec4a0b0fd8944",
+                         "the §7 summary changed: review it, then update this fingerprint")
 
     def test_coverage_guidance_is_reachable_at_intake_and_completion(self):
         entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")

@@ -4,6 +4,33 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.11.0 local candidate — 2026-11-20
+
+Baseline was clean `main` at `1a409ef9cea8b7dcfcd826edf7b024644138e704` (1.10.0),
+identical to GitHub `main`. Candidate branch is `feat/security-trust-signin-idp-admin`.
+The candidate commit is the one introducing this heading. Resolve its full ID with
+`git log --format=%H -G '^## 1\.11\.0 local candidate' -- TEST-EVIDENCE.md`.
+
+### Package checks
+
+- `env -u ENGINEERING_SKILL_ROOT python3 -B -m unittest discover -s tests -v` passed
+  **50/50** on the baseline and **51/51** on the candidate, with zero failures, errors
+  or skips on arm64 macOS with Python 3.15.2.
+- With `ENGINEERING_SKILL_ROOT` pointing to each disposable bundle, ran
+  `python3 -B -m unittest discover -s tests -p test_skill_package.py -k test_security_clauses_stay_in_their_sections -v`.
+  The four runs returned exit 1 with the expected assertions:
+  - The 1.10.0 wording failed all five subtests (`FAILED (failures=5)`).
+  - Moving R2 from §68 to §69 failed the §68 placement check (`FAILED (failures=1)`).
+  - Moving the Keycloak example from its subsection to §93 failed the subsection placement
+    check (`FAILED (failures=1)`).
+  - Changing R2 from `never reveals` to `may reveal` failed the wording fingerprint
+    (`FAILED (failures=1)`).
+- The read-only skill audit returned zero errors and the same 11 reference-depth advisories
+  for the baseline and candidate.
+
+This record covers the local instruction package. Agent exercises, live provider checks, CI
+and installed-copy verification were outside this run.
+
 ## 1.10.0 local candidate — 2026-11-20
 
 Baseline was clean `main` at `d671ceb` (1.9.0). This candidate is on `release/1.10.0`.

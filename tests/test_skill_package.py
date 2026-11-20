@@ -441,6 +441,54 @@ class SkillPackageTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(prose.encode("utf-8")).hexdigest(), fingerprint,
                          f"{rule} wording changed: review it, then update this fingerprint")
 
+    def test_security_clauses_stay_in_their_sections(self):
+        def section_text(prose, heading):
+            level = len(heading.split()[0])
+            boundary = rf"^#{{1,{level}}} "
+            section = re.search(rf"(?ms)^{re.escape(heading)}\n(.*?)(?={boundary}|\Z)", prose)
+            self.assertIsNotNone(section, f"Missing heading {heading}")
+            return section[1]
+
+        backend = (SKILL / "references" / "backend.md").read_text(encoding="utf-8")
+        platform = (SKILL / "references" / "platform-services.md").read_text(encoding="utf-8")
+        backend_prose = "\n".join(markdown_lines(backend))
+        platform_prose = "\n".join(markdown_lines(platform))
+        api = section_text(backend_prose, "## §66 API contract and errors")
+        security = section_text(backend_prose, "## §68 Backend security")
+        sessions = section_text(platform_prose, "## §92 Sessions and multi-tenancy")
+        keycloak = section_text(sessions, "### Keycloak and LDAP — when each fits")
+
+        clauses = (
+            ("§66 internal rate limits", api, "- **Rate limits are due",
+             ("network location alone establishes none (§68)",),
+             "44b88f6544521aebe039586afe3e9ebd20cd3106736b211317a8bf876e451de7"),
+            ("§68 internal network trust", security, "- **Network location alone",
+             ("Network location alone establishes no trust",),
+             "7a06d6dfd6b5d95cae6a7fba9db467a07087209a72ba72b13943a0eaf1bca109"),
+            ("§68 failed sign-ins", security, "- **Limit repeated failed sign-ins",
+             ("per-account limit on failed attempts, counted across all sources",
+              "throttles each source separately",
+              "never reveals whether the account exists or is locked",
+              "Never enforce the limit only in the browser"),
+             "0219242bc0e07126972bbff13053e06e0b162befa059171d00a34290ae950a77"),
+            ("§68 identity-provider administration", security,
+             "- **Identity-provider administration stays out of the product",
+             ("not in the application's screens", "dedicated least-privilege service identity"),
+             "ca81b440a740303f121f54a9f74a8fed17ca8a1e9c86938183ea1d7ff4f5cc8e"),
+            ("§92 Keycloak example", keycloak, "- **Apply the §68 sign-in and administration rules",
+             ("enable and configure its brute-force detection", "never from the product's screens"),
+             "066f7516c46f3a1549be1c15297324233934fdf6cfe64323c8ebb5f5a23956f9"),
+        )
+        for label, section, opener, requirements, fingerprint in clauses:
+            with self.subTest(clause=label):
+                bullets = re.findall(r"(?m)^- .+(?:\n {2,}\S.*)*", section)
+                matches = [bullet for bullet in bullets if bullet.startswith(opener)]
+                self.assertEqual(len(matches), 1, f"Expected one {label} bullet in its section")
+                reviewed = " ".join(matches[0].split())
+                self.assert_reviewed_wording(label, reviewed, fingerprint)
+                for requirement in requirements:
+                    self.assertIn(requirement, reviewed)
+
     def test_speed_target_measured_and_gated_where_reliable(self):
         rule = self.rule_prose("references/data-state-and-runtime.md",
                                "## §45 Performance without premature optimization")

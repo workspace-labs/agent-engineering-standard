@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.11.0 — 2026-11-20
+
+- Clarify that internal network location alone grants no trust and rate-limit internal
+  endpoints reachable by untrusted callers (§66, §68).
+- Limit failed sign-ins per account, throttle sources independently, keep failures generic
+  and document recovery (§68, §92).
+- Keep identity-provider administration in operator tools and limit product account
+  workflows to least-privilege server operations (§68, §92).
+  No rule IDs added or removed.
+
 ## 1.10.0 — 2026-11-20
 
 - Give important flows a project-specific speed target and a repeatable pass-or-fail check

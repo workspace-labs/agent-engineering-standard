@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.8.0
+Standard version: 1.9.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -127,7 +127,7 @@ For architectural work, also establish: what exists now; what problem is being s
 ## Always-on rules
 
 - **Structure reflects responsibility (§5, §6).** Folders show real responsibility, never a popular template. A composition root wires systems together; it does not implement them.
-- **No God files (§7).** Central files such as App, main, index, server, controller or manager must not become the default home of new behavior. Judge by responsibilities and change coupling, not size alone, and never split a cohesive file just to meet a line count.
+- **No God files (§7).** Central files such as App, main, index, server, controller or manager must not become the default home of new behavior. Judge by responsibilities and change coupling, not size alone, and never split a cohesive file just to meet a line count. §7's file-size alarms (review at 400 to 500 lines; a written reason over 1,000) only start that review.
 - **Domain logic has a home (§8, §9, §10).** Product rules stay independent of UI, storage, platform wrappers and global clock access where practical; dependencies point toward stable product logic; each substantial feature has an obvious home; shared rules are not duplicated.
 - **Boundaries are explicit (§11–§14, §39–§42, §49).** Persistence, platforms and configuration sit behind intentional boundaries; canonical data contracts, units and time models are defined; every important piece of state has an owner; failures are owned, not scattered as UI messages.
 - **Backend and frontend behaviour (§66–§72, §106).** For server work use [the backend guide](references/backend.md), including what the server does [when too many requests arrive](references/backend.md#106-overload-and-traffic-spikes); for screens use [the frontend guide](references/frontend.md). Apply each rule only when its due-at trigger is met.

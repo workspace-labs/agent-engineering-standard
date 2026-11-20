@@ -60,6 +60,22 @@ When these appear, establish a real boundary before adding more responsibility. 
 
 Do not split a cohesive file merely to satisfy an arbitrary line-count target.
 
+### File-size alarms
+
+The rule above decides. These numbers only start a review of responsibilities; no number decides anything alone.
+
+| Size | What it means | What to do |
+|---|---|---|
+| About 300 lines | Soft target | Nothing. |
+| 400 to 500 lines | Review | List the file's responsibilities with line ranges, then check the warning signs above. |
+| Over 1,000 lines | Written reason | The file stays whole only with a written reason: generated code, a pure data table, or proven cohesion. Otherwise split it by responsibility. |
+
+- **Functions and hooks:** review any that pass about 40 to 50 lines.
+- **No minimum file size.** A small file is fine if it has one job.
+- A review that finds one responsibility ends there: the file stays whole.
+
+The numbers come from widely used defaults: ESLint `max-lines` 300; SwiftLint 400 warning and 1,000 error; Sonar and Pylint 1,000; the Google TypeScript guide, about 40 lines per function.
+
 ## §8 Domain logic must have a home
 
 Important product concepts exist independently of UI implementation where practical. Domain and business logic should preferably be explicit, testable, deterministic where appropriate, and independent from rendering, storage implementation and platform wrappers.

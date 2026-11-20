@@ -24,7 +24,7 @@ The skill is in this repo — [`skills/`](skills).
 
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
 - **Check what the project needs (§87–§90).** Reuse the project documents you have already approved and their requirement labels, so checks point back to what you asked for. Show what was proved, what does not apply and why, and what is still unfinished. The project-docs skill plans what to build; this skill builds it and checks the work.
-- **Give every job one home.** Keep unrelated jobs out of one giant file. Rules about how the product works stay separate from screens and the code that saves data.
+- **Give every job one home.** Keep unrelated jobs out of one giant file. A long file is an alarm, never a verdict (§7): at 400 to 500 lines the agent lists the file's jobs, and a file over 1,000 lines stays whole only with a written reason. A file that does one job is never cut to meet a number. Rules about how the product works stay separate from screens and the code that saves data.
 - **Think of the cases nobody mentioned (§105).** Two people booking the same slot, a refund after a cancellation, an empty basket: the agent writes each product rule down, walks its edge cases, asks you about the ones that matter and tests them.
 - **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at a limit the server says "too big" for an oversized upload, or "busy, try again" when requests arrive too fast or the server is full. It never crashes or loses accepted work.
 - **Build the tests and the docs with the code.** Check where unfamiliar test and build commands point before running them.

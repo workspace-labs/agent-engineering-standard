@@ -373,6 +373,35 @@ class SkillPackageTests(unittest.TestCase):
         self.assertTrue(releases, "CHANGELOG.md needs a versioned release heading")
         self.assertEqual(versions[0], releases[0], "Standard version must match the newest release")
 
+    def test_file_size_alarms_start_a_review_and_never_decide(self):
+        guide = (SKILL / "references" / "architecture-and-boundaries.md").read_text(encoding="utf-8")
+        section = re.search(r"(?ms)^## §7 Prevent God files\n(.*?)(?=^## )", guide).group(1)
+        # The responsibility rule is unchanged and still comes before any number.
+        rule, heading, alarms = section.partition("### File-size alarms\n")
+        self.assertTrue(heading, "§7 needs its file-size alarms")
+        for sentence in ("File size alone is not the deciding rule.",
+                         "Do not split a cohesive file merely to satisfy an arbitrary line-count target."):
+            self.assertIn(sentence, rule)
+        self.assertNotRegex(rule, r"\d{3}", "the rule itself carries no line count")
+        for threshold in ("| About 300 lines | Soft target | Nothing. |",
+                          "| 400 to 500 lines | Review | List the file's responsibilities with line ranges",
+                          "| Over 1,000 lines | Written reason |",
+                          "generated code, a pure data table, or proven cohesion",
+                          "review any that pass about 40 to 50 lines",
+                          "**No minimum file size.**",
+                          "no number decides anything alone"):
+            with self.subTest(threshold=threshold):
+                self.assertIn(threshold, alarms)
+        # One home for the numbers: the other guides and trees cite §7 and do not restate them.
+        for document in sorted(SKILL.rglob("*.md")):
+            if document.name not in ("SKILL.md", "architecture-and-boundaries.md"):
+                with self.subTest(document=document.relative_to(SKILL).as_posix()):
+                    self.assertNotRegex(document.read_text(encoding="utf-8"),
+                                        r"(?i)\b(300|400|500|1,?000)[ -]lines?\b")
+        summary = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("never split a cohesive file just to meet a line count.", summary)
+        self.assertIn("only start that review", summary)
+
     def test_coverage_guidance_is_reachable_at_intake_and_completion(self):
         entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         guide = SKILL / "references" / "coverage-and-evidence.md"

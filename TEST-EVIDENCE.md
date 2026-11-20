@@ -4,6 +4,21 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.9.0 local candidate — 2026-11-20
+
+Baseline `main` at `8bedf70` had a clean working tree. §7 gains file-size alarms under
+its existing rule, which is unchanged. All 106 rule definitions remain.
+
+- `python3 -B -m unittest discover -s tests -v` passed **45/45** before the update and
+  **46/46** after it on arm64 macOS. The new method
+  `test_file_size_alarms_start_a_review_and_never_decide` checks the two unchanged rule
+  sentences, each threshold, and that no other guide restates the numbers.
+- On a disposable copy, the new method failed for each of three changes: the 1,000-line
+  row removed, the sentence against splitting a cohesive file removed, and "400 lines"
+  written into another guide. The repository copy was not changed by these attempts.
+- These results cover package integrity. Agent behavior with the alarms and the installed
+  copies were outside this run.
+
 ## 1.8.0 local candidate — 2026-11-19
 
 Baseline `main` at `637cdfe` had a clean working tree. The §67 update records

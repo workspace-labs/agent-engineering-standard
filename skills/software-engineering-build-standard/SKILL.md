@@ -162,7 +162,7 @@ For each change listed above, including new recurring spend, the owner's initial
 
 For new recurring spend, state the service, expected cost and usage assumptions (or what remains unknown), and who pays. Use a current price or an approved quote. Never state a price from memory. Wait for the owner's approval before implementing, provisioning or enabling the paid workload. Reuse approval only when it covers that workload and its spend.
 
-**Cost of one paid action. Due at:** before enabling the first workflow that can materially incur operating charges, and again when rates or usage change enough to matter. Estimate the cost to complete one action from start to finish. Include each paid step through delivery and state which failed attempts and retries you expect to be charged for. Show fixed or shared bills separately and agree any allocation with the owner. Use current rates or an approved quote and state your assumptions and known unknowns. A free tier with paid overages can qualify. A fully local desktop or tablet app with no paid operation skips this estimate.
+**Cost of one paid action. Due at:** before enabling the first workflow that can materially incur operating charges, and again when rates or usage change enough to matter. Estimate the cost to complete one action from start to finish. Include each paid step through delivery and state which failed attempts and retries you expect to be charged for. Show fixed or shared bills separately and agree any allocation with the owner. Use current rates or an approved quote and state your assumptions and known unknowns. A free tier with paid overages can qualify. Any fully local project with no paid operation skips this estimate.
 
 ## Stop conditions (§56)
 

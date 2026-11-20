@@ -25,6 +25,7 @@ Baseline was clean `main` at `d671ceb` (1.9.0). This candidate is on `release/1.
 - The read-only skill audit found zero errors and the same 11 nested-tree advisories on
   the baseline and candidate. The package run was local to macOS. CI and installed-copy
   checks for this candidate were outside this run.
+- Fix round 1 (N1) on macOS arm64 with Python 3.15.2. The updated §30 phrase and fingerprint rejected the old exemption, and the full suite passed **50/50** with zero skips.
 
 ### Observed agent behavior
 

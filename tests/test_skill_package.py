@@ -473,12 +473,12 @@ class SkillPackageTests(unittest.TestCase):
                             "fixed or shared bills separately", "agree any allocation with the owner",
                             "current rates or an approved quote", "assumptions and known unknowns",
                             "free tier with paid overages can qualify",
-                            "fully local desktop or tablet app with no paid operation skips this estimate"):
+                            "Any fully local project with no paid operation skips this estimate."):
             with self.subTest(requirement=requirement):
                 self.assertIn(requirement, rule)
         self.assertIn("Wait for the owner's approval before implementing, provisioning or enabling the paid workload.",
                       rule)
-        self.assert_reviewed_wording("§30", rule, "252162a3f8f04fe04db84f9129ddb45778451dc39d8f131e61ddff212ad4821e")
+        self.assert_reviewed_wording("§30", rule, "07767ab6f463ebf3aeb65ec930de94479164f8265867c0ef6ea8753df1c8400d")
 
     def test_release_recovery_requires_a_safe_rehearsed_route(self):
         rule = self.rule_prose("references/team-and-lifecycle.md", "## §78 Releasing a project")

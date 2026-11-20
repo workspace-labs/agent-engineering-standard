@@ -429,6 +429,81 @@ class SkillPackageTests(unittest.TestCase):
                          "05b868ba828d074f52ccc0f6a3a773765f32e3e5ba66802a01dec4a0b0fd8944",
                          "the §7 summary changed: review it, then update this fingerprint")
 
+    def rule_prose(self, path, heading):
+        document = (SKILL / path).read_text(encoding="utf-8")
+        prose = "\n".join(markdown_lines(document))
+        section = re.search(rf"(?ms)^{re.escape(heading)}\n(.*?)(?=^## |\Z)", prose)
+        self.assertIsNotNone(section, f"{path} needs {heading}")
+        return " ".join(section[1].split())
+
+    def assert_reviewed_wording(self, rule, prose, fingerprint):
+        # As with §7, reject contradictory additions that keep the required phrases.
+        self.assertEqual(hashlib.sha256(prose.encode("utf-8")).hexdigest(), fingerprint,
+                         f"{rule} wording changed: review it, then update this fingerprint")
+
+    def test_speed_target_measured_and_gated_where_reliable(self):
+        rule = self.rule_prose("references/data-state-and-runtime.md",
+                               "## §45 Performance without premature optimization")
+        for requirement in ("wait time or throughput materially matters for an important flow",
+                            "project's accepted target", "record it as open until agreed",
+                            "counts as completion", "repeatable conditions",
+                            "representative device and workload", "record a pass or fail",
+                            "If existing CI can measure the agreed conditions reliably",
+                            "block a failing change", "release verification and record the device result",
+                            "Meeting the target removes the performance reason for a rewrite",
+                            "Correctness and maintainability can still justify one"):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, rule)
+        ci = self.rule_prose("references/team-and-lifecycle.md", "## §75 CI quality gates")
+        self.assertIn("[speed target check (§45)](data-state-and-runtime.md#45-performance-without-premature-optimization)",
+                      ci)
+        self.assertIn("when due, using its conditions for a blocking CI check or release verification", ci)
+        layout = (SKILL / "references" / "layout-map.md").read_text(encoding="utf-8")
+        self.assertIn("| `tests/performance/` | the first agreed speed target that needs a repeatable check (§45) |",
+                      layout)
+        self.assert_reviewed_wording("§45", rule, "fcc3feb4ea596e357b1c1fda4db8825da9a17cb3459ecc3a56a606da52a3f7c3")
+        self.assert_reviewed_wording("§75", ci, "4821a39a53df0e29e48812b8de0dded55c7a607c8cdf6594fee7dbd070651741")
+
+    def test_paid_action_estimate_includes_the_whole_workflow(self):
+        rule = self.rule_prose("SKILL.md", "## Human Gate (§30, §44)")
+        for requirement in ("before enabling the first workflow that can materially incur operating charges",
+                            "again when rates or usage change enough to matter",
+                            "cost to complete one action from start to finish", "each paid step through delivery",
+                            "failed attempts and retries you expect to be charged for",
+                            "fixed or shared bills separately", "agree any allocation with the owner",
+                            "current rates or an approved quote", "assumptions and known unknowns",
+                            "free tier with paid overages can qualify",
+                            "fully local desktop or tablet app with no paid operation skips this estimate"):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, rule)
+        self.assertIn("Wait for the owner's approval before implementing, provisioning or enabling the paid workload.",
+                      rule)
+        self.assert_reviewed_wording("§30", rule, "252162a3f8f04fe04db84f9129ddb45778451dc39d8f131e61ddff212ad4821e")
+
+    def test_release_recovery_requires_a_safe_rehearsed_route(self):
+        rule = self.rule_prose("references/team-and-lifecycle.md", "## §78 Releasing a project")
+        for requirement in ("the first release someone else installs, deploys or depends on",
+                            "signal that triggers recovery, who decides",
+                            "whether rollback is safe, to which version and under what conditions",
+                            "time window where it helps", "irreversible migration",
+                            "writes the earlier version cannot read", "whether each data migration can be reversed",
+                            "A timer alone cannot decide whether rollback is safe",
+                            "Check compatibility both inside and after any time window",
+                            "Rehearse the recovery route for the release channel and its saved data",
+                            "data recovery checks (§89)", "distribution checks above (§90)",
+                            "Automated rollback needs a preapproved trigger and a tested safe path"):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, rule)
+        self.assert_reviewed_wording("§78", rule, "7abdaf272865f2b66b85dabc8e1064ae9821a54f62a3c577d9fb1fed4bce661b")
+
+    def test_end_to_end_coverage_earns_the_whole_system(self):
+        rule = self.rule_prose("references/team-and-lifecycle.md", "## §74 Test levels")
+        self.assertIn("Put most checks at the fastest level that proves the behavior.", rule)
+        self.assertIn("Use end-to-end checks for critical user journeys and consequential failure paths "
+                      "that need the whole system to prove.", rule)
+        self.assertNotIn("a few end-to-end", rule)
+        self.assert_reviewed_wording("§74", rule, "f19251d16cd467eab6c7ab0683f3e90fd93b45f7f96313c2f52442e0f74756cf")
+
     def test_coverage_guidance_is_reachable_at_intake_and_completion(self):
         entrypoint = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         guide = SKILL / "references" / "coverage-and-evidence.md"

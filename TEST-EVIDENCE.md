@@ -4,6 +4,74 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.10.0 local candidate — 2026-11-20
+
+Baseline was clean `main` at `d671ceb` (1.9.0). This candidate is on `release/1.10.0`.
+
+### Package checks
+
+- `python3 -B -m unittest discover -s tests -v` passed **46/46** on the baseline and
+  **50/50** on the candidate, with zero skips, on arm64 macOS with Python 3.15.2.
+  The suite checks all 106 stable rule IDs and agreement between the version and changelog.
+- The four new tests in [test_skill_package.py](tests/test_skill_package.py) failed against
+  the baseline wording and passed on the candidate. They check the speed target and its
+  CI and layout links, the cost of one whole action, the recovery decision and the new
+  end-to-end coverage criteria.
+- Ten separate mutations in disposable skill copies were rejected by the intended tests.
+  Six removed the speed pass/fail check, removed the §75 pointer, reversed the performance
+  test folder trigger, removed the full-action estimate, removed the timer rule, or
+  restored the old end-to-end sentence. The other four added a contradiction to one of
+  A–D while retaining its approved wording. The wording fingerprints rejected all four.
+- The read-only skill audit found zero errors and the same 11 nested-tree advisories on
+  the baseline and candidate. The package run was local to macOS. CI and installed-copy
+  checks for this candidate were outside this run.
+
+### Observed agent behavior
+
+Five fresh Codex contexts each received a disposable fixture, a copy of the candidate
+skill, and the exercise request. The evaluator kept the expected results outside those
+contexts. SHA-256 checks matched all 23 skill files in each copy to the candidate.
+In the following results, the timings, provider terms and release data are synthetic.
+
+- **Speed target.** The fixture set an accepted 800 ms ceiling from fresh process start
+  to a visible and responsive 5,000-entry catalog, using the same cleared cache and
+  supported M1 laptop. The agent wrote a replay checker and ran it on timestamp pairs
+  100–840 ms and 100–1010 ms. The checker printed PASS at 740 ms and FAIL at 910 ms.
+  The builder reran each capture separately and both together, with exit codes 0, 1
+  and 1. The agent put the check in native macOS release verification because the
+  fixture's Linux CI cannot reproduce the measurement. This exercise replayed captures.
+- **Cost through delivery.** The provided quote charged USD 0.04 per billed render
+  attempt and USD 0.01 per successful delivery once the free allocation was exhausted.
+  The pilot had 25 charged attempts and 20 deliveries for 20 completed digests. The
+  agent estimated USD 0.06 per delivered digest and USD 1.80 for 30, based on comparable
+  retries and one successful delivery per digest. It kept the USD 18 shared monthly
+  plan visible without allocating it, named Operations as the payer, and identified
+  the unknown cost of runs that never complete. The agent sought approval for the new
+  recurring workload. The quote calculation was cross-checked and the fixture was
+  byte-identical with no new files.
+- **Recovery with incompatible saved data.** Ten minutes into a simulated 30-minute
+  pilot, the old reader opened schema 1 and rejected schema 2. The new reader crashed
+  on an empty tag list. The agent named this failure as the signal, the release lead
+  as decision maker, and the first schema 2 write as the downgrade cutoff. It proposed
+  pausing the pilot and using a newer signed recovery build on the direct channel.
+  A reader prototype on a disposable copy opened both saved lists, including the one
+  created after update, on two runs. It also opened the cleared-tag sample and rejected
+  schema 1 and malformed JSON. The builder reproduced those outcomes and verified byte
+  identity of the original fixture and the rehearsal inputs. Signing and the actual
+  updater path were outside this reader rehearsal.
+- **Tiny offline change.** The agent trimmed the edges of labels in a local desktop
+  terminal app. It ran one existing check, saw the new regression fail on the previous
+  format, then passed both checks. The CLI printed `[SAMPLE LABEL]` for an input
+  padded with spaces and the regression verified that internal spaces survived. The
+  builder reran both checks and compared the fixture manifest. Only the formatter and
+  its existing test file changed. The agent introduced no speed gate, spending estimate,
+  release process or new scaffolding.
+- **Existing recurring-spend control.** The versioned [Northstar fixture](tests/fixtures/behavior/recurring-spend/README.md)
+  still led the agent to ask for approval before implementing the new schedule. Its
+  estimate was USD 1.20 for 30 runs at USD 0.04 each on the Operations account. It
+  called out the higher cost for a 31-day month. The builder verified that the fixture
+  was byte-identical and had no provider-call log.
+
 ## 1.9.0 local candidate — 2026-11-20
 
 Baseline `main` at `8bedf70` had a clean working tree. §7 gains file-size alarms under

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.10.0 — 2026-11-20
+
+- Give important flows a project-specific speed target and a repeatable pass-or-fail check
+  in existing CI or release verification (§45, §75).
+- Estimate the cost of completing one action through delivery, including charged retries,
+  when a workflow can materially incur operating charges (§30).
+- Record who decides to recover, when to act and when rollback is safe. Rehearse a recovery
+  route that fits the release channel and its data (§78, §89, §90).
+- Cover critical user journeys and consequential failure paths with end-to-end checks (§74).
+  No rule IDs added or removed.
+
 ## 1.9.0 — 2026-11-20
 
 - Add file-size alarms to §7: about 300 lines is a soft target, 400 to 500 lines starts a

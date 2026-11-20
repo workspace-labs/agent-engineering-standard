@@ -353,7 +353,7 @@ No agent exercise, publication or installation was run. Delivered for re-review.
 
 ## 1.5.0 local candidate — 2026-11-10
 
-Branch `release/1.5.0` from `a27317b` (1.4.0), in `~/Desktop/Projects/agent-engineering-standard`.
+Branch `release/1.5.0` from `a27317b` (1.4.0), in the local clone.
 Not pushed, not tagged, not installed: the user skill copies stay at 1.4.0.
 
 ### Executed package checks
@@ -381,7 +381,7 @@ executed; no agent exercise was run.
 
 ## 1.4.0 local candidate — 2026-11-09
 
-Branch `release/1.4.0` from `fd8ab67` (1.3.0), in `~/Desktop/Projects/agent-engineering-standard`.
+Branch `release/1.4.0` from `fd8ab67` (1.3.0), in the local clone.
 Not pushed, not tagged, not installed: the six user skill copies stay at 1.3.0.
 
 ### Executed package checks

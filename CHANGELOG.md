@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.12.0 — 2026-11-21
+
+- Stop the build when a new request falls outside the approved scope and the person who
+  approves the scope has not decided it (§56). No rule IDs added or removed.
+
 ## 1.11.0 — 2026-11-20
 
 - Clarify that internal network location alone grants no trust and rate-limit internal

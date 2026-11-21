@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.11.0
+Standard version: 1.12.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -177,7 +177,8 @@ Stop and report instead of improvising when:
 - tests reveal an unexplained regression;
 - the architecture requires an unapproved major decision;
 - a supposedly structural change requires a behavior change;
-- evidence contradicts the task's assumptions.
+- evidence contradicts the task's assumptions;
+- a new request falls outside the approved scope and the person who approves the scope has not decided it.
 
 Never "make it work" by destroying data or bypassing safeguards.
 

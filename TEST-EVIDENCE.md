@@ -4,6 +4,16 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.12.0 local candidate — 2026-11-21
+
+Baseline was clean `main` at `d6f36e7decd322f18f96e9bae511f4ca45173873` (1.11.0). Candidate
+branch is `feat/out-of-scope-stop`, uncommitted when this record was written. The change adds
+one §56 stop condition for a new request outside the approved scope.
+
+- `env -u ENGINEERING_SKILL_ROOT python3 -B -m unittest discover -s tests` passed **51/51**
+  on arm64 macOS with Python 3.15.2.
+- No test pins the new line, and no agent was run against it. CI has not run this candidate.
+
 ## 1.11.0 local candidate — 2026-11-20
 
 Baseline was clean `main` at `1a409ef9cea8b7dcfcd826edf7b024644138e704` (1.10.0),
